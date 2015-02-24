@@ -24,10 +24,17 @@ config/deploy/*.rb (e.g. production.rb) and database.yml are in .gitignore. You 
 ```
 set :linked_files, %w{
   config/database.yml
-  config/deploy/production.rb
 }
 ```
 Therefore, config/database.yml will actually be a symlink which points to shared/config/database.yml and so on.
 
 ## Troubleshooting
 
+<strong>Issue</strong>
+```
+$> cap deploy 
+Stage not set, please call something such as `cap production deploy`, where production is a stage you have defined.
+```
+<strong>Solution</strong> 
+The project currently only has a production file.
+$> cap production deploy
