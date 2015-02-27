@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
-  resources :trackers
-
+  match 'trackers/logon' => 'trackers#logon', as: :trackers_logon, via: [:get, :post, :put, :patch]
+  match 'trackers/logoff' => 'trackers#logoff', as: :trackers_logoff, via: [:get, :delete]
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'trackers#index'
+  # root 'trackers#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
