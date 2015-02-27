@@ -1,7 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  ip: MyString
+  ip: 1.1.1.1
 
 two:
-  ip: MyString
+  ip: 2.2.2.2

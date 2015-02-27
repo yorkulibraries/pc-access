@@ -19,5 +19,5 @@ class TrackersController < ApplicationController
       format.all { render :nothing => true }
     end
   end
-
+  
 end
