@@ -2,11 +2,13 @@ class TrackersController < ApplicationController
   
   # /trackers/logon
   def logon
-    if not Tracker.exists?(:ip => request.remote_ip)
-      @tracker = Tracker.new
-      @tracker.ip = request.remote_ip
-      @tracker.save
+    @computer = Computer.find_by_ip(request.remote_ip)
+    if @computer.nil?
+      @computer = Computer.new
+      @computer.ip = request.remote_ip
     end
+    @computer.occupied = true
+    @computer.save
     respond_to do |format|
       format.all { render :nothing => true }
     end
@@ -14,7 +16,13 @@ class TrackersController < ApplicationController
 
   # /trackers/logoff
   def logoff
-    Tracker.where(:ip => request.remote_ip).destroy_all
+    @computer = Computer.find_by_ip(request.remote_ip)
+    if @computer.nil?
+      @computer = Computer.new
+      @computer.ip = request.remote_ip
+    end
+    @computer.occupied = false
+    @computer.save
     respond_to do |format|
       format.all { render :nothing => true }
     end

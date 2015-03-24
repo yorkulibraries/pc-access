@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class TrackerTest < ActiveSupport::TestCase
+class ComputerTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

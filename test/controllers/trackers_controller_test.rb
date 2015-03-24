@@ -2,32 +2,33 @@ require 'test_helper'
 
 class TrackersControllerTest < ActionController::TestCase
   setup do
-    @tracker = trackers(:one)
+    @computer_one = computers(:one)
+    @computer_two = computers(:two)
   end
   
-  test "tracker should exist after logon" do
+  test "computer should exist after logon" do
     get :logon
-    assert Tracker.exists?(:ip => request.remote_ip)
-    assert_equal 3, Tracker.count
+    assert Computer.exists?(:ip => request.remote_ip)
     assert_response :success
   end
   
-  test "multiple logon should create one tracker" do
-    get :logon
-    post :logon
-    put :logon
-    patch :logon
-    assert Tracker.exists?(:ip => request.remote_ip)
-    assert_equal 1, Tracker.where(:ip => request.remote_ip).count
-    assert_equal 3, Tracker.count
-    assert_response :success
-  end
-  
-  test "tracker should not exist after logoff" do
+  test "computer should exist after logoff" do
     get :logoff
-    assert_not Tracker.exists?(:ip => request.remote_ip)
-    assert_equal 2, Tracker.count
+    assert Computer.exists?(:ip => request.remote_ip)
+    assert_response :success
+  end
+  
+  test "computer should be occupied after logon" do
+    get :logon
+    assert Computer.find_by_ip(request.remote_ip).occupied
+    assert_response :success
+  end
+  
+  test "computer should not be occupied after logoff" do
+    get :logoff
+    assert !Computer.find_by_ip(request.remote_ip).occupied
     assert_response :success
   end
 
+  
 end
