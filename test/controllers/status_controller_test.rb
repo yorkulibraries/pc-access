@@ -14,9 +14,9 @@ class StatusControllerTest < ActionController::TestCase
     assert_equal 1, status['available_count']
     assert_equal 1, status['available'].size
     assert_equal 1, status['occupied'].size
-    assert_equal '1.1.1.1', status['available'][0]['ip']
+    assert_equal @computer_one.ip, status['available'][0]['ip']
     assert !status['available'][0]['occupied']
-    assert_equal '2.2.2.2', status['occupied'][0]['ip']
+    assert_equal @computer_two.ip, status['occupied'][0]['ip']
     assert status['occupied'][0]['occupied']
   end
 end
