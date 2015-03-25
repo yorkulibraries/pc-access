@@ -6,4 +6,4 @@ one:
 
 two:
   ip: 2.2.2.2
-  occupied: false
+  occupied: true
