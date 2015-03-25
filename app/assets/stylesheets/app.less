@@ -1,0 +1,19 @@
+html,body {
+  overflow-x: hidden; /* Prevent scroll on narrow devices */
+}
+.navbar-default.app-navbar {
+    background-image: none !important;
+    background-color: #ffffff;
+    .navbar-brand {
+        img {
+            margin-top: -15px;
+            @media (max-width: 480px) {
+                margin-left: -90px;
+            } 
+        }
+        color: #333;
+    }
+    .navbar-nav > li > a {
+        color: #333;
+    }
+}
