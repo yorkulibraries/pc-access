@@ -55,3 +55,5 @@ group :development, :test do
   gem 'spring'
 end
 
+gem 'less-rails'
+gem 'twitter-bootstrap-rails'
