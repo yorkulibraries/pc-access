@@ -8,6 +8,7 @@ class TrackersController < ApplicationController
       @computer.ip = request.remote_ip
     end
     @computer.occupied = true
+    @computer.current_username = params['username']
     @computer.save
     respond_to do |format|
       format.all { render :nothing => true }
@@ -22,6 +23,8 @@ class TrackersController < ApplicationController
       @computer.ip = request.remote_ip
     end
     @computer.occupied = false
+    @computer.current_username = nil
+    @computer.previous_username = params['username']
     @computer.save
     respond_to do |format|
       format.all { render :nothing => true }

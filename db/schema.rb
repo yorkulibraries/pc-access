@@ -11,14 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150325195304) do
+ActiveRecord::Schema.define(version: 20150326175857) do
 
   create_table "computers", force: :cascade do |t|
     t.string   "ip"
     t.boolean  "occupied"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
     t.integer  "location_id"
+    t.string   "current_username"
+    t.string   "previous_username"
   end
 
   create_table "locations", force: :cascade do |t|
