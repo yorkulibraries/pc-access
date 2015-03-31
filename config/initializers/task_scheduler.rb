@@ -6,5 +6,7 @@ scheduler = Rufus::Scheduler.new
  
 ## It will print message every i minute
 scheduler.every("1m") do
-  Rails.logger.info "#{Time.now}"
+  Computer.where("current_username IS NOT NULL AND last_ping <= ?", 15.minutes.ago).each do |computer|
+    Rails.logger.info "#{computer.last_ping}"
+  end
 end
