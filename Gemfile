@@ -57,3 +57,4 @@ end
 
 gem 'less-rails'
 gem 'twitter-bootstrap-rails'
+gem 'rufus-scheduler'
