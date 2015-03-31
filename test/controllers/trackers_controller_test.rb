@@ -30,4 +30,15 @@ class TrackersControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "computers.last_ping should not be nil after logon" do
+    get :logon
+    assert_not_nil Computer.find_by_ip(request.remote_ip).last_ping
+    assert_response :success
+  end
+  
+  test "computers.last_ping should be nil after logoff" do
+    get :logoff
+    assert_nil Computer.find_by_ip(request.remote_ip).last_ping
+    assert_response :success
+  end
 end
