@@ -18,17 +18,16 @@ class TrackersControllerTest < ActionController::TestCase
     assert_response :success
   end
   
-  test "computer should be occupied after logon" do
+  test "computers.current_username should not be nil after logon" do
     get :logon
-    assert Computer.find_by_ip(request.remote_ip).occupied
+    assert_not_nil Computer.find_by_ip(request.remote_ip).current_username
     assert_response :success
   end
   
-  test "computer should not be occupied after logoff" do
+  test "computers.current_username should be nil after logoff" do
     get :logoff
-    assert !Computer.find_by_ip(request.remote_ip).occupied
+    assert_nil Computer.find_by_ip(request.remote_ip).current_username
     assert_response :success
   end
 
-  
 end

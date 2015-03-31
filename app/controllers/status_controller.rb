@@ -1,8 +1,8 @@
 class StatusController < ApplicationController
   
   def index
-    @occupied = Computer.where(occupied: true).all
-    @available = Computer.where(occupied: false).all
+    @occupied = Computer.where("current_username IS NOT NULL").all
+    @available = Computer.where("current_username IS NULL").all
     status = { occupied_count: @occupied.size, occupied: @occupied, available_count: @available.size, available: @available }
     respond_to do |format|
       format.html

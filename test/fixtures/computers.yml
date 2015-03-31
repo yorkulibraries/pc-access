@@ -2,8 +2,7 @@
 
 one:
   ip: 1.1.1.1
-  occupied: false
 
 two:
   ip: 2.2.2.2
-  occupied: true
+  current_username: user2
