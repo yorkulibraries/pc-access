@@ -5,6 +5,6 @@ require 'rufus/scheduler'
 scheduler = Rufus::Scheduler.new
  
 ## It will print message every i minute
-scheduler.every("5m") do
-puts("HELLO #{Time.now}")
+scheduler.every("1m") do
+  Rails.logger.info "#{Time.now}"
 end
