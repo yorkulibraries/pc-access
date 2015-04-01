@@ -1,9 +1,9 @@
 class StatusController < ApplicationController
   
   def index
-    @occupied = Computer.where("current_username IS NOT NULL").all
-    @available = Computer.where("current_username IS NULL").all
-    status = { occupied_count: @occupied.size, occupied: @occupied, available_count: @available.size, available: @available }
+    @in_use = Computer.in_use
+    @not_in_use = Computer.not_in_use
+    status = { in_use_count: @in_use.size, in_use: @in_use, not_in_use_count: @not_in_use.size, not_in_use: @not_in_use }
     respond_to do |format|
       format.html
       format.json { render :json => status }
