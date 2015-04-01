@@ -1,19 +1,19 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Status</h1>
-<p><%= @available.size %> computer(s) available.</p>
-<p><%= @occupied.size %> computer(s) currently being used.</p>
+<p><%= @not_in_use.size %> computer(s) available.</p>
+<p><%= @in_use.size %> computer(s) currently being used.</p>
 
 <h2>Available Computers</h2>
 <ul>
-<% @available.each do |m| %>
+<% @not_in_use.each do |m| %>
   <li><%= m.ip %></li>
 <% end %>
 </ul>
    
 <h2>In-use Computers</h2>
 <ul>
-<% @occupied.each do |m| %>
+<% @in_use.each do |m| %>
   <li><%= m.ip %></li>
 <% end %>
 </ul>
