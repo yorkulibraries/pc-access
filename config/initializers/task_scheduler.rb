@@ -1,6 +1,6 @@
 require 'rubygems'
 require 'rufus/scheduler'
-require 'net/ping'
+require 'ping'
  
 scheduler = Rufus::Scheduler.new
 
@@ -12,8 +12,9 @@ scheduler.every("1m") do
   end
   
   Computer.find_each do |computer|
-    icmp = Net::Ping::ICMP.new(computer.ip)
-    if !icmp.ping
+    Rails.logger.debug "Pinging #{computer.ip}"
+    if !Ping.pingecho(computer.ip)
+      Rails.logger.debug "#{computer.ip} did not reply"
       computer.logoff
       computer.is_powered_off = true
       computer.save
