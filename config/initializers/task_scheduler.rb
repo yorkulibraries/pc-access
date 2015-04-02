@@ -11,7 +11,7 @@ scheduler.every("1m") do
     #computer.save
   end
   
-  Computer.in_use.each do |computer|
+  Computer.find_each do |computer|
     icmp = Net::Ping::ICMP.new(computer.ip)
     if !icmp.ping
       computer.logoff
