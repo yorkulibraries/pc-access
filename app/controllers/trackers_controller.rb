@@ -7,9 +7,7 @@ class TrackersController < ApplicationController
       @computer = Computer.new
       @computer.ip = request.remote_ip
     end
-    username = !params['username'].nil? && params['username'].size ? params['username'] : request.remote_ip
-    @computer.current_username = username
-    @computer.last_ping = DateTime.now
+    @computer.logon(params[:username])
     @computer.save
     respond_to do |format|
       format.all { render :nothing => true }
@@ -23,10 +21,7 @@ class TrackersController < ApplicationController
       @computer = Computer.new
       @computer.ip = request.remote_ip
     end
-    username = !params['username'].nil? && params['username'].size ? params['username'] : request.remote_ip
-    @computer.current_username = nil
-    @computer.last_ping = nil
-    @computer.previous_username = username
+    @computer.logoff(params[:username])
     @computer.save
     respond_to do |format|
       format.all { render :nothing => true }

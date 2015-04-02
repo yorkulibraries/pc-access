@@ -19,13 +19,13 @@ class TrackersControllerTest < ActionController::TestCase
   end
   
   test "computers.current_username should not be nil after logon" do
-    get :logon
+    get :logon, {:username => "test_username"}
     assert_not_nil Computer.find_by_ip(request.remote_ip).current_username
     assert_response :success
   end
   
   test "computers.current_username should be nil after logoff" do
-    get :logoff
+    get :logoff, {:username => "test_username"}
     assert_nil Computer.find_by_ip(request.remote_ip).current_username
     assert_response :success
   end
