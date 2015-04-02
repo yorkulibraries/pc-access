@@ -30,4 +30,24 @@ class ComputerTest < ActiveSupport::TestCase
     assert_equal 1, @last_ping_more_than_15_minutes_ago.size
     assert_equal @computer_two, @last_ping_more_than_15_minutes_ago.first
   end
+  
+  test "current_username should be correctly updated after logon" do
+    @computer_one.logon('test_user1')
+    assert_equal 'test_user1', @computer_one.current_username
+  end
+  
+  test "current_username should be nil after logoff" do
+    @computer_one.logoff
+    assert_nil @computer_one.current_username
+  end
+
+  test "last_ping should not be nil after logon" do
+    @computer_one.logon('test_user1')
+    assert_not_nil @computer_one.last_ping
+  end
+  
+  test "last_ping should be nil after logoff" do
+    @computer_one.logoff
+    assert_nil @computer_one.last_ping
+  end
 end

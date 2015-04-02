@@ -10,9 +10,9 @@ class Computer < ActiveRecord::Base
     self.last_ping = DateTime.now
   end
   
-  def logoff(username)
+  def logoff
+    self.previous_username = self.current_username
     self.current_username = nil
     self.last_ping = nil
-    self.previous_username = username
   end
 end

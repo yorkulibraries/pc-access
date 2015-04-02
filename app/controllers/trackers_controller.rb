@@ -21,7 +21,7 @@ class TrackersController < ApplicationController
       @computer = Computer.new
       @computer.ip = request.remote_ip
     end
-    @computer.logoff(params[:username])
+    @computer.logoff
     @computer.save
     respond_to do |format|
       format.all { render :nothing => true }
