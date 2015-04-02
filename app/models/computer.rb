@@ -4,7 +4,7 @@ class Computer < ActiveRecord::Base
   scope :in_use, -> { where("current_username IS NOT NULL AND is_powered_off = ?", false) }
   scope :not_in_use, -> { where("current_username IS NULL OR is_powered_off = ?", true) }
   scope :last_ping_more_than_x_time_ago, ->(time) { where("last_ping < ?", time.ago) }
-  scope :powered_off, -> { where(:is_powered_off, true) }
+  scope :powered_off, -> { where("is_powered_off = ?", true) }
   
   def logon(username)
     self.current_username = username
