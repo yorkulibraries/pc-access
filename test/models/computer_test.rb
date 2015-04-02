@@ -4,6 +4,7 @@ class ComputerTest < ActiveSupport::TestCase
   setup do
     @computer_one = computers(:one)
     @computer_two = computers(:two)
+    @computer_three = computers(:three)
   end
   
   test "in_use should return correct data" do
@@ -13,11 +14,13 @@ class ComputerTest < ActiveSupport::TestCase
     assert_equal @computer_two.current_username, @in_use.first.current_username
   end
   
-  test "not_in_use should return correct data" do
+  test "not_in_use should return 2 records" do
     @not_in_use = Computer.not_in_use
-    assert_equal 1, @not_in_use.count
-    assert_equal @computer_one.ip, @not_in_use.first.ip
-    assert_nil @not_in_use.first.current_username
+    assert_equal 2, @not_in_use.count
+  end
+  
+  test "powered_off should return correct data" do
+    @powered_off = Computer.powered_off
   end
   
   test "last_ping_more_than_x_time_ago should return correct record" do

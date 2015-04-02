@@ -17,3 +17,10 @@
   <li><%= m.ip %>,  Last Ping: <%= time_ago_in_words(m.last_ping) %></li>
 <% end %>
 </ul>
+
+<h2>Powered Off</h2>
+<ul>
+<% @powered_off.order('ip').each do |m| %>
+  <li><%= m.ip %></li>
+<% end %>
+</ul>

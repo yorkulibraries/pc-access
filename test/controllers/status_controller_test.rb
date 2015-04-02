@@ -12,9 +12,8 @@ class StatusControllerTest < ActionController::TestCase
     status = JSON.parse(@response.body)
     assert_equal 1, status['in_use_count']
     assert_equal 1, status['in_use'].size
-    assert_equal 1, status['not_in_use_count']
-    assert_equal 1, status['not_in_use'].size
-    assert_equal @computer_one.ip, status['not_in_use'].first['ip']
+    assert_equal 2, status['not_in_use_count']
+    assert_equal 2, status['not_in_use'].size
     assert_equal @computer_two.ip, status['in_use'].first['ip']
   end
 end

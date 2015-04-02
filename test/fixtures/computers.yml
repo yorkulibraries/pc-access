@@ -6,3 +6,7 @@ one:
 two:
   ip: 2.2.2.2
   current_username: user2
+
+three:
+  ip: 3.3.3.3
+  is_powered_off: true
