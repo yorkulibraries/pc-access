@@ -19,4 +19,15 @@ class ComputerTest < ActiveSupport::TestCase
     assert_equal @computer_one.ip, @not_in_use.first.ip
     assert_nil @not_in_use.first.current_username
   end
+  
+  test "last_ping_more_than_x_time_ago should return correct record" do
+    @computer_one.last_ping = DateTime.now - 14.minutes
+    @computer_one.save
+    @computer_two.last_ping = DateTime.now - 15.minutes
+    @computer_two.save
+    
+    @last_ping_more_than_15_minutes_ago = Computer.last_ping_more_than_x_time_ago(15.minutes)
+    assert_equal 1, @last_ping_more_than_15_minutes_ago.size
+    assert_equal @computer_two, @last_ping_more_than_15_minutes_ago.first
+  end
 end
