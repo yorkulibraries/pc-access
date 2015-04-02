@@ -14,6 +14,6 @@
 <h2>In-use</h2>
 <ul>
 <% @in_use.each do |m| %>
-  <li><%= m.ip %>,  Last Ping: <%= m.last_ping %></li>
+  <li><%= m.ip %>,  Last Ping: <%= time_ago_in_words(m.last_ping) %></li>
 <% end %>
 </ul>
