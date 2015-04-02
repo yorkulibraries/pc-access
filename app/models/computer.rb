@@ -9,6 +9,7 @@ class Computer < ActiveRecord::Base
   def logon(username)
     self.current_username = username
     self.last_ping = DateTime.now
+    self.is_powered_off = false
   end
   
   def logoff
