@@ -13,7 +13,7 @@
    
 <h2>In-use</h2>
 <ul>
-<% @in_use.order('last_ping desc, ip asc').each do |m| %>
+<% @in_use.order('last_ping, ip').each do |m| %>
   <li><%= m.ip %>,  Last Ping: <%= time_ago_in_words(m.last_ping) %></li>
 <% end %>
 </ul>
