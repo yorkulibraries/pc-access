@@ -1,7 +1,7 @@
 require 'rubygems'
 require 'rufus/scheduler'
 require 'net/ping'
- 
+
 scheduler = Rufus::Scheduler.new
 
 # run every minute
@@ -11,11 +11,10 @@ scheduler.every("1m") do
     #computer.save
   end
   
-  Computer.last_ping_more_than_x_time_ago(15.minutes) do |computer|
+  Computer.find_each do |computer|
     Rails.logger.debug "Pinging #{computer.ip}"
-    Net::Ping::TCP.econnrefused = true
-    net = Net::Ping::TCP.new(computer.ip)
-    if net.ping
+    net = Net::Ping::External.new(computer.ip)
+    if net.ping?
       Rails.logger.debug "#{computer.ip} is alive"
       computer.is_powered_off = false
       computer.save
