@@ -11,7 +11,7 @@ scheduler.every("1m") do
     #computer.save
   end
   
-  Computer.find_each do |computer|
+  Computer.in_use.last_ping_more_than_x_time_ago(15.minutes).each do |computer|
     Rails.logger.debug "Pinging #{computer.ip}"
     net = Net::Ping::External.new(computer.ip)
     if net.ping?
