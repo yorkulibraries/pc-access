@@ -15,7 +15,7 @@ scheduler.every("1m") do
     ip = computer.ip
     Rails.logger.debug "Pinging #{ip}"
     Net::Ping::TCP.econnrefused = true
-    net = Net::Ping::TCP.new(ip)
+    net = Net::Ping::TCP.new(ip, Socket.getservbyname('echo') , 1)
     if net.ping?
       Rails.logger.debug "#{ip} is alive"
       computer.is_powered_off = false
