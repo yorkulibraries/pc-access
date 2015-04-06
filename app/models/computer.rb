@@ -17,4 +17,9 @@ class Computer < ActiveRecord::Base
     self.current_username = nil
     self.last_ping = nil
   end
+  
+  def power_off
+    self.logoff
+    self.is_powered_off = true
+  end
 end
