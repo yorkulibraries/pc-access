@@ -9,10 +9,11 @@ scheduler.every("1m") do
   Rails.logger.debug("Task scheduler running at: #{Time.now}")
   
   Computer.in_use.last_ping_more_than_x_time_ago(15.minutes).each do |computer|
+    ip = computer.ip
+
     Rails.logger.debug "Logoff #{ip}"
     computer.logoff
-    
-    ip = computer.ip
+
     Rails.logger.debug "Pinging #{ip}"
     Net::Ping::TCP.econnrefused = false
     net = Net::Ping::TCP.new(ip, 135 , 1)
