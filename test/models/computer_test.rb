@@ -53,4 +53,20 @@ class ComputerTest < ActiveSupport::TestCase
     @computer_one.logoff
     assert_nil @computer_one.last_ping
   end
+  
+  test "logoff should save current_username to previous_username if it is not nil" do
+    current_username = @computer_two.current_username
+    assert_not_nil current_username
+    assert_nil @computer_two.previous_username
+    @computer_two.logoff
+    assert_equal current_username, @computer_two.previous_username
+  end
+  
+  test "logoff should not change previous_username if current_username is nil" do
+    previous_username = @computer_one.previous_username
+    assert_nil @computer_one.current_username
+    @computer_one.logoff
+    assert_equal previous_username, @computer_one.previous_username
+  end
+  
 end

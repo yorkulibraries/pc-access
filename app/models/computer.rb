@@ -13,7 +13,9 @@ class Computer < ActiveRecord::Base
   end
   
   def logoff
-    self.previous_username = self.current_username
+    if !self.current_username.nil?
+      self.previous_username = self.current_username
+    end
     self.current_username = nil
     self.last_ping = nil
   end
