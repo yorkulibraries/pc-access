@@ -9,11 +9,8 @@ scheduler.every("1m") do
   Rails.logger.debug("Task scheduler running at: #{Time.now}")
   
   Computer.in_use.last_ping_more_than_x_time_ago(15.minutes).each do |computer|
-    #computer.logoff
-    #computer.save
-  end
-  
-  Computer.in_use.last_ping_more_than_x_time_ago(15.minutes).each do |computer|
+    computer.logoff
+    
     ip = computer.ip
     Rails.logger.debug "Pinging #{ip}"
     Net::Ping::TCP.econnrefused = false
@@ -21,11 +18,11 @@ scheduler.every("1m") do
     if net.ping?
       Rails.logger.debug "#{ip} is alive"
       computer.is_powered_off = false
-      computer.save
     else
       Rails.logger.debug "#{ip} is off"
       computer.power_off
-      computer.save
     end
+    
+    computer.save
   end
 end
