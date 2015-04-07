@@ -27,4 +27,16 @@ scheduler.every("1m") do
     
     computer.save
   end
+  
+  Computer.powered_off.each do |computer|
+    ip = computer.ip
+    Rails.logger.debug "Pinging #{ip}"
+    Net::Ping::TCP.econnrefused = false
+    net = Net::Ping::TCP.new(ip, 135 , 1)
+    if net.ping?
+      Rails.logger.debug "#{ip} is alive"
+      computer.is_powered_off = false
+    end
+    computer.save
+  end
 end
