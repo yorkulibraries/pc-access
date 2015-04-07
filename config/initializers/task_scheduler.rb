@@ -16,8 +16,8 @@ scheduler.every("1m") do
   Computer.in_use.last_ping_more_than_x_time_ago(15.minutes).each do |computer|
     ip = computer.ip
     Rails.logger.debug "Pinging #{ip}"
-    Net::Ping::TCP.econnrefused = true
-    net = Net::Ping::TCP.new(ip, Socket.getservbyname('echo') , 1)
+    Net::Ping::TCP.econnrefused = false
+    net = Net::Ping::TCP.new(ip, 135 , 1)
     if net.ping?
       Rails.logger.debug "#{ip} is alive"
       computer.is_powered_off = false
