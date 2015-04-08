@@ -7,7 +7,10 @@ class Computer < ActiveRecord::Base
   scope :powered_off, -> { where("is_powered_off = ?", true) }
   
   def logon(username)
-    self.current_username = username
+    if self.current_username != username
+      self.logon_time = DateTime.now
+      self.current_username = username
+    end
     self.last_ping = DateTime.now
     self.is_powered_off = false
   end
@@ -18,11 +21,18 @@ class Computer < ActiveRecord::Base
     end
     self.current_username = nil
     self.last_ping = nil
+    self.logon_time = nil
   end
   
   def power_off
     self.logoff
     self.is_powered_off = true
+    self.power_off_time = DateTime.now
+  end
+  
+  def power_on
+    self.is_powered_off = false
+    self.power_on_time = DateTime.now
   end
   
   def is_in_use

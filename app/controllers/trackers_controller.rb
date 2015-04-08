@@ -35,7 +35,7 @@ class TrackersController < ApplicationController
       @computer = Computer.new
       @computer.ip = request.remote_ip
     end
-    @computer.is_powered_off = false
+    @computer.power_on
     @computer.save
     respond_to do |format|
       format.all { render :nothing => true }

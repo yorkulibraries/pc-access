@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150408180415) do
+ActiveRecord::Schema.define(version: 20150408191629) do
 
   create_table "computers", force: :cascade do |t|
     t.string   "ip"
@@ -22,6 +22,9 @@ ActiveRecord::Schema.define(version: 20150408180415) do
     t.datetime "last_ping"
     t.boolean  "is_powered_off",    default: false
     t.integer  "location_id"
+    t.datetime "power_off_time"
+    t.datetime "power_on_time"
+    t.datetime "logon_time"
   end
 
   add_index "computers", ["location_id"], name: "index_computers_on_location_id"
