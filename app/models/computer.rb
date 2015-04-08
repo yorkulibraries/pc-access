@@ -25,7 +25,6 @@ class Computer < ActiveRecord::Base
   end
   
   def power_off
-    self.logoff
     self.is_powered_off = true
     self.power_off_time = DateTime.now
   end
