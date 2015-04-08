@@ -24,4 +24,8 @@ class Computer < ActiveRecord::Base
     self.logoff
     self.is_powered_off = true
   end
+  
+  def is_in_use
+    return !self.current_username.nil?
+  end
 end

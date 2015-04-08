@@ -37,11 +37,29 @@ class ComputerTest < ActiveSupport::TestCase
   test "current_username should be correctly updated after logon" do
     @computer_one.logon('test_user1')
     assert_equal 'test_user1', @computer_one.current_username
+    @computer_two.logon('test_user2')
+    assert_equal 'test_user2', @computer_two.current_username
   end
   
   test "current_username should be nil after logoff" do
     @computer_one.logoff
     assert_nil @computer_one.current_username
+    @computer_two.logoff
+    assert_nil @computer_two.current_username
+  end
+  
+  test "is_in_use should be false after logoff" do
+    @computer_one.logoff
+    assert !@computer_one.is_in_use
+    @computer_two.logoff
+    assert !@computer_two.is_in_use
+  end
+  
+  test "is_in_use should be true after logon" do
+    @computer_one.logon('test_user1')
+    assert @computer_one.is_in_use
+    @computer_two.logon('test_user2')
+    assert @computer_two.is_in_use
   end
 
   test "last_ping should not be nil after logon" do
