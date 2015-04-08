@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/yorkulibraries/pc-access.svg?branch=master)](https://travis-ci.org/yorkulibraries/pc-access)
+
 ## About
 Simple Ruby on Rails app to detect which computers are available.
 
