@@ -112,4 +112,16 @@ class ComputerTest < ActiveSupport::TestCase
     @computer_one.logon(username)
     assert_equal logon_time, @computer_one.logon_time
   end
+  
+  test "power_on immediately after logon should not change logon states" do
+    username = 'test'
+    @computer_one.logon(username)
+    logon_time = @computer_one.logon_time
+    assert @computer_one.is_in_use
+    @computer_one.power_on
+    assert @computer_one.is_in_use
+    assert_equal username, @computer_one.current_username
+    assert_equal logon_time, @computer_one.logon_time
+  end
+
 end
