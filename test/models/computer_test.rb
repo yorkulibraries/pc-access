@@ -12,15 +12,25 @@ class ComputerTest < ActiveSupport::TestCase
     assert_equal 1, @in_use.count
     assert_equal @computer_two, @in_use.first
     assert_equal @computer_two.current_username, @in_use.first.current_username
+    assert @in_use.first.is_in_use
   end
   
-  test "not_in_use should return 2 records" do
+  test "not_in_use should return correct data" do
     @not_in_use = Computer.not_in_use
     assert_equal 2, @not_in_use.count
+    @not_in_use.each do |computer|
+      assert_not computer.is_in_use
+      assert_nil computer.current_username
+    end
   end
   
   test "powered_off should return correct data" do
     @powered_off = Computer.powered_off
+    @powered_off.each do |computer|
+      assert computer.is_powered_off
+      assert_not computer.is_in_use
+      assert_nil computer.current_username
+    end
   end
   
   test "last_ping_more_than_x_time_ago should return correct record" do
@@ -50,9 +60,9 @@ class ComputerTest < ActiveSupport::TestCase
   
   test "is_in_use should be false after logoff" do
     @computer_one.logoff
-    assert !@computer_one.is_in_use
+    assert_not @computer_one.is_in_use
     @computer_two.logoff
-    assert !@computer_two.is_in_use
+    assert_not @computer_two.is_in_use
   end
   
   test "is_in_use should be true after logon" do
