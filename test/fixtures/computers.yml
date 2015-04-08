@@ -1,12 +1,15 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+pc_one:
   ip: 1.1.1.1
+  location: loc_one
 
-two:
+pc_two:
   ip: 2.2.2.2
   current_username: user2
+  location: loc_one
 
-three:
+pc_three:
   ip: 3.3.3.3
   is_powered_off: true
+  location: loc_two

@@ -2,9 +2,9 @@ require 'test_helper'
 
 class ComputerTest < ActiveSupport::TestCase
   setup do
-    @computer_one = computers(:one)
-    @computer_two = computers(:two)
-    @computer_three = computers(:three)
+    @computer_one = computers(:pc_one)
+    @computer_two = computers(:pc_two)
+    @computer_three = computers(:pc_three)
   end
   
   test "in_use should return correct data" do

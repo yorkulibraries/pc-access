@@ -2,8 +2,8 @@ require 'test_helper'
 
 class TrackersControllerTest < ActionController::TestCase
   setup do
-    @computer_one = computers(:one)
-    @computer_two = computers(:two)
+    @computer_one = computers(:pc_one)
+    @computer_two = computers(:pc_two)
   end
   
   test "computer should exist after logon" do
