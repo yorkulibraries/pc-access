@@ -1,5 +1,3 @@
-require 'net/ping'
-
 class Computer < ActiveRecord::Base
   class_attribute :config
   self.config = Rails.application.config
@@ -46,14 +44,7 @@ class Computer < ActiveRecord::Base
     return !self.current_username.nil?
   end
   
-  def ping?
-    Net::Ping::TCP.econnrefused = true
-    net = Net::Ping::TCP.new(self.ip, self.config.tcp_ping_port, 1)
-    result = net.ping?
-    if !net.exception.nil?
-      Rails.logger.debug(net.exception)
-      return false
-    end
-    return result
+  def ping
+    self.last_ping = DateTime.now
   end
 end

@@ -40,15 +40,6 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
   
-  # it is possible that a computer is powered on
-  # and a user immediately logs in before a startup/power_on 
-  # event is fired. This config option sets the max number of seconds allowed 
-  # for a delayed startup/power_on event to occur AFTER a logon
-  config.max_delayed_power_on_time = 1.seconds
-  
-  # use TCP ping on a known open port to check if a computer is online or not
-  config.tcp_ping_port = 135
-  
   # after logon, each computer should send a logon "keep-alive" request every x seconds
   # if no "keep-alive" logon request is received, the computer is considered logged off
   config.keep_alive_interval = 15.minutes
