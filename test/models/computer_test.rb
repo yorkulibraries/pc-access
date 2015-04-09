@@ -78,18 +78,20 @@ class ComputerTest < ActiveSupport::TestCase
     assert @computer_two.is_in_use
   end
 
-  test "last_ping should not be nil after logon" do
+  test "last_ping and last_keep_alive should not be nil after logon" do
     @computer_one.logon('test_user1')
     assert_not_nil @computer_one.last_ping
+    assert_not_nil @computer_one.last_keep_alive
     @computer_two.logon('test_user2')
     assert_not_nil @computer_two.last_ping
+    assert_not_nil @computer_two.last_keep_alive
   end
   
-  test "last_ping should be nil after logoff" do
+  test "last_keep_alive should be nil after logoff" do
     @computer_one.logoff
-    assert_nil @computer_one.last_ping
+    assert_nil @computer_one.last_keep_alive
     @computer_two.logoff
-    assert_nil @computer_two.last_ping
+    assert_nil @computer_two.last_keep_alive
   end
   
   test "logoff should save current_username to previous_username if it is not nil" do
