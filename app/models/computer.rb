@@ -1,4 +1,7 @@
 class Computer < ActiveRecord::Base
+  class_attribute :config
+  self.config = Rails.application.config
+    
   belongs_to :location
   
   scope :in_use, -> { where("current_username IS NOT NULL AND is_powered_off = ?", false) }
@@ -30,6 +33,9 @@ class Computer < ActiveRecord::Base
   end
   
   def power_on
+    if self.logon_time < config.max_delayed_power_on_time.ago
+      self.logoff
+    end
     self.is_powered_off = false
     self.power_on_time = DateTime.now
   end

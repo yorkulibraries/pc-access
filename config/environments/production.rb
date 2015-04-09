@@ -79,4 +79,11 @@ Rails.application.configure do
   
   config.time_zone = 'Eastern Time (US & Canada)'
   config.active_record.default_timezone = 'Eastern Time (US & Canada)'
+  
+  # it is possible that a computer is powered on
+  # and a user immediately logs in before a startup/power_on 
+  # event is fired. This config option sets the max number of seconds allowed 
+  # for a delayed startup/power_on event to occur AFTER a logon
+  config.max_delayed_power_on_time = 60.seconds
+  
 end

@@ -124,4 +124,17 @@ class ComputerTest < ActiveSupport::TestCase
     assert_equal logon_time, @computer_one.logon_time
   end
 
+  test "power_on #{Computer.config.max_delayed_power_on_time} seconds after logon should change to not-in-use state" do
+    username = 'test'
+    @computer_one.logon(username)
+    logon_time = @computer_one.logon_time
+    assert @computer_one.is_in_use
+    
+    sleep(Computer.config.max_delayed_power_on_time)
+    
+    @computer_one.power_on
+    assert_not @computer_one.is_in_use
+    assert_nil @computer_one.current_username
+    assert_nil @computer_one.logon_time
+  end
 end
