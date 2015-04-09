@@ -13,3 +13,9 @@ pc_three:
   ip: 3.3.3.3
   is_powered_off: true
   location: loc_two
+
+google_dns_a:
+  ip: 8.8.8.8
+
+foo_bar_baz:
+  ip: foo.bar.baz

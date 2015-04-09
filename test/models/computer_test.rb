@@ -5,6 +5,8 @@ class ComputerTest < ActiveSupport::TestCase
     @computer_one = computers(:pc_one)
     @computer_two = computers(:pc_two)
     @computer_three = computers(:pc_three)
+    @google_dns_a = computers(:google_dns_a)
+    @foo_bar_baz = computers(:foo_bar_baz)
   end
   
   test "in_use should return correct data" do
@@ -17,7 +19,7 @@ class ComputerTest < ActiveSupport::TestCase
   
   test "not_in_use should return correct data" do
     @not_in_use = Computer.not_in_use
-    assert_equal 2, @not_in_use.count
+    assert_equal 4, @not_in_use.count
     @not_in_use.each do |computer|
       assert_not computer.is_in_use
       assert_nil computer.current_username
@@ -136,5 +138,15 @@ class ComputerTest < ActiveSupport::TestCase
     assert_not @computer_one.is_in_use
     assert_nil @computer_one.current_username
     assert_nil @computer_one.logon_time
+  end
+  
+  test "calling ping on google public DNS computer should return true" do
+    result = @google_dns_a.ping?
+    assert result
+  end
+  
+  test "calling ping on foo_bar_baz computer should return false" do
+    result = @foo_bar_baz.ping?
+    assert_not result
   end
 end

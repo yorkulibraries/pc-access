@@ -1,3 +1,5 @@
+require 'net/ping'
+
 class Computer < ActiveRecord::Base
   class_attribute :config
   self.config = Rails.application.config
@@ -42,5 +44,11 @@ class Computer < ActiveRecord::Base
   
   def is_in_use
     return !self.current_username.nil?
+  end
+  
+  def ping?
+    Net::Ping::TCP.econnrefused = true
+    net = Net::Ping::TCP.new(self.ip, 135 , 1)
+    return net.ping?
   end
 end
