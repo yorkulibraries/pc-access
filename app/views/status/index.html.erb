@@ -17,3 +17,10 @@
   <li><%= m.ip %>,  <%= time_ago_in_words(m.last_keep_alive) %></li>
 <% end %>
 </ul>
+
+<h2>Offline</h2>
+<ul>
+<% @ping_timed_out.order('last_ping, ip').each do |m| %>
+  <li><%= m.ip %>,  <%= time_ago_in_words(m.last_ping) %></li>
+<% end %>
+</ul>
