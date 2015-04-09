@@ -6,8 +6,8 @@ class Computer < ActiveRecord::Base
   
   scope :in_use, -> { where("current_username IS NOT NULL") }
   scope :not_in_use, -> { where("current_username IS NULL") }
-  scope :keep_alive_timed_out, -> { where("last_keep_alive IS NOT NULL AND last_keep_alive < ?", config.keep_alive_interval.ago) }
-  scope :ping_timed_out, -> { where("last_ping IS NOT NULL AND last_ping < ?", config.keep_alive_interval.ago) }
+  scope :keep_alive_timed_out, -> { where("last_keep_alive < ?", config.keep_alive_interval.ago) }
+  scope :ping_timed_out, -> { where("last_ping < ?", config.keep_alive_interval.ago) }
   
   def logon(username)
     if self.current_username != username
