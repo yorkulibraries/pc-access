@@ -27,19 +27,6 @@ class Computer < ActiveRecord::Base
     self.logon_time = nil
   end
   
-  def power_off
-    self.is_powered_off = true
-    self.power_off_time = DateTime.now
-  end
-  
-  def power_on
-    if self.logon_time < config.max_delayed_power_on_time.ago
-      self.logoff
-    end
-    self.is_powered_off = false
-    self.power_on_time = DateTime.now
-  end
-  
   def is_in_use
     return !self.current_username.nil?
   end
