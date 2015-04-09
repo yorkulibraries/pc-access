@@ -78,7 +78,7 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
   
   config.time_zone = 'Eastern Time (US & Canada)'
-  config.active_record.default_timezone = 'Eastern Time (US & Canada)'
+  config.active_record.default_timezone = :local
   
   # after logon, each computer should send a logon "keep-alive" request every x seconds
   # if no "keep-alive" logon request is received, the computer is considered logged off
