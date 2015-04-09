@@ -42,6 +42,6 @@ Rails.application.configure do
   
   # after logon, each computer should send a logon "keep-alive" request every x seconds
   # if no "keep-alive" logon request is received, the computer is considered logged off
-  config.keep_alive_interval = 15.minutes
+  config.keep_alive_interval = 1.seconds
   
 end

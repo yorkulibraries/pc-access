@@ -80,4 +80,8 @@ Rails.application.configure do
   config.time_zone = 'Eastern Time (US & Canada)'
   config.active_record.default_timezone = 'Eastern Time (US & Canada)'
   
+  # after logon, each computer should send a logon "keep-alive" request every x seconds
+  # if no "keep-alive" logon request is received, the computer is considered logged off
+  config.keep_alive_interval = 15.minutes
+  
 end

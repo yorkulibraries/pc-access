@@ -26,15 +26,28 @@ class ComputerTest < ActiveSupport::TestCase
     end
   end
   
-  test "last_ping_more_than_x_time_ago should return correct record" do
-    @computer_one.last_ping = DateTime.now - 14.minutes
+  test "ping_timed_out should return correct record" do
+    @computer_one.last_ping = DateTime.now
     @computer_one.save
-    @computer_two.last_ping = DateTime.now - 15.minutes
+    
+    @computer_two.last_ping = DateTime.now - Computer.config.keep_alive_interval
     @computer_two.save
     
-    @last_ping_more_than_15_minutes_ago = Computer.last_ping_more_than_x_time_ago(15.minutes)
-    assert_equal 1, @last_ping_more_than_15_minutes_ago.size
-    assert_equal @computer_two, @last_ping_more_than_15_minutes_ago.first
+    @ping_timed_out = Computer.ping_timed_out
+    assert_equal 1, @ping_timed_out.size
+    assert_equal @computer_two, @ping_timed_out.first
+  end
+  
+  test "keep_alive_timed_out should return correct record" do
+    @computer_one.last_keep_alive = DateTime.now
+    @computer_one.save
+    
+    @computer_two.last_keep_alive = DateTime.now - Computer.config.keep_alive_interval
+    @computer_two.save
+    
+    @keep_alive_timed_out = Computer.keep_alive_timed_out
+    assert_equal 1, @keep_alive_timed_out.size
+    assert_equal @computer_two, @keep_alive_timed_out.first
   end
   
   test "current_username should be correctly updated after logon" do
