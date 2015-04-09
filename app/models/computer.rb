@@ -1,7 +1,7 @@
 class Computer < ActiveRecord::Base
   class_attribute :config
   self.config = Rails.application.config
-    
+
   belongs_to :location
   
   scope :in_use, -> { where("current_username IS NOT NULL") }
@@ -13,10 +13,9 @@ class Computer < ActiveRecord::Base
     if self.current_username != username
       self.current_username = username
     end
-    self.ping
     self.keep_alive
   end
-  
+
   def logoff
     self.previous_username = self.current_username unless self.current_username.nil?
     self.current_username = nil
@@ -32,5 +31,6 @@ class Computer < ActiveRecord::Base
   
   def keep_alive
     self.last_keep_alive = DateTime.now
+    self.ping
   end
 end
