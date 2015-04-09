@@ -26,15 +26,6 @@ class ComputerTest < ActiveSupport::TestCase
     end
   end
   
-  test "powered_off should return correct data" do
-    @powered_off = Computer.powered_off
-    @powered_off.each do |computer|
-      assert computer.is_powered_off
-      assert_not computer.is_in_use
-      assert_nil computer.current_username
-    end
-  end
-  
   test "last_ping_more_than_x_time_ago should return correct record" do
     @computer_one.last_ping = DateTime.now - 14.minutes
     @computer_one.save

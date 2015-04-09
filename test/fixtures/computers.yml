@@ -11,7 +11,6 @@ pc_two:
 
 pc_three:
   ip: 3.3.3.3
-  is_powered_off: true
   location: loc_two
 
 localhost:
