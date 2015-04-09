@@ -11,10 +11,10 @@ class Computer < ActiveRecord::Base
   
   def logon(username)
     if self.current_username != username
-      self.logon_time = DateTime.now
       self.current_username = username
     end
-    self.last_ping = DateTime.now
+    self.ping
+    self.keep_alive
     self.is_powered_off = false
   end
   
@@ -23,8 +23,6 @@ class Computer < ActiveRecord::Base
       self.previous_username = self.current_username
     end
     self.current_username = nil
-    self.last_ping = nil
-    self.logon_time = nil
   end
   
   def is_in_use
@@ -33,5 +31,9 @@ class Computer < ActiveRecord::Base
   
   def ping
     self.last_ping = DateTime.now
+  end
+  
+  def keep_alive
+    self.last_keep_alive = DateTime.now
   end
 end

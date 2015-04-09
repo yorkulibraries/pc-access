@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150409184557) do
+ActiveRecord::Schema.define(version: 20150409190617) do
 
   create_table "computers", force: :cascade do |t|
     t.string   "ip"
@@ -22,7 +22,6 @@ ActiveRecord::Schema.define(version: 20150409184557) do
     t.datetime "last_ping"
     t.boolean  "is_powered_off",    default: false
     t.integer  "location_id"
-    t.datetime "logon_time"
     t.datetime "last_keep_alive"
   end
 

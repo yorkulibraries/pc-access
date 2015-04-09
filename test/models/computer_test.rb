@@ -103,16 +103,4 @@ class ComputerTest < ActiveSupport::TestCase
     assert_equal previous_username, @computer_one.previous_username
   end
   
-  test "logon_time should not change if same username logon multiple times" do
-    username = 'test_user1'
-    @computer_one.logon(username)
-    assert_not_nil @computer_one.logon_time
-    logon_time = @computer_one.logon_time
-    
-    @computer_one.logon(username)
-    @computer_one.logon(username)
-    @computer_one.logon(username)
-    assert_equal logon_time, @computer_one.logon_time
-  end
-  
 end
