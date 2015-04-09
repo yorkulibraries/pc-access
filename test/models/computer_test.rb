@@ -5,7 +5,7 @@ class ComputerTest < ActiveSupport::TestCase
     @computer_one = computers(:pc_one)
     @computer_two = computers(:pc_two)
     @computer_three = computers(:pc_three)
-    @google_dns_a = computers(:google_dns_a)
+    @localhost = computers(:localhost)
     @foo_bar_baz = computers(:foo_bar_baz)
   end
   
@@ -140,13 +140,11 @@ class ComputerTest < ActiveSupport::TestCase
     assert_nil @computer_one.logon_time
   end
   
-  test "calling ping on google public DNS computer should return true" do
-    result = @google_dns_a.ping?
-    assert result
+  test "calling ping on localhost should return true" do
+    assert @localhost.ping?
   end
   
   test "calling ping on foo_bar_baz computer should return false" do
-    result = @foo_bar_baz.ping?
-    assert_not result
+    assert_not @foo_bar_baz.ping?
   end
 end

@@ -48,7 +48,12 @@ class Computer < ActiveRecord::Base
   
   def ping?
     Net::Ping::TCP.econnrefused = true
-    net = Net::Ping::TCP.new(self.ip, 135 , 1)
-    return net.ping?
+    net = Net::Ping::TCP.new(self.ip, self.config.tcp_ping_port, 1)
+    result = net.ping?
+    if !net.exception.nil?
+      Rails.logger.debug(net.exception)
+      return false
+    end
+    return result
   end
 end

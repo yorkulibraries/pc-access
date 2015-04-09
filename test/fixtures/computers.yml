@@ -14,8 +14,8 @@ pc_three:
   is_powered_off: true
   location: loc_two
 
-google_dns_a:
-  ip: 8.8.8.8
+localhost:
+  ip: 127.0.0.1
 
 foo_bar_baz:
   ip: foo.bar.baz

@@ -46,4 +46,6 @@ Rails.application.configure do
   # for a delayed startup/power_on event to occur AFTER a logon
   config.max_delayed_power_on_time = 1.seconds
   
+  # use TCP ping on a known open port to check if a computer is online or not
+  config.tcp_ping_port = 135
 end
