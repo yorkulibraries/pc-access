@@ -48,4 +48,9 @@ Rails.application.configure do
   
   # use TCP ping on a known open port to check if a computer is online or not
   config.tcp_ping_port = 135
+  
+  # after logon, each computer should send a logon "keep-alive" request every x seconds
+  # if no "keep-alive" logon request is received, the computer is considered logged off
+  config.keep_alive_interval = 15.minutes
+  
 end
