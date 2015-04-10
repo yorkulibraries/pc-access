@@ -7,9 +7,5 @@ scheduler = Rufus::Scheduler.new
 scheduler.every("1m") do
   Rails.logger.info("Task scheduler running at: #{Time.now}")
   
-  Computer.in_use.keep_alive_timed_out.each do |pc|
-    Rails.logger.info("#{pc.ip} keep_alive_timed_out => logging off")
-    pc.logoff
-    pc.save
-  end
+  Computer.free_inactive_computers
 end

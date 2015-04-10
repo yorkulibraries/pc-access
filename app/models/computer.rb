@@ -9,6 +9,14 @@ class Computer < ActiveRecord::Base
   scope :keep_alive_timed_out, -> { where("last_keep_alive < ?", config.keep_alive_interval.ago) }
   scope :ping_timed_out, -> { where("last_ping < ?", config.keep_alive_interval.ago) }
   
+  def self.free_inactive_computers
+    self.in_use.keep_alive_timed_out.each do |pc|
+      Rails.logger.info("#{pc.ip} keep_alive_timed_out => logging off")
+      pc.logoff
+      pc.save
+    end
+  end
+    
   def logon(username)
     if self.current_username != username
       self.current_username = username

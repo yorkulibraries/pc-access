@@ -5,25 +5,27 @@ class ComputerTest < ActiveSupport::TestCase
     @computer_one = computers(:pc_one)
     @computer_two = computers(:pc_two)
     @computer_three = computers(:pc_three)
-    @localhost = computers(:localhost)
-    @foo_bar_baz = computers(:foo_bar_baz)
   end
   
   test "in_use should return correct data" do
-    @in_use = Computer.in_use
-    assert_equal 1, @in_use.count
-    assert_equal @computer_two, @in_use.first
-    assert_equal @computer_two.current_username, @in_use.first.current_username
-    assert @in_use.first.is_in_use
+    assert_equal 3, Computer.count
+    assert_equal 0, Computer.in_use.count
+    
+    @computer_one.logon('test1')
+    @computer_one.save
+    
+    assert_equal 1, Computer.in_use.count
+    assert_equal @computer_one, Computer.in_use.first
   end
   
   test "not_in_use should return correct data" do
-    @not_in_use = Computer.not_in_use
-    assert_equal 4, @not_in_use.count
-    @not_in_use.each do |computer|
-      assert_not computer.is_in_use
-      assert_nil computer.current_username
-    end
+    assert_equal 3, Computer.count
+    assert_equal 3, Computer.not_in_use.count
+    
+    @computer_one.logon('test1')
+    @computer_one.save
+    
+    assert_equal 2, Computer.not_in_use.count
   end
   
   test "ping_timed_out should return correct record" do
@@ -50,63 +52,72 @@ class ComputerTest < ActiveSupport::TestCase
     assert_equal @computer_two, @keep_alive_timed_out.first
   end
   
-  test "current_username should be correctly updated after logon" do
-    @computer_one.logon('test_user1')
-    assert_equal 'test_user1', @computer_one.current_username
-    @computer_two.logon('test_user2')
-    assert_equal 'test_user2', @computer_two.current_username
+  test "logon should set correct states" do
+    username = 'test'
+    @computer_one.logon(username)
+    @computer_one.save
+    
+    after = Computer.find(@computer_one.id)
+    
+    assert after.is_in_use
+    assert_equal username, after.current_username
+    assert_not_nil after.last_ping
+    assert_not_nil after.last_keep_alive
   end
   
-  test "current_username should be nil after logoff" do
+  test "logoff should set correct states" do
+    username = 'test'
+    @computer_one.logon(username)
+    @computer_one.save
+    
+    @computer_one = Computer.find(@computer_one.id)
     @computer_one.logoff
-    assert_nil @computer_one.current_username
-    @computer_two.logoff
-    assert_nil @computer_two.current_username
-  end
-  
-  test "is_in_use should be false after logoff" do
-    @computer_one.logoff
-    assert_not @computer_one.is_in_use
-    @computer_two.logoff
-    assert_not @computer_two.is_in_use
-  end
-  
-  test "is_in_use should be true after logon" do
-    @computer_one.logon('test_user1')
-    assert @computer_one.is_in_use
-    @computer_two.logon('test_user2')
-    assert @computer_two.is_in_use
-  end
-
-  test "last_ping and last_keep_alive should not be nil after logon" do
-    @computer_one.logon('test_user1')
-    assert_not_nil @computer_one.last_ping
-    assert_not_nil @computer_one.last_keep_alive
-    @computer_two.logon('test_user2')
-    assert_not_nil @computer_two.last_ping
-    assert_not_nil @computer_two.last_keep_alive
-  end
-  
-  test "last_keep_alive should be nil after logoff" do
-    @computer_one.logoff
-    assert_nil @computer_one.last_keep_alive
-    @computer_two.logoff
-    assert_nil @computer_two.last_keep_alive
-  end
-  
-  test "logoff should save current_username to previous_username if it is not nil" do
-    current_username = @computer_two.current_username
-    assert_not_nil current_username
-    assert_nil @computer_two.previous_username
-    @computer_two.logoff
-    assert_equal current_username, @computer_two.previous_username
+    @computer_one.save
+    
+    after = Computer.find(@computer_one.id)
+    
+    assert_nil after.current_username
+    assert_not after.is_in_use
+    assert_equal username, after.previous_username
   end
   
   test "logoff should not change previous_username if current_username is nil" do
     previous_username = @computer_one.previous_username
     assert_nil @computer_one.current_username
     @computer_one.logoff
-    assert_equal previous_username, @computer_one.previous_username
+    @computer_one.save
+    
+    assert_equal previous_username, Computer.find(@computer_one.id).previous_username
+  end
+  
+  test "free_inactive_computers should free up inactive computers" do
+    @computer_one.logon('test1')
+    @computer_one.last_keep_alive = DateTime.now
+    @computer_one.save
+    
+    @computer_two.logon('test2')
+    @computer_two.last_keep_alive = DateTime.now - Computer.config.keep_alive_interval
+    @computer_two.save
+    
+    all_computers_count = Computer.count
+    in_use_count = Computer.in_use.count
+    not_in_use_count = Computer.not_in_use.count 
+    
+    assert_equal 3, all_computers_count
+    assert_equal 2, in_use_count
+    assert 1, not_in_use_count
+    
+    sleep 1.seconds
+        
+    assert_equal 2, Computer.in_use.keep_alive_timed_out.count
+    
+    Computer.free_inactive_computers
+    
+    assert_equal 0, Computer.in_use.keep_alive_timed_out.count, "Number of inactive should be 0"
+    assert_equal in_use_count - 2, Computer.in_use.count, "Number of in-use computers should be 2 less"
+    assert_equal not_in_use_count + 2, Computer.not_in_use.count, "Number of not-in-use computers should be 2 more"
+    assert_equal all_computers_count, Computer.count, "Total number of computers should not change"
+    
   end
   
 end

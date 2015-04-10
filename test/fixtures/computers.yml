@@ -6,15 +6,8 @@ pc_one:
 
 pc_two:
   ip: 2.2.2.2
-  current_username: user2
   location: loc_one
 
 pc_three:
   ip: 3.3.3.3
   location: loc_two
-
-localhost:
-  ip: 127.0.0.1
-
-foo_bar_baz:
-  ip: foo.bar.baz
