@@ -84,12 +84,21 @@ class ComputerTest < ActiveSupport::TestCase
   end
   
   test "logoff should not change previous_username if current_username is nil" do
-    previous_username = @computer_one.previous_username
+    previous_username = 'test_previous_username'
+    @computer_one.previous_username = previous_username
+    @computer_one.save
+    
+    @computer_one = Computer.find(@computer_one.id)
     assert_nil @computer_one.current_username
+    assert_equal previous_username, @computer_one.previous_username
+
     @computer_one.logoff
     @computer_one.save
     
-    assert_equal previous_username, Computer.find(@computer_one.id).previous_username
+    after = Computer.find(@computer_one.id)
+    
+    assert_nil after.current_username
+    assert_equal previous_username, after.previous_username
   end
   
   test "free_inactive_computers should free up inactive computers" do
