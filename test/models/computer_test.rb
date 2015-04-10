@@ -26,6 +26,8 @@ class ComputerTest < ActiveSupport::TestCase
     @computer_one.save
     
     assert_equal 2, Computer.not_in_use.count
+    assert_equal @computer_two, Computer.not_in_use.order('ip').first 
+    assert_equal @computer_three, Computer.not_in_use.order('ip').last 
   end
   
   test "ping_timed_out should return correct record" do
