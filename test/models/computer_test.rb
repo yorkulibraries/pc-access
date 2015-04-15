@@ -42,6 +42,18 @@ class ComputerTest < ActiveSupport::TestCase
     assert_equal @computer_two, @ping_timed_out.first
   end
   
+  test "actively_pinging should return correct record" do
+    @computer_one.last_ping = DateTime.now
+    @computer_one.save
+    
+    @computer_two.last_ping = DateTime.now - Computer.config.keep_alive_interval
+    @computer_two.save
+    
+    @actively_pinging = Computer.actively_pinging
+    assert_equal 1, @actively_pinging.size
+    assert_equal @computer_one, @actively_pinging.first
+  end
+  
   test "keep_alive_timed_out should return correct record" do
     @computer_one.last_keep_alive = DateTime.now
     @computer_one.save
@@ -52,6 +64,18 @@ class ComputerTest < ActiveSupport::TestCase
     @keep_alive_timed_out = Computer.keep_alive_timed_out
     assert_equal 1, @keep_alive_timed_out.size
     assert_equal @computer_two, @keep_alive_timed_out.first
+  end
+  
+  test "actively_keep_alive should return correct record" do
+    @computer_one.last_keep_alive = DateTime.now
+    @computer_one.save
+    
+    @computer_two.last_keep_alive = DateTime.now - Computer.config.keep_alive_interval
+    @computer_two.save
+    
+    @actively_keep_alive = Computer.actively_keep_alive
+    assert_equal 1, @actively_keep_alive.size
+    assert_equal @computer_one, @actively_keep_alive.first
   end
   
   test "logon should set correct states" do
