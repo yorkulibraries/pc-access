@@ -6,14 +6,14 @@ class Computer < ActiveRecord::Base
   
   scope :in_use, -> { where("current_username IS NOT NULL") }
   scope :not_in_use, -> { where("current_username IS NULL") }
-  scope :keep_alive_timed_out, -> { where("last_keep_alive < ?", config.keep_alive_interval.ago) }
-  scope :actively_keep_alive, -> { where("last_keep_alive >= ?", config.keep_alive_interval.ago) }
-  scope :ping_timed_out, -> { where("last_ping < ?", config.keep_alive_interval.ago) }
-  scope :actively_pinging, -> { where("last_ping >= ?", config.keep_alive_interval.ago) }
+  scope :not_keeping_alive, -> { where("last_keep_alive < ?", config.keep_alive_interval.ago) }
+  scope :keeping_alive, -> { where("last_keep_alive >= ?", config.keep_alive_interval.ago) }
+  scope :not_pinging, -> { where("last_ping < ?", config.keep_alive_interval.ago) }
+  scope :pinging, -> { where("last_ping >= ?", config.keep_alive_interval.ago) }
   
   def self.free_inactive_computers
-    self.in_use.keep_alive_timed_out.each do |pc|
-      Rails.logger.info("#{pc.ip} keep_alive_timed_out => logging off")
+    self.in_use.not_keeping_alive.each do |pc|
+      Rails.logger.info("#{pc.ip} not_keeping_alive => logging off")
       pc.logoff
       pc.save
     end

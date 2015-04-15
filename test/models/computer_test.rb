@@ -30,52 +30,52 @@ class ComputerTest < ActiveSupport::TestCase
     assert_equal @computer_three, Computer.not_in_use.order('ip').last 
   end
   
-  test "ping_timed_out should return correct record" do
+  test "not_pinging should return correct record" do
     @computer_one.last_ping = DateTime.now
     @computer_one.save
     
     @computer_two.last_ping = DateTime.now - Computer.config.keep_alive_interval
     @computer_two.save
     
-    @ping_timed_out = Computer.ping_timed_out
-    assert_equal 1, @ping_timed_out.size
-    assert_equal @computer_two, @ping_timed_out.first
+    @not_pinging = Computer.not_pinging
+    assert_equal 1, @not_pinging.size
+    assert_equal @computer_two, @not_pinging.first
   end
   
-  test "actively_pinging should return correct record" do
+  test "pinging should return correct record" do
     @computer_one.last_ping = DateTime.now
     @computer_one.save
     
     @computer_two.last_ping = DateTime.now - Computer.config.keep_alive_interval
     @computer_two.save
     
-    @actively_pinging = Computer.actively_pinging
-    assert_equal 1, @actively_pinging.size
-    assert_equal @computer_one, @actively_pinging.first
+    @pinging = Computer.pinging
+    assert_equal 1, @pinging.size
+    assert_equal @computer_one, @pinging.first
   end
   
-  test "keep_alive_timed_out should return correct record" do
+  test "not_keeping_alive should return correct record" do
     @computer_one.last_keep_alive = DateTime.now
     @computer_one.save
     
     @computer_two.last_keep_alive = DateTime.now - Computer.config.keep_alive_interval
     @computer_two.save
     
-    @keep_alive_timed_out = Computer.keep_alive_timed_out
-    assert_equal 1, @keep_alive_timed_out.size
-    assert_equal @computer_two, @keep_alive_timed_out.first
+    @not_keeping_alive = Computer.not_keeping_alive
+    assert_equal 1, @not_keeping_alive.size
+    assert_equal @computer_two, @not_keeping_alive.first
   end
   
-  test "actively_keep_alive should return correct record" do
+  test "keeping_alive should return correct record" do
     @computer_one.last_keep_alive = DateTime.now
     @computer_one.save
     
     @computer_two.last_keep_alive = DateTime.now - Computer.config.keep_alive_interval
     @computer_two.save
     
-    @actively_keep_alive = Computer.actively_keep_alive
-    assert_equal 1, @actively_keep_alive.size
-    assert_equal @computer_one, @actively_keep_alive.first
+    @keeping_alive = Computer.keeping_alive
+    assert_equal 1, @keeping_alive.size
+    assert_equal @computer_one, @keeping_alive.first
   end
   
   test "logon should set correct states" do
@@ -144,11 +144,11 @@ class ComputerTest < ActiveSupport::TestCase
     
     sleep 1.seconds
         
-    assert_equal 2, Computer.in_use.keep_alive_timed_out.count
+    assert_equal 2, Computer.in_use.not_keeping_alive.count
     
     Computer.free_inactive_computers
     
-    assert_equal 0, Computer.in_use.keep_alive_timed_out.count, "Number of inactive should be 0"
+    assert_equal 0, Computer.in_use.not_keeping_alive.count, "Number of inactive should be 0"
     assert_equal in_use_count - 2, Computer.in_use.count, "Number of in-use computers should be 2 less"
     assert_equal not_in_use_count + 2, Computer.not_in_use.count, "Number of not-in-use computers should be 2 more"
     assert_equal all_computers_count, Computer.count, "Total number of computers should not change"
