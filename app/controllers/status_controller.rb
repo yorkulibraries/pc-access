@@ -11,8 +11,9 @@ class StatusController < ApplicationController
       in_use: @in_use, 
       not_in_use: @not_in_use,
       not_pinging: @not_pinging,
-      pinging: @actively_pinging,
-      keeping_alive: @actively_keep_alive
+      pinging: @pinging,
+      keeping_alive: @keeping_alive,
+      not_keeping_alive: @not_keeping_alive
     }
     respond_to do |format|
       format.html
