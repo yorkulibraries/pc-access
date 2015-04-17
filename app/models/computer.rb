@@ -41,6 +41,5 @@ class Computer < ActiveRecord::Base
   
   def keep_alive
     self.last_keep_alive = DateTime.now
-    self.ping
   end
 end

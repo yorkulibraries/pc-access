@@ -87,7 +87,6 @@ class ComputerTest < ActiveSupport::TestCase
     
     assert after.is_in_use
     assert_equal username, after.current_username
-    assert_not_nil after.last_ping
     assert_not_nil after.last_keep_alive
   end
   
