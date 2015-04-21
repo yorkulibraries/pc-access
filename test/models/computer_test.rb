@@ -166,4 +166,22 @@ class ComputerTest < ActiveSupport::TestCase
     
   end
   
+  test "validate IP address" do
+    @computer_one.ip = nil
+    assert_not @computer_one.valid?
+    
+    @computer_one.ip = '256.0.0.0'
+    assert_not @computer_one.valid?
+    
+    @computer_one.ip = '1.0.0.256'
+    assert_not @computer_one.valid?
+    
+    @computer_one.ip = '127.0.0.1'
+    assert @computer_one.valid?
+  end
+  
+  test "validate IP uniqueness" do
+    @computer_one.ip = @computer_two.ip
+    assert_not @computer_one.valid?
+  end
 end

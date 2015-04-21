@@ -1,4 +1,9 @@
+require "ipaddress"
+
 class Computer < ActiveRecord::Base
+  validates :ip, :presence => true, :uniqueness => true
+  validate :valid_ip
+    
   class_attribute :config
   self.config = Rails.application.config
 
@@ -42,5 +47,12 @@ class Computer < ActiveRecord::Base
   
   def keep_alive
     self.last_keep_alive = DateTime.now
+  end
+  
+  private
+  def valid_ip
+    unless IPAddress.valid?(ip) 
+      errors.add(:ip, "Invalid IP address")
+    end
   end
 end
