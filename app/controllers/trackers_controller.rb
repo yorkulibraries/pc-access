@@ -2,11 +2,7 @@ class TrackersController < ApplicationController
   
   # /trackers/logon
   def logon
-    @computer = Computer.find_by_ip(request.remote_ip)
-    if @computer.nil?
-      @computer = Computer.new
-      @computer.ip = request.remote_ip
-    end
+    @computer = Computer.where(ip: request.remote_ip).first_or_create
     @computer.logon(params[:username])
     @computer.save
     respond_to do |format|
@@ -16,11 +12,7 @@ class TrackersController < ApplicationController
 
   # /trackers/logoff
   def logoff
-    @computer = Computer.find_by_ip(request.remote_ip)
-    if @computer.nil?
-      @computer = Computer.new
-      @computer.ip = request.remote_ip
-    end
+    @computer = Computer.where(ip: request.remote_ip).first_or_create
     @computer.logoff
     @computer.save
     respond_to do |format|
@@ -30,11 +22,7 @@ class TrackersController < ApplicationController
   
   # /trackers/ping
   def ping
-    @computer = Computer.find_by_ip(request.remote_ip)
-    if @computer.nil?
-      @computer = Computer.new
-      @computer.ip = request.remote_ip
-    end
+    @computer = Computer.where(ip: request.remote_ip).first_or_create
     @computer.ping
     @computer.save
     respond_to do |format|
