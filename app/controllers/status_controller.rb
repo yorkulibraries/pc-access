@@ -8,6 +8,7 @@ class StatusController < ApplicationController
     @keeping_alive = Computer.keeping_alive
     @not_keeping_alive = Computer.not_keeping_alive
     @never_ping = Computer.never_ping
+    @never_used = Computer.never_used
     status = { 
       in_use: @in_use, 
       not_in_use: @not_in_use,

@@ -16,6 +16,7 @@ class Computer < ActiveRecord::Base
   scope :not_pinging, -> { where("last_ping < ?", config.keep_alive_interval.ago) }
   scope :pinging, -> { where("last_ping >= ?", config.keep_alive_interval.ago) }
   scope :never_ping, -> { where("last_ping IS NULL") }
+  scope :never_used, -> { where("last_keep_alive IS NULL") }
   
   def self.free_inactive_computers
     self.in_use.not_keeping_alive.each do |pc|

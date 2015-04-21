@@ -42,7 +42,7 @@ class ComputerTest < ActiveSupport::TestCase
     assert_equal @computer_two, @not_pinging.first
   end
   
-  test "never_pingi should return correct record" do
+  test "never_ping should return correct record" do
     @computer_two.ping
     @computer_two.save
     
@@ -88,6 +88,18 @@ class ComputerTest < ActiveSupport::TestCase
     @keeping_alive = Computer.keeping_alive
     assert_equal 1, @keeping_alive.size
     assert_equal @computer_one, @keeping_alive.first
+  end
+  
+  test "never_used should return correct record" do
+    @computer_one.logon('test1')
+    @computer_one.save
+    
+    @computer_two.logon('test2')
+    @computer_two.save
+    
+    @never_used = Computer.never_used
+    assert_equal 1, @never_used.size
+    assert_equal @computer_three, @never_used.first
   end
   
   test "logon should set correct states" do

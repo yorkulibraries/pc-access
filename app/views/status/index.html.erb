@@ -38,3 +38,10 @@
   <li><%= m.ip %></li>
 <% end %>
 </ul>
+
+<h2>Never Used</h2>
+<ul>
+<% @never_used.order('ip').each do |m| %>
+  <li><%= m.ip %></li>
+<% end %>
+</ul>
