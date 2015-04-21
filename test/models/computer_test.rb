@@ -42,6 +42,18 @@ class ComputerTest < ActiveSupport::TestCase
     assert_equal @computer_two, @not_pinging.first
   end
   
+  test "never_pingi should return correct record" do
+    @computer_two.ping
+    @computer_two.save
+    
+    @computer_three.ping
+    @computer_three.save
+    
+    @never_ping = Computer.never_ping
+    assert_equal 1, @never_ping.size
+    assert_equal @computer_one, @never_ping.first
+  end
+  
   test "pinging should return correct record" do
     @computer_one.last_ping = DateTime.now
     @computer_one.save
