@@ -80,7 +80,43 @@ class ComputerTest < ActiveSupport::TestCase
     assert_equal 2, Computer.not_in_use.count, "2 Not In Use"
   end
 
+  should "return true or false, testing if computer is in use" do
+    not_used = create(:computer, current_username: nil)
+    used = create(:computer, current_username: "billy")
 
+    assert used.is_in_use, "In use"
+    assert ! not_used.is_in_use, "Not in use"
+  end
+
+  ## TRACKING METHODS
+
+  should "logon and logoff a computer" do
+    pc = create(:computer, current_username: nil, previous_username: nil, last_keep_alive: nil)
+
+    pc.logon("james")
+
+    assert_equal "james", pc.current_username, "Current username has been recorded"
+    assert_not_nil pc.last_keep_alive, "Keep alive was set"
+
+    pc.logoff
+    assert_nil pc.current_username, "Current username should be reset"
+    assert_equal "james", pc.previous_username, "Previous username should be james"
+
+    pc.logon("jeremy")
+
+    assert_equal "jeremy", pc.current_username, "Current username should be jeremy"
+    assert_equal "james", pc.previous_username, "Previous username should be james"
+  end
+
+  should "ping and keep alive a computer" do
+    pc = create(:computer, last_ping: nil, last_keep_alive: nil)
+
+    pc.ping
+    assert_not_nil pc.last_ping, "Last Ping was set"
+
+    pc.keep_alive
+    assert_not_nil pc.last_keep_alive, "Keep alive was set"
+  end
 
 
 end
