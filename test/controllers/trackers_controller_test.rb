@@ -1,20 +1,27 @@
 require 'test_helper'
 
 class TrackersControllerTest < ActionController::TestCase
-  setup do
-    @computer_one =  create(:computer)
-    @computer_two =  create(:computer)
+
+  should "have a computer in db after logon" do
+    assert_difference "Computer.count", 1 do
+      get :logon, username: "tester"
+      c = assigns(:computer)
+      assert c, "computer is present"
+      assert_equal c.ip, request.remote_ip
+      assert_response :success
+    end
   end
 
-  test "computer should exist after logon" do
-    get :logon
-    assert Computer.exists?(:ip => request.remote_ip)
-    assert_response :success
-  end
+  should "still have computer in db after logoff" do
+    create(:computer, ip: request.remote_ip)
+    
+    assert_no_difference "Computer.count" do
+      get :logoff
+      c = assigns(:computer)
+      assert c, "Computer is present"
+      assert Computer.exists?(:ip => request.remote_ip)
+      assert_response :success
+    end
 
-  test "computer should exist after logoff" do
-    get :logoff
-    assert Computer.exists?(:ip => request.remote_ip)
-    assert_response :success
   end
 end

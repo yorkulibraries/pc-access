@@ -2,7 +2,7 @@ require 'test_helper'
 
 class StatusControllerTest < ActionController::TestCase
 
-  test "index.json should return correct data" do
+  should "return correct data" do
     create_list(:computer, 3)
     create_list(:computer, 2, current_username: nil)
 
