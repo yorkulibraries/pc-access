@@ -2,198 +2,85 @@ require 'test_helper'
 
 class ComputerTest < ActiveSupport::TestCase
   setup do
-    @computer_one = create(:computer)
-    @computer_two = create(:computer)
-    @computer_three = create(:computer)
+      @before_interval = (Computer::KEEP_ALIVE_INTERVAL - 1.minute).ago
+      @after_interval =  (Computer::KEEP_ALIVE_INTERVAL + 2.minutes).ago
   end
 
-  test "in_use should return correct data" do
-    assert_equal 3, Computer.count
-    assert_equal 0, Computer.in_use.count
+  should "create a valid computer" do
+    c = build(:computer)
 
-    @computer_one.logon('test1')
-    @computer_one.save
-
-    assert_equal 1, Computer.in_use.count
-    assert_equal @computer_one, Computer.in_use.first
+    assert_difference "Computer.count", 1 do
+      c.save
+    end
   end
 
-  test "not_in_use should return correct data" do
-    assert_equal 3, Computer.count
-    assert_equal 3, Computer.not_in_use.count
+  should "not create an invalid computer" do
 
-    @computer_one.logon('test1')
-    @computer_one.save
+    assert ! build(:computer, ip: nil).valid?, "IP is required"
+    assert ! build(:computer, ip: "dljaflsda").valid?, "IP Should be a valid ip"
 
-    assert_equal 2, Computer.not_in_use.count
-    assert_equal @computer_two, Computer.not_in_use.order('ip').first
-    assert_equal @computer_three, Computer.not_in_use.order('ip').last
+    create(:computer, ip: "10.0.0.1")
+    assert ! build(:computer, ip: "10.0.0.1").valid?, "IP Should be unique"
   end
 
-  test "not_pinging should return correct record" do
-    @computer_one.last_ping = DateTime.now
-    @computer_one.save
 
-    @computer_two.last_ping = DateTime.now - Computer.config.keep_alive_interval
-    @computer_two.save
+  should "return correct numbers of pcs in use and not inuse" do
 
-    @not_pinging = Computer.not_pinging
-    assert_equal 1, @not_pinging.size
-    assert_equal @computer_two, @not_pinging.first
+    create_list(:computer, 2, current_username: nil) # 2 not in use
+    create_list(:computer, 3, current_username: "blah") # 3 in use
+
+    assert_equal 3, Computer.in_use.count, "3 In Use"
+    assert_equal 2, Computer.not_in_use.count, "3 In Use"
+
   end
 
-  test "never_ping should return correct record" do
-    @computer_two.ping
-    @computer_two.save
+  should "return correct number of pcs pinging and not pinging" do
 
-    @computer_three.ping
-    @computer_three.save
+    create_list(:computer, 2, last_ping: @after_interval ) # not pinging
+    create_list(:computer, 4, last_ping: @before_interval) # pinging
+    create_list(:computer, 3, last_ping: nil) # never pinging
 
-    @never_ping = Computer.never_ping
-    assert_equal 1, @never_ping.size
-    assert_equal @computer_one, @never_ping.first
+    assert_equal 2, Computer.not_pinging.count
+    assert_equal 4, Computer.pinging.count
+    assert_equal 3, Computer.never_ping.count
   end
 
-  test "pinging should return correct record" do
-    @computer_one.last_ping = DateTime.now
-    @computer_one.save
+  should "return correct number of pcs keeping alive and not keeping alive" do
 
-    @computer_two.last_ping = DateTime.now - Computer.config.keep_alive_interval
-    @computer_two.save
+    create_list(:computer, 2, last_keep_alive: @after_interval ) # not keeping alive
+    create_list(:computer, 4, last_keep_alive: @before_interval) # keeping alive
+    create_list(:computer, 3, last_keep_alive: nil) # never kept alive
 
-    @pinging = Computer.pinging
-    assert_equal 1, @pinging.size
-    assert_equal @computer_one, @pinging.first
+    assert_equal 2, Computer.not_keeping_alive.count, "Not Keeping Alive Should be 2"
+    assert_equal 4, Computer.keeping_alive.count, "should be 4"
+    assert_equal 3, Computer.never_used.count, "should be 3"
   end
 
-  test "not_keeping_alive should return correct record" do
-    @computer_one.last_keep_alive = DateTime.now
-    @computer_one.save
+  ### ADDITIONAL METHODS TESTS ###
 
-    @computer_two.last_keep_alive = DateTime.now - Computer.config.keep_alive_interval
-    @computer_two.save
+  should "free inactive computers" do
+    # self.in_use.not_keeping_alive.each do |pc|
+    #   Rails.logger.info("#{pc.ip} not_keeping_alive => logging off")
+    #   pc.logoff
+    #   pc.save
+    # end
 
-    @not_keeping_alive = Computer.not_keeping_alive
-    assert_equal 1, @not_keeping_alive.size
-    assert_equal @computer_two, @not_keeping_alive.first
-  end
+    create_list(:computer, 2, last_keep_alive: @after_interval)
+    create_list(:computer, 3, last_keep_alive: @before_interval)
 
-  test "keeping_alive should return correct record" do
-    @computer_one.last_keep_alive = DateTime.now
-    @computer_one.save
-
-    @computer_two.last_keep_alive = DateTime.now - Computer.config.keep_alive_interval
-    @computer_two.save
-
-    @keeping_alive = Computer.keeping_alive
-    assert_equal 1, @keeping_alive.size
-    assert_equal @computer_one, @keeping_alive.first
-  end
-
-  test "never_used should return correct record" do
-    @computer_one.logon('test1')
-    @computer_one.save
-
-    @computer_two.logon('test2')
-    @computer_two.save
-
-    @never_used = Computer.never_used
-    assert_equal 1, @never_used.size
-    assert_equal @computer_three, @never_used.first
-  end
-
-  test "logon should set correct states" do
-    username = 'test'
-    @computer_one.logon(username)
-    @computer_one.save
-
-    after = Computer.find(@computer_one.id)
-
-    assert after.is_in_use
-    assert_equal username, after.current_username
-    assert_not_nil after.last_keep_alive
-  end
-
-  test "logoff should set correct states" do
-    username = 'test'
-    @computer_one.logon(username)
-    @computer_one.save
-
-    @computer_one = Computer.find(@computer_one.id)
-    @computer_one.logoff
-    @computer_one.save
-
-    after = Computer.find(@computer_one.id)
-
-    assert_nil after.current_username
-    assert_not after.is_in_use
-    assert_equal username, after.previous_username
-  end
-
-  test "logoff should not change previous_username if current_username is nil" do
-    previous_username = 'test_previous_username'
-    @computer_one.previous_username = previous_username
-    @computer_one.save
-
-    @computer_one = Computer.find(@computer_one.id)
-    assert_nil @computer_one.current_username
-    assert_equal previous_username, @computer_one.previous_username
-
-    @computer_one.logoff
-    @computer_one.save
-
-    after = Computer.find(@computer_one.id)
-
-    assert_nil after.current_username
-    assert_equal previous_username, after.previous_username
-  end
-
-  test "free_inactive_computers should free up inactive computers" do
-    @computer_one.logon('test1')
-    @computer_one.last_keep_alive = DateTime.now
-    @computer_one.save
-
-    @computer_two.logon('test2')
-    @computer_two.last_keep_alive = DateTime.now - Computer.config.keep_alive_interval
-    @computer_two.save
-
-    all_computers_count = Computer.count
-    in_use_count = Computer.in_use.count
-    not_in_use_count = Computer.not_in_use.count
-
-    assert_equal 3, all_computers_count
-    assert_equal 2, in_use_count
-    assert 1, not_in_use_count
-
-    sleep 1.seconds
-
-    assert_equal 2, Computer.in_use.not_keeping_alive.count
+    # check before
+    assert_equal 2, Computer.not_keeping_alive.count, "2 in use but not keeping alive"
+    assert_equal 5, Computer.in_use.count, "5 in use,in total"
 
     Computer.free_inactive_computers
 
-    assert_equal 0, Computer.in_use.not_keeping_alive.count, "Number of inactive should be 0"
-    assert_equal in_use_count - 2, Computer.in_use.count, "Number of in-use computers should be 2 less"
-    assert_equal not_in_use_count + 2, Computer.not_in_use.count, "Number of not-in-use computers should be 2 more"
-    assert_equal all_computers_count, Computer.count, "Total number of computers should not change"
-
+    # check after
+    assert_equal 2, Computer.not_keeping_alive.count, "Should still be two, but they are not in use"
+    assert_equal 3, Computer.in_use.count, "3 computers still in use"
+    assert_equal 2, Computer.not_in_use.count, "2 Not In Use"
   end
 
-  test "validate IP address" do
-    @computer_one.ip = nil
-    assert_not @computer_one.valid?
 
-    @computer_one.ip = '256.0.0.0'
-    assert_not @computer_one.valid?
 
-    @computer_one.ip = '1.0.0.256'
-    assert_not @computer_one.valid?
 
-    @computer_one.ip = '127.0.0.1'
-    assert @computer_one.valid?
-  end
-
-  test "validate IP uniqueness" do
-    @computer_one.ip = @computer_two.ip
-    assert_not @computer_one.valid?
-  end
 end
