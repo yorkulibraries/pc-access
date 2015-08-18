@@ -1,15 +1,19 @@
 title "All Locations"
 
 
-for location in @locations
+for entry in @locations
   xml.item do
 
     xml.author "Library Computers"
     xml.pubDate Date.today
-    xml.link "https://#{location[:name]}"
-    xml.guid "some_id"
-    text = "<h1>#{location[:name]}</h1>"
-    text <<  "<p>Available: #{location[:available]}<br/>In Use:  #{location[:in_use]}</p>"
-    xml.description text
+    xml.link "#{entry[:location].map}"
+    xml.guid "#{entry[:location].map}"
+
+    html = "<div class='computers_availablity_by_location'>"
+    html << "<img src='#{entry[:location].map}'/>"
+    html << "<h3>#{entry[:location].name}</h3>"
+    html <<  "<p>Available: #{entry[:available]}<br/>In Use:  #{entry[:in_use]}</p>"
+    html << "</div>"
+    xml.description { xml.cdata!(html) }
   end
 end

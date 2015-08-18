@@ -1,10 +1,14 @@
 class ApiController < ApplicationController
 
     def index
-      @locations = [ {name: "Scott", available: 0, in_use: 10},
-                     {name: "Steacie", available: 10, in_use: 4},
-                     {name: "Bronfman", available: 4, in_use: 0} 
-                   ]
+      locations_list = Location.mock_locations
+
+      @locations = Array.new
+      locations_list.each do |location|
+        l = { location: location, available: rand(0..10), in_use: rand(0..20) }
+        @locations.push l
+      end
+
 
       respond_to do |format|
         format.rss
