@@ -1,3 +1,5 @@
+title "All Locations"
+
 
 for location in @locations
   xml.item do

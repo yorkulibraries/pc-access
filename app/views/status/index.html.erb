@@ -1,3 +1,5 @@
+<% title "Dashboard" %>
+
 <p id="notice"><%= notice %></p>
 
 <h1>Summary</h1>
@@ -10,7 +12,7 @@
   <li><%= m.ip %></li>
 <% end %>
 </ul>
-   
+
 <h2>In-use</h2>
 <ul>
 <% @in_use.order('last_keep_alive, ip').each do |m| %>
