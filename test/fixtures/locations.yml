@@ -1,7 +1,0 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-loc_one:
-  name: loc_one
-
-loc_two:
-  name: loc_two

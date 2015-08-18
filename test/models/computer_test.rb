@@ -2,8 +2,8 @@ require 'test_helper'
 
 class ComputerTest < ActiveSupport::TestCase
   setup do
-      @before_interval = (Computer::KEEP_ALIVE_INTERVAL - 1.minute).ago
-      @after_interval =  (Computer::KEEP_ALIVE_INTERVAL + 2.minutes).ago
+      @before_interval = (Computer::KEEP_ALIVE_INTERVAL - 5.minute).ago
+      @after_interval =  (Computer::KEEP_ALIVE_INTERVAL + 5.minutes).ago
   end
 
   should "create a valid computer" do
@@ -30,7 +30,9 @@ class ComputerTest < ActiveSupport::TestCase
     create_list(:computer, 3, current_username: "blah") # 3 in use
 
     assert_equal 3, Computer.in_use.count, "3 In Use"
-    assert_equal 2, Computer.not_in_use.count, "3 In Use"
+    assert_equal 2, Computer.not_in_use.count, "2 Not In Use. Total: #{Computer.all.count}"
+
+
 
   end
 
