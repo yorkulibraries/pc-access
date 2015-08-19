@@ -1,6 +1,6 @@
 module ApplicationHelper
 
   def app_version
-    PcAccess::Version.new.version
+    App::Version.new.version
   end
 end

@@ -1,4 +1,4 @@
-module PcAccess
+module App
 
   class Version
     def version
