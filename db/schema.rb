@@ -11,18 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150918150923) do
+ActiveRecord::Schema.define(version: 20150918183523) do
 
   create_table "computers", force: :cascade do |t|
     t.string   "ip"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
     t.string   "current_username"
     t.string   "previous_username"
     t.datetime "last_ping"
     t.integer  "location_id"
     t.datetime "last_user_activity"
     t.integer  "image_id"
+    t.integer  "area_id"
+    t.boolean  "offline",            default: false, null: false
+    t.string   "hostname"
   end
 
   add_index "computers", ["location_id"], name: "index_computers_on_location_id"
