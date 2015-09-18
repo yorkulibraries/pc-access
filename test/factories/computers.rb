@@ -4,7 +4,7 @@ FactoryGirl.define do
     current_username "jamesmay"
     previous_username "jeremyclarkson"
     last_ping 1.minute.ago
-    last_keep_alive 30.seconds.ago
+    last_user_activity 30.seconds.ago
 
     association(:location)
   end

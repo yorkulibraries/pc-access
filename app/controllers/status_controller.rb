@@ -5,8 +5,8 @@ class StatusController < ApplicationController
     @not_in_use = Computer.not_in_use
     @not_pinging = Computer.not_pinging
     @pinging = Computer.pinging
-    @keeping_alive = Computer.keeping_alive
-    @not_keeping_alive = Computer.not_keeping_alive
+    @staying_active = Computer.staying_active
+    @not_staying_active = Computer.not_staying_active
     @never_ping = Computer.never_ping
     @never_used = Computer.never_used
     status = { 
@@ -14,8 +14,8 @@ class StatusController < ApplicationController
       not_in_use: @not_in_use,
       not_pinging: @not_pinging,
       pinging: @pinging,
-      keeping_alive: @keeping_alive,
-      not_keeping_alive: @not_keeping_alive
+      staying_active: @staying_active,
+      not_staying_active: @not_staying_active
     }
     respond_to do |format|
       format.html

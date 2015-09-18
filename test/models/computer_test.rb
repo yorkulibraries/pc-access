@@ -2,8 +2,8 @@ require 'test_helper'
 
 class ComputerTest < ActiveSupport::TestCase
   setup do
-      @before_interval = (Computer::KEEP_ALIVE_INTERVAL - 5.minute).ago
-      @after_interval =  (Computer::KEEP_ALIVE_INTERVAL + 5.minutes).ago
+      @before_interval = (Computer::STAY_ALIVE_INTERVAL - 5.minute).ago
+      @after_interval =  (Computer::STAY_ALIVE_INTERVAL + 5.minutes).ago
   end
 
   should "create a valid computer" do
@@ -49,35 +49,35 @@ class ComputerTest < ActiveSupport::TestCase
 
   should "return correct number of pcs keeping alive and not keeping alive" do
 
-    create_list(:computer, 2, last_keep_alive: @after_interval ) # not keeping alive
-    create_list(:computer, 4, last_keep_alive: @before_interval) # keeping alive
-    create_list(:computer, 3, last_keep_alive: nil) # never kept alive
+    create_list(:computer, 2, last_user_activity: @after_interval ) # not keeping alive
+    create_list(:computer, 4, last_user_activity: @before_interval) # keeping alive
+    create_list(:computer, 3, last_user_activity: nil) # never kept alive
 
-    assert_equal 2, Computer.not_keeping_alive.count, "Not Keeping Alive Should be 2"
-    assert_equal 4, Computer.keeping_alive.count, "should be 4"
+    assert_equal 2, Computer.not_staying_active.count, "Not Keeping Alive Should be 2"
+    assert_equal 4, Computer.staying_active.count, "should be 4"
     assert_equal 3, Computer.never_used.count, "should be 3"
   end
 
   ### ADDITIONAL METHODS TESTS ###
 
   should "free inactive computers" do
-    # self.in_use.not_keeping_alive.each do |pc|
-    #   Rails.logger.info("#{pc.ip} not_keeping_alive => logging off")
+    # self.in_use.not_staying_active.each do |pc|
+    #   Rails.logger.info("#{pc.ip} not_staying_active => logging off")
     #   pc.logoff
     #   pc.save
     # end
 
-    create_list(:computer, 2, last_keep_alive: @after_interval)
-    create_list(:computer, 3, last_keep_alive: @before_interval)
+    create_list(:computer, 2, last_user_activity: @after_interval)
+    create_list(:computer, 3, last_user_activity: @before_interval)
 
     # check before
-    assert_equal 2, Computer.not_keeping_alive.count, "2 in use but not keeping alive"
+    assert_equal 2, Computer.not_staying_active.count, "2 in use but not keeping alive"
     assert_equal 5, Computer.in_use.count, "5 in use,in total"
 
     Computer.free_inactive_computers
 
     # check after
-    assert_equal 2, Computer.not_keeping_alive.count, "Should still be two, but they are not in use"
+    assert_equal 2, Computer.not_staying_active.count, "Should still be two, but they are not in use"
     assert_equal 3, Computer.in_use.count, "3 computers still in use"
     assert_equal 2, Computer.not_in_use.count, "2 Not In Use"
   end
@@ -93,12 +93,12 @@ class ComputerTest < ActiveSupport::TestCase
   ## TRACKING METHODS
 
   should "logon and logoff a computer" do
-    pc = create(:computer, current_username: nil, previous_username: nil, last_keep_alive: nil)
+    pc = create(:computer, current_username: nil, previous_username: nil, last_user_activity: nil)
 
     pc.logon("james")
 
     assert_equal "james", pc.current_username, "Current username has been recorded"
-    assert_not_nil pc.last_keep_alive, "Keep alive was set"
+    assert_not_nil pc.last_user_activity, "Keep alive was set"
 
     pc.logoff
     assert_nil pc.current_username, "Current username should be reset"
@@ -111,13 +111,13 @@ class ComputerTest < ActiveSupport::TestCase
   end
 
   should "ping and keep alive a computer" do
-    pc = create(:computer, last_ping: nil, last_keep_alive: nil)
+    pc = create(:computer, last_ping: nil, last_user_activity: nil)
 
     pc.ping
     assert_not_nil pc.last_ping, "Last Ping was set"
 
-    pc.keep_alive
-    assert_not_nil pc.last_keep_alive, "Keep alive was set"
+    pc.stay_alive
+    assert_not_nil pc.last_user_activity, "Keep alive was set"
   end
 
 

@@ -76,12 +76,12 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
-  
+
   config.time_zone = 'Eastern Time (US & Canada)'
   config.active_record.default_timezone = :local
-  
+
   # after logon, each computer should send a logon "keep-alive" request every x seconds
   # if no "keep-alive" logon request is received, the computer is considered logged off
-  config.keep_alive_interval = 15.minutes
-  
+  config.stay_alive_interval = 15.minutes
+
 end

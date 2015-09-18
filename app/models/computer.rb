@@ -3,7 +3,7 @@ require "ipaddress"
 class Computer < ActiveRecord::Base
 
   ## CONSTANTS
-  KEEP_ALIVE_INTERVAL = Rails.application.config.keep_alive_interval # 15.minutes
+  STAY_ALIVE_INTERVAL = Rails.application.config.stay_alive_interval # 15.minutes
 
   ## RELATIONS
   belongs_to :location
@@ -16,16 +16,16 @@ class Computer < ActiveRecord::Base
 
   scope :in_use, -> { where("current_username IS NOT NULL") }
   scope :not_in_use, -> { where("current_username IS NULL") }
-  scope :not_keeping_alive, -> { where("last_keep_alive < ?", Computer::KEEP_ALIVE_INTERVAL.ago) }
-  scope :keeping_alive, -> { where("last_keep_alive >= ?", Computer::KEEP_ALIVE_INTERVAL.ago) }
-  scope :not_pinging, -> { where("last_ping < ?", Computer::KEEP_ALIVE_INTERVAL.ago) }
-  scope :pinging, -> { where("last_ping >= ?", Computer::KEEP_ALIVE_INTERVAL.ago) }
+  scope :not_staying_active, -> { where("last_user_activity < ?", Computer::STAY_ALIVE_INTERVAL.ago) }
+  scope :staying_active, -> { where("last_user_activity >= ?", Computer::STAY_ALIVE_INTERVAL.ago) }
+  scope :not_pinging, -> { where("last_ping < ?", Computer::STAY_ALIVE_INTERVAL.ago) }
+  scope :pinging, -> { where("last_ping >= ?", Computer::STAY_ALIVE_INTERVAL.ago) }
   scope :never_ping, -> { where("last_ping IS NULL") }
-  scope :never_used, -> { where("last_keep_alive IS NULL") }
+  scope :never_used, -> { where("last_user_activity IS NULL") }
 
   def self.free_inactive_computers
-    self.in_use.not_keeping_alive.each do |pc|
-      Rails.logger.info("#{pc.ip} not_keeping_alive => logging off")
+    self.in_use.not_staying_active.each do |pc|
+      Rails.logger.info("#{pc.ip} not_staying_active => logging off")
       pc.logoff
       pc.save
     end
@@ -35,7 +35,7 @@ class Computer < ActiveRecord::Base
     if self.current_username != username
       self.current_username = username
     end
-    self.keep_alive
+    self.stay_alive
   end
 
   def logoff
@@ -51,8 +51,8 @@ class Computer < ActiveRecord::Base
     self.last_ping = DateTime.now
   end
 
-  def keep_alive
-    self.last_keep_alive = DateTime.now
+  def stay_alive
+    self.last_user_activity = DateTime.now
   end
 
   private
