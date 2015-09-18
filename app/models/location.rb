@@ -1,10 +1,23 @@
 class Location < ActiveRecord::Base
   # FIELDS: name, map, ip_subnet
+
+  ## RELATIONS
   has_many :computers
 
+  ## VALIDATIONS
+  validates :name, presence: true, uniqueness: true
+  validates :ip_subnet, presence: true
+
+  ## SCOPES
+  
 
 
-  # DELETE THIS METHOD LATER
+
+
+
+  ## METHODS
+
+  ##
   def self.mock_locations
     maps = [ "https://www.library.yorku.ca/preview/images/maps/scott-1stfloor.jpg",
       "https://www.library.yorku.ca/preview/images/maps/scott-2ndfloor.jpg",
@@ -24,4 +37,5 @@ class Location < ActiveRecord::Base
 
     return locations
   end
+
 end

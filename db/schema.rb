@@ -22,10 +22,10 @@ ActiveRecord::Schema.define(version: 20150918183523) do
     t.datetime "last_ping"
     t.integer  "location_id"
     t.datetime "last_user_activity"
-    t.integer  "image_id"
     t.integer  "area_id"
     t.boolean  "offline",            default: false, null: false
     t.string   "hostname"
+    t.integer  "image_id"
   end
 
   add_index "computers", ["location_id"], name: "index_computers_on_location_id"
@@ -40,10 +40,11 @@ ActiveRecord::Schema.define(version: 20150918183523) do
 
   create_table "locations", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
     t.string   "map"
     t.string   "ip_subnet"
+    t.boolean  "active",     default: true, null: false
   end
 
 end

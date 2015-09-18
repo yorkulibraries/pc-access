@@ -23,6 +23,8 @@ class Computer < ActiveRecord::Base
   scope :never_ping, -> { where("last_ping IS NULL") }
   scope :never_used, -> { where("last_user_activity IS NULL") }
 
+  ## METHODS
+
   def self.free_inactive_computers
     self.in_use.not_staying_active.each do |pc|
       Rails.logger.info("#{pc.ip} not_staying_active => logging off")
