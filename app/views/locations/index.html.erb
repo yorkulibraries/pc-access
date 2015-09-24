@@ -19,7 +19,7 @@
   <tbody>
     <% @locations.each do |location| %>
       <tr>
-        <td><%= location.name %></td>
+        <td><%= link_to location.name, location %></td>
         <td><%= location.ip_subnet %></td>
         <td><img src="<%= location.map %>"/></td>
         <td>-</td>

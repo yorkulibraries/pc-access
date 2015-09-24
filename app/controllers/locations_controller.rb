@@ -17,7 +17,7 @@ class LocationsController < ApplicationController
 
     def create
       @location = Location.new(location_params)
-      @location.is_deleted = false
+      #@location.is_deleted = false
 
       respond_to do |format|
         if @location.save
@@ -46,8 +46,8 @@ class LocationsController < ApplicationController
 
     def destroy
       @location.destroy
-      @location = Location.find(params[:id])
-      
+      #@location = Location.find(params[:id])
+
       # @location.is_deleted = true
 
       respond_to do |format|
