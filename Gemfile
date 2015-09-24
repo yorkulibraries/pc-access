@@ -16,10 +16,12 @@ gem 'turbolinks', "2.5.3"
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
-## TWITTER BOOTSTRAP AND THINGS
+## TWITTER BOOTSTRAP, SIMPLE_FORM & FONTAWESOME
 gem 'jquery-rails', "4.0.3"
 gem 'less-rails', "2.6.0"
 gem 'twitter-bootstrap-rails', "3.2.0"
+gem 'simple_form', "3.1.0"
+gem 'font-awesome-less', "4.0.2"
 
 ## TOOLS AND PLUGINS
 gem 'rufus-scheduler', "3.0.9"

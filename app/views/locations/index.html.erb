@@ -1,0 +1,33 @@
+<% title "Locations" %>
+
+<% sidebar do  %>
+  <%= link_to '<i class="fa fa-plus"></i> Add a new location'.html_safe, new_location_path, class: "btn btn-primary" %>
+<% end %>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>IP Subnet</th>
+      <th>Map</th>
+      <th>Computers</th>
+			<th>Images</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @locations.each do |location| %>
+      <tr>
+        <td><%= location.name %></td>
+        <td><%= location.ip_subnet %></td>
+        <td><img src="<%= location.map %>"/></td>
+        <td>-</td>
+				<td>-</td>
+				<td><%= link_to 'Update', edit_location_path(location) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

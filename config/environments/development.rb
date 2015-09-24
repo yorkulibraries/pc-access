@@ -46,4 +46,7 @@ Rails.application.configure do
   # if no "keep-alive" logon request is received, the computer is considered logged off
   config.stay_alive_interval = 15.minutes
 
+
+  config.middleware.insert_after ActionDispatch::Static, Rack::LiveReload
+
 end

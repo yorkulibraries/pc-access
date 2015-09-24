@@ -1,0 +1,20 @@
+<% title "Location: #{@location.name}" %>
+
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">Location</h3>
+  </div>
+  <div class="panel-body">
+    <dl class="dl-horizontal">
+      <dt>Name:</dt><dd><%= @location.name %></dd>
+      <dt>IP Subnet:</dt><dd><%= @location.ip_subnet %></dd>
+      <dt>Map:</dt><dd><img src="<%= location.map %>"/></dd>
+      <dt>Computers:</dt><dd>-</dd>
+      <dt>Images:</dt><dd>-</dd>
+    </dl>
+  </div>
+</div>
+
+
+<%= link_to '<i class="fa fa-backward"></i> Back To List'.html_safe, locations_path, class: "btn btn-default" %>
+<%= link_to '<i class="fa fa-pencil"></i> Edit'.html_safe, edit_location_path(@location), class: "btn btn-default" %>

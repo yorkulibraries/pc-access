@@ -9,7 +9,7 @@ class Location < ActiveRecord::Base
   validates :ip_subnet, presence: true
 
   ## SCOPES
-  
+
 
 
 
