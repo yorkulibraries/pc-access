@@ -41,20 +41,39 @@
   <body>
     <a class="sr-only" href="#content">Skip to main content</a>
     <%= render partial: "layouts/navbar" %>
+
+    <% if flash.keys.size > 0 %>
     <div class="container">
-      <div class="row" id="content">
-        <div class="col-lg-9">
-          <%= bootstrap_flash %>
+      <% flash.each do |name, msg| %>
+        <div class="alert alert-<%= name == "notice" ? "success" : "info" %>">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          <%= msg %>
+        </div>
+      <% end %>
+    </div>
+    <% end %>
+
+    <div class="container">
+      <div id="heading">
+        <%= content_tag :h1, yield(:title) if show_title? && !content_for?(:page_header) %>
+
+        <%= yield (:page_header) if content_for?(:page_header)%>
+      </div>
+
+      <div class="row">
+        <div class="<%=  content_for?(:sidebar) ? "col-lg-9" : "col-lg-12" %>"  id="content">
           <%= yield %>
         </div>
-        <div class="col-lg-3">
-          <div class="sidebar-nav">
+        <% if content_for?(:sidebar) %>
+          <div class="col-lg-3" id="sidebar">
+            <%=  yield (:sidebar) %>
           </div>
-        </div>
+        <% end %>
       </div>
 
       <footer>
-        <p>PCAccess <%= app_version %> &copy; York University Libraries 2015</p>
+        <hr/>
+         <p class="text-muted"><%= app_name %> <%= app_version%> &copy; <%= Date.today.year %>. YorkU. All rights reserved.</p>
       </footer>
 
     </div> <!-- /container -->
