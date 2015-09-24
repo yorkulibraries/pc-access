@@ -1,0 +1,31 @@
+<% title "Images" %>
+
+<% sidebar do  %>
+  <%= link_to '<i class="fa fa-plus"></i> Add a new image'.html_safe, new_image_path, class: "btn btn-primary" %>
+<% end %>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>OS Name</th>
+      <th>OS Version</th>
+      <th>Computers</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @images.each do |image| %>
+      <tr>
+        <td><%= link_to image.name, image %></td>
+        <td><%= image.os_name %></td>
+        <td><%= image.os_version %></td>
+        <td>-</td>
+				<td><%= link_to 'Update', edit_image_path(image) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

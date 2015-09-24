@@ -1,0 +1,19 @@
+<% title "Location: #{@image.name}" %>
+
+<div class="panel panel-info">
+  <div class="panel-heading">
+    <h3 class="panel-title">Image</h3>
+  </div>
+  <div class="panel-body">
+    <dl class="dl-horizontal">
+      <dt>Name:</dt><dd><%= @image.name %></dd>
+      <dt>OS Name:</dt><dd><%= @image.os_name %></dd>
+      <dt>OS Version:</dt><dd><%= @image.os_name %></dd>
+      <dt>Computers:</dt><dd>-</dd>
+    </dl>
+  </div>
+</div>
+
+
+<%= link_to '<i class="fa fa-backward"></i> Back To List'.html_safe, images_path, class: "btn btn-default" %>
+<%= link_to '<i class="fa fa-pencil"></i> Edit'.html_safe, edit_image_path(@image), class: "btn btn-default" %>

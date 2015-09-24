@@ -52,7 +52,7 @@ class LocationsController < ApplicationController
 
       respond_to do |format|
         if @location.save
-          format.html { redirect_to locations_path, notice: 'Location was successfully flagged as deleted and removed from the list.' }
+          format.html { redirect_to locations_path, notice: 'Location was successfully deleted and removed from the list.' }
           format.json { head :no_content }
         else
           format.html { render action: 'edit' }
