@@ -21,10 +21,10 @@ class LocationsController < ApplicationController
       respond_to do |format|
         if @location.save
           format.html { redirect_to locations_path, notice: 'Location was successfully created.' }
-          # format.json { render action: 'show', status: :created, location: @location }
+          format.js
         else
           format.html { render action: 'new' }
-          # format.json { render json: @location.errors, status: :unprocessable_entity }
+          format.js
         end
       end
 
@@ -35,10 +35,10 @@ class LocationsController < ApplicationController
 
         if @location.update(location_params)
           format.html { redirect_to locations_path, notice: 'Location was successfully updated.' }
-          format.json { head :no_content }
+          format.js
         else
           format.html { render action: 'edit' }
-          format.json { render json: @location.errors, status: :unprocessable_entity }
+          format.js
         end
       end
     end
@@ -46,11 +46,11 @@ class LocationsController < ApplicationController
     def destroy
       @location.deleted = true
       @location.save(validate: false)
-    
+
 
       respond_to do |format|
           format.html { redirect_to locations_path, notice: 'Location was successfully deleted and removed from the list.' }
-          format.json { head :no_content }
+          format.js
       end
     end
 

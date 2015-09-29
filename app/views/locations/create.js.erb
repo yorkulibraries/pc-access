@@ -1,0 +1,9 @@
+<% if @location.errors.size == 0 %>
+  $("#location_form").modal( 'hide' ).data( 'bs.modal', null );
+  $( '.modal-backdrop' ).remove();
+<% else %>
+$("#location_form").modal('hide');
+$("#location_form").replaceWith("<%= j render "form", formats: [:html] %>");
+$("#location_form").modal("show");
+
+<% end %>

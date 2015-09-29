@@ -1,0 +1,6 @@
+$("#location_form").modal( 'hide' ).data( 'bs.modal', null );
+$( '.modal-backdrop' ).remove();
+$( 'body' ).removeClass( "modal-open" );
+$("#location_form").remove();
+
+$("#location_<%= @location.id %>").remove();
