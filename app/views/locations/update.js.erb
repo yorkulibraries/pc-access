@@ -1,0 +1,12 @@
+<% if @location.errors.size == 0 %>
+  $("#location_form").modal( 'hide' ).data( 'bs.modal', null );
+  $( '.modal-backdrop' ).remove();
+
+  // update via  partial and insert it into proper place
+  $("#location_<%= @location.id %>").replaceWith("Updated");
+<% else %>
+  $( '.modal-backdrop' ).remove();
+  $("#location_form").modal('hide');
+  $("#location_form").replaceWith("<%= j render "form", formats: [:html] %>");
+  $("#location_form").modal("show");
+<% end %>
