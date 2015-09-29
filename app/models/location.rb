@@ -1,5 +1,5 @@
 class Location < ActiveRecord::Base
-  # FIELDS: name, map, ip_subnet
+  # FIELDS: name, map, ip_subnet, deleted
 
   ## RELATIONS
   has_many :computers
@@ -9,7 +9,8 @@ class Location < ActiveRecord::Base
   validates :ip_subnet, presence: true
 
   ## SCOPES
-
+  default_scope { where(deleted: false) } # only active images
+  scope :deleted, -> { unscoped.where(deleted: true) } 
 
 
 

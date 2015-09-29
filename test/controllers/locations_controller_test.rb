@@ -63,10 +63,15 @@ class LocationsControllerTest < ActionController::TestCase
 
      should  "delete location" do
        loc = create(:location)
-       assert_difference('Location.count', -1, "Location was deleted") do
-         delete :destroy, id: loc.id
-       end
 
+       assert_no_difference('Location.unscoped.count', "Location was not removed, but flag set") do
+         post :destroy, id: loc.id
+         location = assigns(:location)
+         assert location.deleted, "Deleted flag was not set"
+
+         assert_response :redirect
+         assert_redirected_to locations_path
+       end
 
      end
 

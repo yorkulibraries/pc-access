@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150918183523) do
+ActiveRecord::Schema.define(version: 20150929180724) do
 
   create_table "computers", force: :cascade do |t|
     t.string   "ip"
@@ -34,17 +34,19 @@ ActiveRecord::Schema.define(version: 20150918183523) do
     t.string   "name"
     t.string   "os_name"
     t.string   "os_version"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.boolean  "deleted",    default: false, null: false
   end
 
   create_table "locations", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.string   "map"
     t.string   "ip_subnet"
-    t.boolean  "active",     default: true, null: false
+    t.boolean  "active",     default: true,  null: false
+    t.boolean  "deleted",    default: false, null: false
   end
 
 end

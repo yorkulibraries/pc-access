@@ -64,10 +64,12 @@ class ImagesControllerTest < ActionController::TestCase
 
      should  "delete image" do
        i = create(:image)
-       assert_difference('Image.count', -1, "image was deleted") do
+       assert_no_difference('Image.unscoped.count', "image was not removed, but deleted flag was set") do
          delete :destroy, id: i.id
        end
 
+       i.reload
+       assert i.deleted?, "Deleted flag was set"
 
      end
 

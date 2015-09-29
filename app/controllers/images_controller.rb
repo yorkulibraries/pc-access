@@ -45,8 +45,7 @@ class ImagesController < ApplicationController
     end
 
     def destroy
-      @image.destroy
-
+      @image.deleted = true
 
       respond_to do |format|
         if @image.save

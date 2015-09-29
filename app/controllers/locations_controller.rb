@@ -17,7 +17,6 @@ class LocationsController < ApplicationController
 
     def create
       @location = Location.new(location_params)
-      #@location.is_deleted = false
 
       respond_to do |format|
         if @location.save
@@ -45,19 +44,13 @@ class LocationsController < ApplicationController
     end
 
     def destroy
-      @location.destroy
-      #@location = Location.find(params[:id])
-
-      # @location.is_deleted = true
+      @location.deleted = true
+      @location.save(validate: false)
+    
 
       respond_to do |format|
-        if @location.save
           format.html { redirect_to locations_path, notice: 'Location was successfully deleted and removed from the list.' }
           format.json { head :no_content }
-        else
-          format.html { render action: 'edit' }
-          format.json { render json: @location.errors, status: :unprocessable_entity }
-        end
       end
     end
 
