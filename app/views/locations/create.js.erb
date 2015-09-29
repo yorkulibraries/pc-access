@@ -1,9 +1,12 @@
 <% if @location.errors.size == 0 %>
   $("#location_form").modal( 'hide' ).data( 'bs.modal', null );
   $( '.modal-backdrop' ).remove();
-<% else %>
-$("#location_form").modal('hide');
-$("#location_form").replaceWith("<%= j render "form", formats: [:html] %>");
-$("#location_form").modal("show");
 
+  // add location to a locations list
+<% else %>
+  $( '.modal-backdrop' ).remove();
+  $("#add_new_location #location_form").modal('hide');
+  $("#add_new_location").empty();
+  $("#add_new_location").append("<%= j render "form", formats: [:html] %>");
+  $("#add_new_location #location_form").modal("show");
 <% end %>

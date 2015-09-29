@@ -1,3 +1,4 @@
-$("#location_form").remove();
-$("body").append("<%= j render "form", formats: [:html] %>");
-$("#location_form").modal('show');
+$("#add_new_location").remove();
+$("body").append("<div id='add_new_location'></div>");
+$("#add_new_location ").append("<%= j render "form", formats: [:html] %>");
+$("#add_new_location #location_form").modal('show');
