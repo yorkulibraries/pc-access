@@ -3,7 +3,12 @@
   $( '.modal-backdrop' ).remove();
 
   // update via  partial and insert it into proper place
-  $("#location_<%= @location.id %>").replaceWith("Updated");
+  if ($("#locations").is("table")) {
+    $("#location_<%= @location.id %>").replaceWith("<%= j render @location, formats: [:html], locals: { table: true } %>");
+  } else {
+    $("#location_<%= @location.id %>").replaceWith("<%= j render @location, formats: [:html], locals: { table: false } %>");
+  }
+    
 <% else %>
   $( '.modal-backdrop' ).remove();
   $("#location_form").modal('hide');

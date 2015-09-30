@@ -4,7 +4,7 @@
   <%= link_to '<i class="fa fa-plus"></i> Add a new location'.html_safe, new_location_path, class: "btn btn-primary", data: { remote: true } %>
 <% end %>
 
-<table class="table table-bordered">
+<table id="locations" class="table table-bordered">
   <thead>
     <tr>
       <th>Name</th>
@@ -18,14 +18,7 @@
 
   <tbody>
     <% @locations.each do |location| %>
-      <tr id="location_<%= location.id %>">
-        <td><%= link_to location.name, location %></td>
-        <td><%= location.ip_subnet %></td>
-        <td><img src="<%= location.map %>"/></td>
-        <td>-</td>
-				<td>-</td>
-				<td><%= link_to 'Update', edit_location_path(location), data: { remote: true} %></td>
-      </tr>
+      <%= render location, locals: { table: true } %>
     <% end %>
   </tbody>
 </table>

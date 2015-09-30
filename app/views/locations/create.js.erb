@@ -2,7 +2,12 @@
   $("#location_form").modal( 'hide' ).data( 'bs.modal', null );
   $( '.modal-backdrop' ).remove();
 
-  // add location to a locations list
+  // add location to a locations list, figure out if locations is a table or not
+  if ($("#locations").is("table")) {
+    $("#locations tbody").prepend("<%= j render @location, formats: [:html], locals: { table: true } %>");
+  } else {
+    $("#locations").prepend("<%= j render @location, formats: [:html], locals: { table: false } %>");
+  }
 <% else %>
   $( '.modal-backdrop' ).remove();
   $("#add_new_location #location_form").modal('hide');
