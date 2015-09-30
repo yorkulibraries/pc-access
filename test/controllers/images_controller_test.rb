@@ -13,65 +13,80 @@ class ImagesControllerTest < ActionController::TestCase
     end
 
     should "list all images" do
-       create_list(:image, 10)
+      create_list(:image, 10)
 
-       get :index
-       assert_template :index
-       images  = assigns(:images)
-       assert_equal 11, images.size, "10 images + 1 from setup"
-     end
+      get :index
+      assert_template :index
+      images  = assigns(:images)
+      assert_equal 11, images.size, "10 images + 1 from setup"
+    end
 
-     should "show new image form" do
-       get :new
-       assert_response :success
-       assert_template :new
-     end
+    should "list images based on name" do
+      i = create(:image, name: "test")
+      create(:image, name: "tesla")
+      create(:image, name: "whatdoyouwant")
 
-     should "create a new image" do
-       assert_difference('Image.count') do
-         post :create, image: attributes_for(:image)
-         image = assigns(:image)
-         assert_equal 0, image.errors.size, "Should be no errors"
-         assert_redirected_to images_path
-       end
+      get :index, q: "te"
+      images = assigns(:images)
+      assert_equal 2, images.size, "Should be 2"
 
-     end
+      get :index, q: i.name
+      images = assigns(:images)
+      assert_equal 1, images.size, "Should be 1"
+      assert_equal i.name, images.first.name, "Should be test"
+    end
 
-     should "show image details" do
-       get :show, id: @image
-       assert_response :success
-       assert_template :show
-     end
+    should "show new image form" do
+     get :new
+     assert_response :success
+     assert_template :new
+    end
 
-     should "show get edit form" do
-       get :edit, id: @image
-       assert_response :success
-     end
-
-     should "update an existing location" do
-       old_image_name = @image.name
-
-       patch :update, id: @image.id, image: { name: "WinXP" }
+    should "create a new image" do
+     assert_difference('Image.count') do
+       post :create, image: attributes_for(:image)
        image = assigns(:image)
-       assert_equal 0, image.errors.size, "image name did not update"
-       assert_response :redirect
+       assert_equal 0, image.errors.size, "Should be no errors"
        assert_redirected_to images_path
-
-       assert_not_equal old_image_name, image.name, "Old image name is not there"
-       assert_equal "WinXP", image.name, "Image name was updated"
-
      end
 
-     should  "delete image" do
-       i = create(:image)
-       assert_no_difference('Image.unscoped.count', "image was not removed, but deleted flag was set") do
-         delete :destroy, id: i.id
-       end
+    end
 
-       i.reload
-       assert i.deleted?, "Deleted flag was set"
+    should "show image details" do
+     get :show, id: @image
+     assert_response :success
+     assert_template :show
+    end
 
+    should "show get edit form" do
+     get :edit, id: @image
+     assert_response :success
+    end
+
+    should "update an existing location" do
+     old_image_name = @image.name
+
+     patch :update, id: @image.id, image: { name: "WinXP" }
+     image = assigns(:image)
+     assert_equal 0, image.errors.size, "image name did not update"
+     assert_response :redirect
+     assert_redirected_to images_path
+
+     assert_not_equal old_image_name, image.name, "Old image name is not there"
+     assert_equal "WinXP", image.name, "Image name was updated"
+
+    end
+
+    should  "delete image" do
+     i = create(:image)
+     assert_no_difference('Image.unscoped.count', "image was not removed, but deleted flag was set") do
+       delete :destroy, id: i.id
      end
+
+     i.reload
+     assert i.deleted?, "Deleted flag was set"
+
+    end
 
   end
 
