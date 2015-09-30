@@ -8,7 +8,8 @@
   } else {
     $("#location_<%= @location.id %>").replaceWith("<%= j render @location, formats: [:html], locals: { table: false } %>");
   }
-    
+
+  $("#location_<%= @location.id %>").effect("highlight", {}, 3000);
 <% else %>
   $( '.modal-backdrop' ).remove();
   $("#location_form").modal('hide');

@@ -8,7 +8,7 @@
 </tr>
 <% else %>
 
-  <div class="media">
+  <div class="media" id="image_<%= image.id %>">
     <div class="media-left">
       <a href="#">
         <img class="media-object" src="<%= asset_path("os_icons/#{os_icon(image.os_name)}".html_safe) %>">

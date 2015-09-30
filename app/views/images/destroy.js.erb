@@ -1,0 +1,6 @@
+$("#image_form").modal( 'hide' ).data( 'bs.modal', null );
+$( '.modal-backdrop' ).remove();
+$( 'body' ).removeClass( "modal-open" );
+$("#image_form").remove();
+
+$("#image_<%= @image.id %>").remove();

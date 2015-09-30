@@ -2,14 +2,15 @@
   $("#image_form").modal( 'hide' ).data( 'bs.modal', null );
   $( '.modal-backdrop' ).remove();
 
-  // add location to a locations list, figure out if locations is a table or not
+  // update via  partial and insert it into proper place
   if ($("#images").is("table")) {
-    $("#images tbody").prepend("<%= j render @image, formats: [:html], locals: { table: true } %>");
+    $("#image_<%= @image.id %>").replaceWith("<%= j render @image, formats: [:html], locals: { table: true } %>");
   } else {
-    $("#images").prepend("<%= j render @image, formats: [:html], locals: { table: false } %>");
+    $("#image_<%= @image.id %>").replaceWith("<%= j render @image, formats: [:html], locals: { table: false } %>");
   }
 
-    $("#image_<%= @image.id %>").effect("highlight", {}, 3000);
+  $("#image_<%= @image.id %>").effect("highlight", {}, 3000);
+
 <% else %>
   $( '.modal-backdrop' ).remove();
   $("#image_form").modal('hide');
