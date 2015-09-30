@@ -22,10 +22,10 @@ class ImagesController < ApplicationController
       respond_to do |format|
         if @image.save
           format.html { redirect_to images_path, notice: 'Image was successfully created.' }
-          # format.json { render action: 'show', status: :created, location: @location }
+          format.js
         else
           format.html { render action: 'new' }
-          # format.json { render json: @image.errors, status: :unprocessable_entity }
+          format.js
         end
       end
 
@@ -36,10 +36,10 @@ class ImagesController < ApplicationController
 
         if @image.update(image_params)
           format.html { redirect_to images_path, notice: 'Image was successfully updated.' }
-          format.json { head :no_content }
+          format.js
         else
           format.html { render action: 'edit' }
-          format.json { render json: @image.errors, status: :unprocessable_entity }
+          format.js
         end
       end
     end
@@ -50,10 +50,10 @@ class ImagesController < ApplicationController
       respond_to do |format|
         if @image.save
           format.html { redirect_to locations_path, notice: 'Image was successfully deleted' }
-          format.json { head :no_content }
+          format.js
         else
           format.html { render action: 'edit' }
-          format.json { render json: @location.errors, status: :unprocessable_entity }
+          format.js
         end
       end
     end

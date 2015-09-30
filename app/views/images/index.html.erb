@@ -1,7 +1,7 @@
 <% title "Images" %>
 
 <% sidebar do  %>
-  <%= link_to '<i class="fa fa-plus"></i> Add a new image'.html_safe, new_image_path, class: "btn btn-primary" %>
+  <%= link_to '<i class="fa fa-plus"></i> Add a new image'.html_safe, new_image_path, class: "btn btn-primary", remote: true %>
 <% end %>
 
 <table class="table table-bordered">
@@ -22,7 +22,7 @@
         <td><%= image.os_name %></td>
         <td><%= image.os_version %></td>
         <td>-</td>
-				<td><%= link_to 'Update', edit_image_path(image) %></td>
+				<td><%= link_to 'Update', edit_image_path(image), remote: true %></td>
       </tr>
     <% end %>
   </tbody>

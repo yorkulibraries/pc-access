@@ -1,0 +1,40 @@
+<%= simple_form_for @image, :defaults => { :input_html => { :class => "form-horizontal", role: "form" } }  do |f| %>
+
+
+
+<fieldset>
+  <legend>Image Details</legend>
+
+  <div class="form-group">
+    <div class="col-sm-12">
+        <%= f.input :name, as: :string %>
+    </div>
+  </div> <!-- form-group end -->
+  <div class="form-group">
+    <div class="col-sm-6">
+        <%= f.input :os_name, as: :string, required: true %>
+    </div>
+    <div class="col-sm-6">
+        <%= f.input :os_version, as: :string %>
+    </div>
+  </div> <!-- form-group end -->
+
+</fieldset>
+
+
+  <hr />
+  <div class="row">
+    <div class="col-sm-6">
+        <%= f.button :submit, class: "btn btn-success"%>
+				<%= link_to "Cancel Changes", images_path, class: "btn btn-link" %>
+    </div>
+		<div class="col-sm-6">
+			<% unless @image.new_record? %>
+				<%= link_to @image, method: :delete, data: { confirm: 'Are you sure?' }, class: "red pull-right btn btn-link btn-xs" do %>
+					<span class="glyphicon glyphicon-trash"></span> Remove this image record?
+				<% end %>
+			<% end %>
+		</div>
+  </div> <!-- row end -->
+
+<% end %>
