@@ -7,5 +7,6 @@ FactoryGirl.define do
     last_user_activity 30.seconds.ago
 
     association(:location)
+    image nil
   end
 end

@@ -7,6 +7,7 @@ class Computer < ActiveRecord::Base
 
   ## RELATIONS
   belongs_to :location
+  belongs_to :image
 
   ## VALIDATIONS
   validates :ip, :presence => true, :uniqueness => true
@@ -23,7 +24,17 @@ class Computer < ActiveRecord::Base
   scope :never_ping, -> { where("last_ping IS NULL") }
   scope :never_used, -> { where("last_user_activity IS NULL") }
 
+  ## CALLBACKS
+  after_create :attach_to_location
+
   ## METHODS
+  def attach_to_location
+    Location.all.each do |loc|
+      if self[:ip].start_with?(loc.ip_subnet)
+        update_attribute(:location_id, loc.id)
+      end
+    end
+  end
 
   def self.free_inactive_computers
     self.in_use.not_staying_active.each do |pc|

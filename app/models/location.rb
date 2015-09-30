@@ -6,19 +6,19 @@ class Location < ActiveRecord::Base
 
   ## VALIDATIONS
   validates :name, presence: true, uniqueness: true
-  validates :ip_subnet, presence: true
+  validates :ip_subnet, uniqueness: true, presence: true
 
   ## SCOPES
   default_scope { where(deleted: false) } # only active images
-  scope :deleted, -> { unscoped.where(deleted: true) } 
-
-
-
-
+  scope :deleted, -> { unscoped.where(deleted: true) }
 
   ## METHODS
+  # Attach computers to location based on IP and location's ip_subnet
+  def attach_computers
+    Computer.where("location_id IS NULL").where("ip LIKE '#{self[:ip_subnet]}%'").update_all(location_id: self[:id])
+  end
 
-  ##
+  # mock locations with maps
   def self.mock_locations
     maps = [ "https://www.library.yorku.ca/preview/images/maps/scott-1stfloor.jpg",
       "https://www.library.yorku.ca/preview/images/maps/scott-2ndfloor.jpg",

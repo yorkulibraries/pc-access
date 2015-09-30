@@ -1,6 +1,10 @@
 class Image < ActiveRecord::Base
   # FIELDS: name, os_name, os_version, deleted
 
+  ## CONSTANTS
+  OS_NAMES = ["Windows", "OS X", "Linux"]
+
+
   ## RELATIONS
   has_many :computers
 
