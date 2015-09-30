@@ -31,7 +31,7 @@
 		<div class="col-sm-6">
 			<% unless @image.new_record? %>
 				<%= link_to @image, method: :delete, data: { confirm: 'Are you sure?' }, class: "red pull-right btn btn-link btn-xs" do %>
-					<span class="glyphicon glyphicon-trash"></span> Remove this image record?
+					<span class="fa fa-trash"></span> Remove this image record?
 				<% end %>
 			<% end %>
 		</div>
