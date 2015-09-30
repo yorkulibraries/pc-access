@@ -17,15 +17,12 @@
 
   <tbody>
     <% @images.each do |image| %>
-      <tr>
-        <td><%= link_to image.name, image %></td>
-        <td><%= image.os_name %></td>
-        <td><%= image.os_version %></td>
-        <td>-</td>
-				<td><%= link_to 'Update', edit_image_path(image), remote: true %></td>
-      </tr>
+      <%= render image, locals: { table: true } %>
     <% end %>
   </tbody>
 </table>
 
 <br>
+<% @images.each do |image| %>
+  <%= render image, locals: { table: false } %>
+<% end %>

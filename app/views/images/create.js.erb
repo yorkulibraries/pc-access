@@ -1,0 +1,16 @@
+<% if @image.errors.size == 0 %>
+  $("#image_form").modal( 'hide' ).data( 'bs.modal', null );
+  $( '.modal-backdrop' ).remove();
+
+  // add location to a locations list, figure out if locations is a table or not
+  if ($("#images").is("table")) {
+    $("#images tbody").prepend("<%= j render @image, formats: [:html], locals: { table: true } %>");
+  } else {
+    $("#images").prepend("<%= j render @image, formats: [:html], locals: { table: false } %>");
+  }
+<% else %>
+  $( '.modal-backdrop' ).remove();
+  $("#image_form").modal('hide');
+  $("#image_form").replaceWith("<%= j render "form", formats: [:html] %>");
+  $("#image_form").modal("show");
+<% end %>
