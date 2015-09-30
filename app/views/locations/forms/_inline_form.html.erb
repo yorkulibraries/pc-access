@@ -31,7 +31,7 @@
 		<div class="col-sm-6">
 			<% unless @location.new_record? %>
 				<%= link_to @location, method: :delete, data: { confirm: 'Are you sure?' }, class: "red pull-right btn btn-link btn-xs" do %>
-					<span class="glyphicon glyphicon-trash"></span> Remove this location record?
+					<span class="fa fa-trash"></span> Remove this location record?
 				<% end %>
 			<% end %>
 		</div>

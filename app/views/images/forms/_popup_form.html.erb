@@ -38,7 +38,7 @@
     <div class="modal-footer">
       <% unless @image.new_record? %>
         <%= link_to @image, method: :delete, data: { confirm: 'Are you sure?', remote: true }, class: "pull-left btn btn-danger" do %>
-          <span class="glyphicon glyphicon-trash"></span><span class="sr-only">Delete?</span>
+          <span class="fa fa-trash"></span><span class="sr-only">Delete?</span>
         <% end %>
       <% end %>
 

@@ -22,7 +22,7 @@ gem 'jquery-ui-rails', "4.2.0"
 gem 'less-rails', "2.6.0"
 gem 'twitter-bootstrap-rails', "3.2.0"
 gem 'simple_form', "3.1.0"
-gem 'font-awesome-less', "4.0.2"
+gem "font-awesome-rails", '4.4.0'
 
 ## TOOLS AND PLUGINS
 gem 'rufus-scheduler', "3.0.9"
