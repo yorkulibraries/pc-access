@@ -17,4 +17,6 @@
 //= require jquery.ui.autocomplete
 //= require jquery.ui.effect-highlight
 //= require turbolinks
+//= require raphael
+//= require morris
 //= require_tree .

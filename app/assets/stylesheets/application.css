@@ -13,7 +13,7 @@
  *= require bootstrap_and_overrides
  *= require jquery.ui.datepicker
  *= require font-awesome
+ *= require morris
  *= require_self
  *= require_tree .
-
  */

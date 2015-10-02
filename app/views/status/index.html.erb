@@ -1,49 +1,35 @@
-<% title "Dashboard" %>
+<% title "Nerve Centre" %>
 
-<p id="notice"><%= notice %></p>
 
-<h1>Summary</h1>
-<p><%= @not_in_use.size %> not in-use.</p>
-<p><%= @in_use.size %> in-use.</p>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Current Activity By Location</h3>
+  </div>
+  <div class="panel-body">
+    <%= content_tag :div, "", id: "by_location_activity", data: { computers: location_activity_chart_data }  %>
+  </div>
+</div>
 
-<h2>Not In-use</h2>
-<ul>
-<% @not_in_use.order('ip').each do |m| %>
-  <li><%= m.ip %></li>
-<% end %>
-</ul>
+<div class="row">
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Current Activity By Status</h3>
+      </div>
+      <div class="panel-body">
+        <%= content_tag :div, "", id: "by_status_of_activity", data: { computers: by_status_of_activity_chart_data }  %>
+      </div>
+    </div>
+  </div>
 
-<h2>In-use</h2>
-<ul>
-<% @in_use.order('last_user_activity, ip').each do |m| %>
-  <li><%= m.ip %>,  </li>
-<% end %>
-</ul>
-
-<h2>Pinging</h2>
-<ul>
-<% @pinging.order('last_ping, ip').each do |m| %>
-  <li><%= m.ip %>,  <%= time_ago_in_words(m.last_ping) %></li>
-<% end %>
-</ul>
-
-<h2>Not Pinging</h2>
-<ul>
-<% @not_pinging.order('last_ping, ip').each do |m| %>
-  <li><%= m.ip %>,  <%= time_ago_in_words(m.last_ping) unless m.last_ping.nil? %></li>
-<% end %>
-</ul>
-
-<h2>Never Ping</h2>
-<ul>
-<% @never_ping.order('ip').each do |m| %>
-  <li><%= m.ip %></li>
-<% end %>
-</ul>
-
-<h2>Never Used</h2>
-<ul>
-<% @never_used.order('ip').each do |m| %>
-  <li><%= m.ip %></li>
-<% end %>
-</ul>
+  <div class="col-md-6">
+    <div class="panel panel-warning">
+      <div class="panel-heading">
+        <h3 class="panel-title">Not Being Used</h3>
+      </div>
+      <div class="panel-body">
+        <%= content_tag :div, "", id: "troubled_computers", data: { computers: troubled_computers_chart_data }  %>
+      </div>
+    </div>
+  </div>
+</div>
