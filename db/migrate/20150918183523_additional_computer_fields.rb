@@ -3,7 +3,7 @@ class AdditionalComputerFields < ActiveRecord::Migration
     add_column :computers, :area_id, :integer
     add_column :computers, :offline, :boolean, null: false, default: false
     add_column :computers, :hostname, :string
-    rename_column :computers, :last_user_activity, :last_user_activity
+    rename_column :computers, :last_keep_alive, :last_user_activity
     add_column :computers, :image_id, :integer
 
     add_column :locations, :active, :boolean, null: false, default: true
