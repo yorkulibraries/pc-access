@@ -14,8 +14,12 @@ class Location < ActiveRecord::Base
 
   ## METHODS
   # Attach computers to location based on IP and location's ip_subnet
-  def attach_computers
-    Computer.where("location_id IS NULL").where("ip LIKE '#{self[:ip_subnet]}%'").update_all(location_id: self[:id])
+  def attach_computers(only_computers_without_location = true)
+    if only_computers_without_location
+      Computer.where("location_id IS NULL").where("ip LIKE '#{self[:ip_subnet]}%'").update_all(location_id: self[:id])
+    else
+      Computer.where("ip LIKE '#{self[:ip_subnet]}%'").update_all(location_id: self[:id])
+    end
   end
 
   # mock locations with maps

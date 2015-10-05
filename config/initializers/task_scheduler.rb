@@ -14,7 +14,7 @@ end
 scheduler.every("10m") do
   Rails.logger.info("Task scheduler running at: #{Time.now}")
 
-  Computer.all.each do |c|
-    c.attach_to_location
+  Location.all.each do |l|
+    l.attach_computers(false)
   end
 end
