@@ -12,6 +12,8 @@ class Computer < ActiveRecord::Base
   belongs_to :location
   belongs_to :image
 
+  has_many :activiy_entries, class_name: "ComputerActivityLog"
+
   ## VALIDATIONS
   validates :ip, :presence => true, :uniqueness => true
   validate :valid_ip
@@ -28,7 +30,7 @@ class Computer < ActiveRecord::Base
   scope :never_used, -> { where("last_user_activity IS NULL") }
 
   ## CALLBACKS
-  
+
 
   ## METHODS
 
