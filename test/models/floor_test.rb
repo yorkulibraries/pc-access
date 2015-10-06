@@ -18,8 +18,11 @@ class FloorTest < ActiveSupport::TestCase
   end
 
   should "show active floors only by default, and deleted via a scope" do
-    create_list(:floor, 3, deleted: true)
-    create_list(:floor, 2, deleted: false)
+    location = create(:location)
+    location.floors.first.destroy # remove default floor
+    
+    create_list(:floor, 3, deleted: true, location: location)
+    create_list(:floor, 2, deleted: false, location: location)
 
     assert_equal 2, Floor.all.size, "Should be two"
     assert_equal 3, Floor.deleted.size, "Should be 3"
