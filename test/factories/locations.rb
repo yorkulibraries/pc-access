@@ -3,7 +3,6 @@ FactoryGirl.define do
     sequence(:name) { |n| "Building ##{n}" }
     address nil
     ip_subnets nil
-    deleted false
-    floors 1
+    deleted false    
   end
 end

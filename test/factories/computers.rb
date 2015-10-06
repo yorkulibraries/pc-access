@@ -10,7 +10,8 @@ FactoryGirl.define do
     image nil
     floor_id nil
     area_id nil
-    
+
     general_usage Computer::PUBLIC_USE
+
   end
 end

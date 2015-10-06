@@ -6,7 +6,7 @@ class Area < ActiveRecord::Base
   belongs_to :floor
 
   ## VALIDATIONS
-  validates :name, presence: true
+  validates :name, :location, :floor, presence: true
 
   ## SCOPES
   default_scope { where(deleted: false) } # only active areas

@@ -3,6 +3,8 @@ class Location < ActiveRecord::Base
 
   ## RELATIONS
   has_many :computers
+  has_many :floors
+  has_many :areas
 
   ## VALIDATIONS
   validates :name, presence: true, uniqueness: true
