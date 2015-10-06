@@ -12,7 +12,7 @@ class Computer < ActiveRecord::Base
   belongs_to :location
   belongs_to :image
 
-  has_many :activiy_entries, class_name: "ComputerActivityLog"
+  has_many :activity_entries, class_name: "ComputerActivityLog"
 
   ## VALIDATIONS
   validates :ip, :presence => true, :uniqueness => true
@@ -30,10 +30,16 @@ class Computer < ActiveRecord::Base
   scope :never_used, -> { where("last_user_activity IS NULL") }
 
   ## CALLBACKS
-
+  after_create :add_register_activity_entry
 
   ## METHODS
-
+  def add_register_activity_entry
+    e = ComputerActivityLog.new(ip: self[:ip], activity_date: DateTime.now)
+    e.action = ComputerActivityLog::ACTION_REGISTER
+    e.computer = self
+    e.username = self[:current_username]
+    e.save
+  end
 
   def self.free_inactive_computers
     self.in_use.not_staying_active.each do |pc|

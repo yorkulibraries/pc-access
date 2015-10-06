@@ -15,9 +15,7 @@ class ComputerActivityLog < ActiveRecord::Base
   validates :computer_id, presence: true
   validates :ip, :action, presence: true
 
-  ## SCOPES
-  default_scope { where(deleted: false) } # only active floors
-  scope :deleted, -> { unscoped.where(deleted: true) }
+  ## SCOPES  
 
   ## METHODS
 end

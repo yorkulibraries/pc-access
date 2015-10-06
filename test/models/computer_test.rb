@@ -6,11 +6,19 @@ class ComputerTest < ActiveSupport::TestCase
       @after_interval =  (Computer::STAY_ALIVE_INTERVAL + 5.minutes).ago
   end
 
-  should "create a valid computer" do
+  should "create a valid computer and recored a Register Action in activity Log" do
     c = build(:computer)
 
-    assert_difference "Computer.count", 1 do
+    assert_difference ["Computer.count", "ComputerActivityLog.count"],  1 do
       c.save
+      assert_equal 1, c.activity_entries.size,  "Should be one"
+
+      entry = c.activity_entries.first
+      assert_equal ComputerActivityLog::ACTION_REGISTER, entry.action, "First action should be register"
+      assert_equal c.ip, entry.ip, "ip should be the same"
+      assert_equal c.current_username, entry.username, "usernames should match"
+      assert_not_nil entry.activity_date, "Date should be set"
+
     end
   end
 
