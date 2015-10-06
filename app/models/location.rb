@@ -13,7 +13,17 @@ class Location < ActiveRecord::Base
   default_scope { where(deleted: false) } # only active images
   scope :deleted, -> { unscoped.where(deleted: true) }
 
+  ## CALLBACKS
+  after_create :create_first_floor
+
   ## METHODS
+  def create_first_floor
+    floor = Floor.new
+    floor.location = self
+    floor.name = "1st Floor"
+    floor.position = 1
+    floor.save(validate: false)
+  end
 
 
 end
