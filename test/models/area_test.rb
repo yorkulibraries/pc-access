@@ -1,7 +1,10 @@
 require 'test_helper'
 
 class AreaTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  should "create a valid area" do
+    area = build(:area)
+    assert_difference "Area.count", 1 do
+      area.save
+    end
+  end
 end

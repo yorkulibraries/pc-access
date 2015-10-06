@@ -21,8 +21,7 @@ class LocationTest < ActiveSupport::TestCase
   end
 
   should "not create an invalid location" do
-    assert ! build(:location, name: nil).valid?, "Name should not be blank"
-    assert ! build(:location, ip_subnet: nil).valid?, "IP Subnet is required"
+    assert ! build(:location, name: nil).valid?, "Name should not be blank"    
 
     create(:location, name: "test")
     assert ! build(:location, name: "test").valid?, "Duplicate name"
@@ -37,21 +36,5 @@ class LocationTest < ActiveSupport::TestCase
   end
 
 
-  should "attach computers to location based on ip_subnet" do
-    create(:computer, ip: "130.63.180.2", location: nil)
-    create(:computer, ip: "130.63.180.3", location: nil)
-    create(:computer, ip: "130.63.176.20", location: nil)
-    create(:computer, ip: "130.63.176.21", location: nil)
-    create(:computer, ip: "130.63.176.2", location: nil)
-
-    loc180 = create(:location, ip_subnet: "130.63.180")
-    loc176 = create(:location, ip_subnet: "130.63.176")
-
-    loc180.attach_computers
-    loc176.attach_computers
-    assert_equal 2, loc180.computers.size, "2 computers with 180 subnet"
-    assert_equal 3, loc176.computers.size, "3 computers with 176 subnet"
-
-  end
 
 end

@@ -24,18 +24,6 @@ class ComputerTest < ActiveSupport::TestCase
   end
 
 
-  should "attach a location to a computer based on ip" do
-    loc = create(:location, ip_subnet: "130.63.180")
-    c = build(:computer, ip: "130.63.180.2", location: nil)
-    c2 = build(:computer, ip: "130.63.120.2", location: nil)
-
-    c.save
-    c2.save
-    assert_equal c.location.id, loc.id, "Location should be attached"
-    assert_nil c2.location, "There is no locations for this subnet yet"
-  end
-
-
   should "return correct numbers of pcs in use and not inuse" do
 
     create_list(:computer, 2, current_username: nil) # 2 not in use

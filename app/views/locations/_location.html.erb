@@ -1,8 +1,7 @@
 <% if locals[:table] == true %>
   <tr id="location_<%= location.id %>">
     <td><%= link_to location.name, location %></td>
-    <td><%= location.ip_subnet %></td>
-    <td><img src="<%= location.map %>"/></td>
+    <td><%= location.address %></td>  
     <td>-</td>
     <td>-</td>
     <td><%= link_to 'Update', edit_location_path(location), data: { remote: true} %></td>
@@ -10,10 +9,9 @@
 <% else %>
   <div class="col-sm-6 col-md-4"  id="location_<%= location.id %>">
     <div class="thumbnail">
-      <img src="<%= location.map %>"/>
       <div class="caption">
         <h3><%= location.name %></h3>
-        <p><%= location.ip_subnet %></p>
+        <p><%= location.address %></p>
         <p>
           <a href="<%= edit_location_path(location) %>" data-remote="true" class="btn btn-default" role="button">Update</a>
         </p>

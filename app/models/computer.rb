@@ -5,6 +5,9 @@ class Computer < ActiveRecord::Base
   ## CONSTANTS
   STAY_ALIVE_INTERVAL = Rails.application.config.stay_alive_interval # 15.minutes
 
+  PUBLIC_USE = "public"
+  STAFF_USE = "staff"
+
   ## RELATIONS
   belongs_to :location
   belongs_to :image
@@ -25,16 +28,10 @@ class Computer < ActiveRecord::Base
   scope :never_used, -> { where("last_user_activity IS NULL") }
 
   ## CALLBACKS
-  after_create :attach_to_location
+  
 
   ## METHODS
-  def attach_to_location
-    Location.all.each do |loc|
-      if self[:ip].start_with?(loc.ip_subnet)
-        update_attribute(:location_id, loc.id)
-      end
-    end
-  end
+
 
   def self.free_inactive_computers
     self.in_use.not_staying_active.each do |pc|

@@ -77,7 +77,7 @@ ActiveRecord::Schema.define(version: 20151006181245) do
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
     t.string   "map"
-    t.string   "ip_subnet"
+    t.string   "ip_subnets"
     t.boolean  "active",     default: true,  null: false
     t.boolean  "deleted",    default: false, null: false
     t.integer  "floors"

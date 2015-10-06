@@ -62,7 +62,7 @@ class LocationsController < ApplicationController
       end
 
       def location_params
-        params.require(:location).permit( :name, :ip_subnet, :map)
+        params.require(:location).permit( :name, :ip_subnets, :address, :floors)
       end
 
 
