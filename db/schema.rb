@@ -11,7 +11,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150929180724) do
+ActiveRecord::Schema.define(version: 20151006181245) do
+
+  create_table "areas", force: :cascade do |t|
+    t.string   "name"
+    t.string   "department"
+    t.string   "map"
+    t.text     "notes"
+    t.boolean  "special_access", default: false, null: false
+    t.boolean  "deleted",        default: false, null: false
+    t.integer  "location_id"
+    t.integer  "floor_id"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+  end
+
+  create_table "computer_activity_logs", force: :cascade do |t|
+    t.datetime "activity_date"
+    t.string   "action"
+    t.string   "username"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
 
   create_table "computers", force: :cascade do |t|
     t.string   "ip"
@@ -26,9 +47,21 @@ ActiveRecord::Schema.define(version: 20150929180724) do
     t.boolean  "offline",            default: false, null: false
     t.string   "hostname"
     t.integer  "image_id"
+    t.integer  "floor_id"
+    t.string   "general_usage"
   end
 
   add_index "computers", ["location_id"], name: "index_computers_on_location_id"
+
+  create_table "floors", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "positition"
+    t.boolean  "deleted",     default: false, null: false
+    t.string   "map"
+    t.integer  "location_id"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
 
   create_table "images", force: :cascade do |t|
     t.string   "name"
@@ -47,6 +80,8 @@ ActiveRecord::Schema.define(version: 20150929180724) do
     t.string   "ip_subnet"
     t.boolean  "active",     default: true,  null: false
     t.boolean  "deleted",    default: false, null: false
+    t.integer  "floors"
+    t.string   "address"
   end
 
 end
