@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 20151006181245) do
 
   create_table "floors", force: :cascade do |t|
     t.string   "name"
-    t.integer  "positition"
+    t.integer  "position"
     t.boolean  "deleted",     default: false, null: false
     t.string   "map"
     t.integer  "location_id"

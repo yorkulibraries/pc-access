@@ -4,7 +4,7 @@ FactoryGirl.define do
     positition 1
     deleted false
     map nil
-    assiciation(:location)
+    location nil
   end
 
 end

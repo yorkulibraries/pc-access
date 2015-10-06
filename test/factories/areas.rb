@@ -5,13 +5,9 @@ FactoryGirl.define do
     special_access false
     map nil
     notes nil
-    association :location
-    association :floor # random for now, but after create it will be associated with the location
+    location { FactoryGirl.create(:location) }
+    floor { FactoryGirl.create(:floor, location: location) }
 
-    after(:create) do |area|
-      area.floor.location.id = area.location.id
-      #association :floor, location_id: area.location.id 
-    end
   end
 
 end
