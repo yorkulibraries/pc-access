@@ -1,10 +1,10 @@
 FactoryGirl.define do
   factory :floor do
     sequence(:name)  { |n| "Floor ##{n}" }
-    positition 1
+    position 1
     deleted false
     map nil
-    location nil
+    association :location
   end
 
 end

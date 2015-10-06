@@ -27,6 +27,8 @@ ActiveRecord::Schema.define(version: 20151006181245) do
   end
 
   create_table "computer_activity_logs", force: :cascade do |t|
+    t.integer  "computer_id"
+    t.string   "ip"
     t.datetime "activity_date"
     t.string   "action"
     t.string   "username"

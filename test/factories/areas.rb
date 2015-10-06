@@ -5,7 +5,7 @@ FactoryGirl.define do
     special_access false
     map nil
     notes nil
-    location { FactoryGirl.create(:location) }
+    association :location
     floor { FactoryGirl.create(:floor, location: location) }
 
   end
