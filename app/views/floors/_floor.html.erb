@@ -6,7 +6,7 @@
     <td><%= link_to 'Update', edit_location_floor_path(@location, floor), data: { remote: true} %></td>
   </tr>
 <% elsif locals[:show] == "ul" %>
-    <li id="floor_<%= floor.id %>" data-id="<%= floor.id %>">
+    <li id="floor_<%= floor.id %>" data-id="<%= floor.id %>" class="<%= 'active' if locals[:first_item] %>">
       <a href="<%= location_floor_path(@location, floor) %>" data-remote="true"><%= floor.name %></a>
     </li>
 <% else %>

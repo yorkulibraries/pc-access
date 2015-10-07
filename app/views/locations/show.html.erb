@@ -1,4 +1,4 @@
-<% title "Location: #{@location.name}" %>
+<% title "#{@location.name}" %>
 
 <div class="panel panel-primary">
   <div class="panel-heading">
@@ -8,8 +8,13 @@
     <div class="row">
       <div class="col-md-3">
         <ul class="nav nav-pills nav-stacked" id="floors">
-          <% @location.floors.each do |floor| %>
-              <%= render floor, locals: { show: "ul" } %>
+          <% @location.floors.each_with_index do |floor, index| %>
+              <% if index == 0 %>
+                <%= render floor, locals: { show: "ul", first_item: true } %>
+              <% else %>
+                <%= render floor, locals: { show: "ul" } %>
+              <% end %>
+
           <% end %>
         </ul>
         <hr/>
@@ -17,8 +22,9 @@
           <i class="fa fa-plus"></i> Add a new floor
         <% end %>
       </div>
-      <div class="col-md-6">      
+      <div class="col-md-6">
         <div id="floors">
+            <%= render @location.floors.first, locals: { show: "div" } %>
         </div>
       </div>
     </div>
