@@ -34,11 +34,7 @@ class Computer < ActiveRecord::Base
 
   ## METHODS
   def add_register_activity_entry
-    e = ComputerActivityLog.new(ip: self[:ip], activity_date: DateTime.now)
-    e.action = ComputerActivityLog::ACTION_REGISTER
-    e.computer = self
-    e.username = self[:current_username]
-    e.save
+    record_activity_log(ComputerActivityLog::ACTION_REGISTER)
   end
 
   def self.free_inactive_computers
@@ -46,6 +42,7 @@ class Computer < ActiveRecord::Base
       Rails.logger.info("#{pc.ip} not_staying_active => logging off")
       pc.logoff
       pc.save
+      pc.record_activity_log(ComputerActivityLog::ACTION_LOGOFF_INACTIVE)
     end
   end
 
@@ -73,10 +70,24 @@ class Computer < ActiveRecord::Base
     self.last_user_activity = DateTime.now
   end
 
+
+  ##### Records activity log entry with a specified action
+  def record_activity_log(action = ComputerActivityLog::ACTION_PING)
+    e = ComputerActivityLog.new(ip: self[:ip], activity_date: DateTime.now)
+    e.action = action
+    e.computer = self
+    e.username = self[:current_username]
+    e.save
+  end
+
+  ## PRIVATE
   private
+
   def valid_ip
     unless IPAddress.valid?(ip)
       errors.add(:ip, "Invalid IP address")
     end
   end
+
+
 end

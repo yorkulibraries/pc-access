@@ -14,7 +14,7 @@ class TrackersControllerTest < ActionController::TestCase
 
   should "still have computer in db after logoff" do
     create(:computer, ip: request.remote_ip)
-    
+
     assert_no_difference "Computer.count" do
       get :logoff
       c = assigns(:computer)
@@ -24,4 +24,14 @@ class TrackersControllerTest < ActionController::TestCase
     end
 
   end
+
+  should "record activiy log entry on each action" do
+    assert_difference "ComputerActivityLog.count", 4 do
+      get :ping # After initial one, it should have a register and a PING
+      get :logon, username: "tester"
+      get :logoff
+
+    end
+  end
+
 end

@@ -88,6 +88,16 @@ class ComputerTest < ActiveSupport::TestCase
     assert_equal 2, Computer.not_in_use.count, "2 Not In Use"
   end
 
+  should "Free Inactive Computers should register a ACTION_LOGOFF_INACTIVE" do
+    c = create(:computer, last_user_activity: @after_interval)
+
+    assert_difference "ComputerActivityLog.count", 1 do
+      Computer.free_inactive_computers
+      entry = ComputerActivityLog.last
+      assert_equal  ComputerActivityLog::ACTION_LOGOFF_INACTIVE, entry.action, "should be logoff inactive"
+    end
+  end
+
   should "return true or false, testing if computer is in use" do
     not_used = create(:computer, current_username: nil)
     used = create(:computer, current_username: "billy")
