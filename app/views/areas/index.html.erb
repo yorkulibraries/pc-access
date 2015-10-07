@@ -1,0 +1,25 @@
+<% title "areas" %>
+
+<% sidebar do  %>
+  <%= link_to '<i class="fa fa-plus"></i> Add a new area'.html_safe, new_location_area_path(@location), class: "btn btn-primary", data: { remote: true } %>
+<% end %>
+
+<table id="areas" class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Map</th>
+      <th>Position</th>
+			<th>Areas</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @areas.each do |area| %>
+      <%= render area, locals: { table: true } %>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

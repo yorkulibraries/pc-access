@@ -1,0 +1,19 @@
+<% if @area.errors.size == 0 %>
+  $("#area_form").modal( 'hide' ).data( 'bs.modal', null );
+  $( '.modal-backdrop' ).remove();
+
+  // add location to a locations list, figure out if locations is a table or not
+  if ($("#areas").is("table")) {
+    $("#areas tbody").prepend("<%= j render @area, formats: [:html], locals: { table: true } %>");
+  } else {
+    $("#areas").prepend("<%= j render @area, formats: [:html], locals: { table: false } %>");
+  }
+
+  $("#area_<%= @area.id %>").effect("highlight", {}, 3000);
+<% else %>
+  $( '.modal-backdrop' ).remove();
+  $("#add_new_area #area_form").modal('hide');
+  $("#add_new_area").empty();
+  $("#add_new_area").append("<%= j render "form", formats: [:html] %>");
+  $("#add_new_area #area_form").modal("show");
+<% end %>

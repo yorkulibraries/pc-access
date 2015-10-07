@@ -1,0 +1,6 @@
+$("#area_form").modal( 'hide' ).data( 'bs.modal', null );
+$( '.modal-backdrop' ).remove();
+$( 'body' ).removeClass( "modal-open" );
+$("#area_form").remove();
+
+$("#area_<%= @area.id %>").remove();

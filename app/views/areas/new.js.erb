@@ -1,0 +1,4 @@
+$("#add_new_area").remove();
+$("body").append("<div id='add_new_area'></div>");
+$("#add_new_area ").append("<%= j render "form", formats: [:html] %>");
+$("#add_new_area #area_form").modal('show');

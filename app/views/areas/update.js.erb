@@ -1,0 +1,18 @@
+<% if @area.errors.size == 0 %>
+  $("#area_form").modal( 'hide' ).data( 'bs.modal', null );
+  $( '.modal-backdrop' ).remove();
+
+  // update via  partial and insert it into proper place
+  if ($("#areas").is("table")) {
+    $("#area_<%= @area.id %>").replaceWith("<%= j render @area, formats: [:html], locals: { table: true } %>");
+  } else {
+    $("#area_<%= @area.id %>").replaceWith("<%= j render @area, formats: [:html], locals: { table: false } %>");
+  }
+
+  $("#area_<%= @area.id %>").effect("highlight", {}, 3000);
+<% else %>
+  $( '.modal-backdrop' ).remove();
+  $("#area_form").modal('hide');
+  $("#area_form").replaceWith("<%= j render "form", formats: [:html] %>");
+  $("#area_form").modal("show");
+<% end %>

@@ -1,0 +1,5 @@
+<% if request.xhr? %>
+  <%= render partial: "areas/forms/popup_form" %>
+<% else %>
+  <%= render partial: "areas/forms/inline_form" %>
+<% end %>
