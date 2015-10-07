@@ -64,11 +64,11 @@ class AreasController < ApplicationController
       end
 
       def set_area
-        @area = area.find(params[:id])
+        @area = @location.areas.find(params[:id])
       end
 
       def area_params
-        params.require(:area).permit( :name, :department, :specia_access, :map, :notes)
+        params.require(:area).permit( :name, :department, :specia_access, :map, :notes, :floor_id)
       end
 
 

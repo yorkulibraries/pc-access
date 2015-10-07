@@ -5,8 +5,6 @@ class AreasControllerTest < ActionController::TestCase
 
     setup do
       @location = create(:location)
-      @location.areas.first.destroy # destroy the initial one, we don't need it to mess up our counts
-
 
       #@user = create(:user, admin: true, role: User::MANAGER_ROLE, location: @mylocation)
       #log_user_in(@user)
@@ -31,9 +29,9 @@ class AreasControllerTest < ActionController::TestCase
 
      should "create a new area" do
        assert_difference('Area.count') do
-         post :create, area: attributes_for(:area), location_id: @location.id
+         post :create, area: attributes_for(:area, floor_id: @location.floors.first.id), location_id: @location.id
          area = assigns(:area)
-         assert_equal 0, area.errors.size, "Should be no errors"
+         assert_equal 0, area.errors.size, "Should be no errors #{area.errors.messages}"
          assert_redirected_to location_areas_path(@location)
        end
 

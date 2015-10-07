@@ -63,7 +63,7 @@ class FloorsController < ApplicationController
       end
 
       def set_floor
-        @floor = Floor.find(params[:id])
+        @floor = @location.floors.find(params[:id])
       end
 
       def floor_params
