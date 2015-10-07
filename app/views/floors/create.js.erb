@@ -3,10 +3,12 @@
   $( '.modal-backdrop' ).remove();
 
   // add location to a locations list, figure out if locations is a table or not
-  if ($("#floors").is("table")) {
-    $("#floors tbody").prepend("<%= j render @floor, formats: [:html], locals: { table: true } %>");
+  if ($("#floors").is("table")) {    
+    $("#floors tbody").prepend("<%= j render @floor, formats: [:html], locals: { show: 'table' } %>");
+  } else if ($("#floors").is("ul")) {
+    $("#floors").append("<%= j render @floor, formats: [:html], locals: { show: 'ul' } %>");
   } else {
-    $("#floors").prepend("<%= j render @floor, formats: [:html], locals: { table: false } %>");
+    $("#floors").prepend("<%= j render @floor, formats: [:html], locals: { show: 'div'} %>");
   }
 
   $("#floor_<%= @floor.id %>").effect("highlight", {}, 3000);

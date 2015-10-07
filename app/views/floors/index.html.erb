@@ -17,7 +17,7 @@
 
   <tbody>
     <% @floors.each do |floor| %>
-      <%= render floor, locals: { table: true } %>
+      <%= render floor, locals: { show: "table" } %>
     <% end %>
   </tbody>
 </table>

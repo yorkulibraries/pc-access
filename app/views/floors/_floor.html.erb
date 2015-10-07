@@ -1,12 +1,16 @@
-<% if locals[:table] == true %>
-  <tr id="floor_<%= floor.id %>">
+<% if locals[:show] == "table" %>
+  <tr id="floor_<%= floor.id %>" data-id="<%= floor.id %>">
     <td><%= link_to floor.name, [@location, floor] %></td>
     <td><%= floor.map %></td>
     <td>-</td>
     <td><%= link_to 'Update', edit_location_floor_path(@location, floor), data: { remote: true} %></td>
   </tr>
+<% elsif locals[:show] == "ul" %>
+    <li id="floor_<%= floor.id %>" data-id="<%= floor.id %>">
+      <a href="<%= location_floor_path(@location, floor) %>" data-remote="true"><%= floor.name %></a>
+    </li>
 <% else %>
-  <div class="col-sm-6 col-md-4"  id="floor_<%= floor.id %>">
+  <div class="col-sm-6 col-md-4"  id="floor_<%= floor.id %>" data-id="<%= floor.id %>">
     <div class="thumbnail">
       <div class="caption">
         <h3><%= floor.name %></h3>
