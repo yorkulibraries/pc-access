@@ -35,7 +35,7 @@ class FloorsController < ApplicationController
       respond_to do |format|
 
         if @floor.update(floor_params)
-          format.html { redirect_to location_floors_path(@floor), notice: 'Floor was successfully updated.' }
+          format.html { redirect_to location_floors_path(@location), notice: 'Floor was successfully updated.' }
           format.js
         else
           format.html { render action: 'edit' }
