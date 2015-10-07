@@ -8,7 +8,10 @@ Rails.application.routes.draw do
   match 'trackers/logoff' => 'trackers#logoff', as: :trackers_logoff, via: [:get, :post]
   match 'trackers/ping' => 'trackers#ping', as: :trackers_ping, via: [:get, :post]
 
-  resources :locations
+  resources :locations do
+    resources :floors
+  end
+  
   resources :images
 
   ## DASHBOARD

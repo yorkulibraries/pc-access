@@ -1,0 +1,4 @@
+$("#add_new_floor").remove();
+$("body").append("<div id='add_new_floor'></div>");
+$("#add_new_floor ").append("<%= j render "form", formats: [:html] %>");
+$("#add_new_floor #floor_form").modal('show');

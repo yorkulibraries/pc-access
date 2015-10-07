@@ -1,0 +1,19 @@
+<% if @floor.errors.size == 0 %>
+  $("#floor_form").modal( 'hide' ).data( 'bs.modal', null );
+  $( '.modal-backdrop' ).remove();
+
+  // add location to a locations list, figure out if locations is a table or not
+  if ($("#floors").is("table")) {
+    $("#floors tbody").prepend("<%= j render @floor, formats: [:html], locals: { table: true } %>");
+  } else {
+    $("#floors").prepend("<%= j render @floor, formats: [:html], locals: { table: false } %>");
+  }
+
+  $("#floor_<%= @floor.id %>").effect("highlight", {}, 3000);
+<% else %>
+  $( '.modal-backdrop' ).remove();
+  $("#add_new_floor #floor_form").modal('hide');
+  $("#add_new_floor").empty();
+  $("#add_new_floor").append("<%= j render "form", formats: [:html] %>");
+  $("#add_new_floor #floor_form").modal("show");
+<% end %>

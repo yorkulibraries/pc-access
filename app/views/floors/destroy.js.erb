@@ -1,0 +1,6 @@
+$("#floor_form").modal( 'hide' ).data( 'bs.modal', null );
+$( '.modal-backdrop' ).remove();
+$( 'body' ).removeClass( "modal-open" );
+$("#floor_form").remove();
+
+$("#floor_<%= @floor.id %>").remove();

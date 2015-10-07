@@ -1,0 +1,5 @@
+<% if request.xhr? %>
+  <%= render partial: "floors/forms/popup_form" %>
+<% else %>
+  <%= render partial: "floors/forms/inline_form" %>
+<% end %>

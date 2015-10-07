@@ -1,0 +1,40 @@
+<%= simple_form_for [@location, @floor], defaults: { input_html: { class: "form-horizontal", role: "form" } }  do |f| %>
+
+
+
+<fieldset>
+  <legend>Floor Details</legend>
+
+  <div class="form-group">
+    <div class="col-sm-12">
+        <%= f.input :name, as: :string %>
+    </div>
+  </div> <!-- form-group end -->
+  <div class="form-group">
+    <div class="col-sm-6">
+        <%= f.input :map, as: :string, required: true %>
+    </div>
+    <div class="col-sm-6">
+        <%= f.input :position, as: :integer %>
+    </div>
+  </div> <!-- form-group end -->
+
+</fieldset>
+
+
+  <hr />
+  <div class="row">
+    <div class="col-sm-6">
+        <%= f.button :submit, class: "btn btn-success"%>
+				<%= link_to "Cancel Changes", location_floors_path(@location), class: "btn btn-link" %>
+    </div>
+		<div class="col-sm-6">
+			<% unless @floor.new_record? %>
+				<%= link_to [@location, @floor], method: :delete, data: { confirm: 'Are you sure?' }, class: "red pull-right btn btn-link btn-xs" do %>
+					<span class="fa fa-trash"></span> Remove this floor record?
+				<% end %>
+			<% end %>
+		</div>
+  </div> <!-- row end -->
+
+<% end %>
