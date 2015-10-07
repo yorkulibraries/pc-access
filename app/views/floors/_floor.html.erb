@@ -10,14 +10,25 @@
       <a href="<%= location_floor_path(@location, floor) %>" data-remote="true"><%= floor.name %></a>
     </li>
 <% else %>
-  <div class="col-sm-6 col-md-4"  id="floor_<%= floor.id %>" data-id="<%= floor.id %>">
+  <div id="floor_<%= floor.id %>" data-id="<%= floor.id %>">
     <div class="thumbnail">
       <div class="caption">
-        <h3><%= floor.name %></h3>
-        <p><%= floor.map %></p>
-        <p>
-          <a href="<%= edit_location_floor_path(@location, floor) %>" data-remote="true" class="btn btn-default" role="button">Update</a>
-        </p>
+        <h3>
+          <%= floor.name %>
+          <a href="<%= edit_location_floor_path(@location, floor) %>" data-remote="true" class="btn btn-link pull-right">
+            Update
+          </a>
+        </h3>
+        <hr/>
+        <div id="areas">
+          <% floor.areas.each do |area| %>
+              <%= render area, locals: { show: "div" } %>
+          <% end %>
+        </div>
+        <hr/>
+        <%= link_to new_location_area_path(@location, floor_id: floor.id), class: "btn btn-link green", data: { remote: true }  do%>
+          <i class="fa fa-plus"></i> Add a new area
+        <% end %>
       </div>
     </div>
   </div>

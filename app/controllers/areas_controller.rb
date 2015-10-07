@@ -12,6 +12,7 @@ class AreasController < ApplicationController
 
     def new
       @area = @location.areas.build
+      @area.floor = @location.floors.find(params[:floor_id])
     end
 
     def edit
@@ -68,7 +69,7 @@ class AreasController < ApplicationController
       end
 
       def area_params
-        params.require(:area).permit( :name, :department, :specia_access, :map, :notes, :floor_id)
+        params.require(:area).permit( :name, :department, :specia_access, :map, :notes, :floor_id, :floor)
       end
 
 

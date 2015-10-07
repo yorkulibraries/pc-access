@@ -1,12 +1,12 @@
-<% if locals[:table] == true %>
-  <tr id="area_<%= area.id %>">
+<% if locals[:show] == "table" %>
+  <tr id="area_<%= area.id %>" data-id="<%= area.id %>">
     <td><%= link_to area.name, [@location, area] %></td>
     <td><%= area.map %></td>
     <td>-</td>
     <td><%= link_to 'Update', edit_location_area_path(@location, area), data: { remote: true} %></td>
   </tr>
 <% else %>
-  <div class="col-sm-6 col-md-4"  id="area_<%= area.id %>">
+  <div id="area_<%= area.id %>" data-id="<%= area.id %>">
     <div class="thumbnail">
       <div class="caption">
         <h3><%= area.name %></h3>

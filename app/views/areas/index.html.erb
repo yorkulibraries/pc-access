@@ -9,15 +9,15 @@
     <tr>
       <th>Name</th>
       <th>Map</th>
-      <th>Position</th>
-			<th>Areas</th>
+      <th>Department</th>
+			<th>Special Access</th>
       <th></th>
     </tr>
   </thead>
 
   <tbody>
     <% @areas.each do |area| %>
-      <%= render area, locals: { table: true } %>
+      <%= render area, locals: { show: "table" } %>
     <% end %>
   </tbody>
 </table>

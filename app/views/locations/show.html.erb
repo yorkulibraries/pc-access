@@ -2,7 +2,7 @@
 
 <div class="panel panel-primary">
   <div class="panel-heading">
-    <h3 class="panel-title">Location Details</h3>
+    <h3 class="panel-title">Floors and Areas</h3>
   </div>
   <div class="panel-body">
     <div class="row">
@@ -22,7 +22,7 @@
           <i class="fa fa-plus"></i> Add a new floor
         <% end %>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-9">
         <div id="floors">
             <%= render @location.floors.first, locals: { show: "div" } %>
         </div>
