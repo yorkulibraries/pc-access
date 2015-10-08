@@ -1,4 +1,4 @@
 $("#attach_computers").remove();
 $("body").append("<div id='attach_computers'></div>");
-$("#attach_computers ").append("<%= j render "forms/computer_box", formats: [:html] %>");
+$("#attach_computers ").append("<%= j render "areas/forms/computers_box", formats: [:html] %>");
 $("#attach_computers #attach_computers_form").modal('show');

@@ -60,13 +60,24 @@ class AreasController < ApplicationController
 
     ### ADDITIONAL ACTIONS ###
     def attach_computers_form
+      @computer_list = @area.computers.select(:ip).collect { |c| c.ip }.join("\n")
       respond_to do |format|
         format.js
       end
     end
 
-    def attach_compunters
+    def attach_computers
+      list = params[:computer_list]
+      @area.attach_computers(list)
+      @computers = @area.computers
 
+      respond_to do |format|
+        format.js
+      end
+    end
+
+    def computer_list
+      @computers = @area.computers
     end
 
     ### PRIVATE METHODS ###

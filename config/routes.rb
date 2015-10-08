@@ -12,7 +12,8 @@ Rails.application.routes.draw do
     resources :floors
     resources :areas do
       get :attach_computers_form, on: :member
-      post :attach_computers, on: :member
+      get :computer_list, on: :member
+      patch :attach_computers, on: :member
     end
   end
 
