@@ -1,9 +1,11 @@
 <% if locals[:table] == true %>
   <tr id="location_<%= location.id %>">
     <td><%= link_to location.name, location %></td>
-    <td><%= location.address %></td>  
-    <td>-</td>
-    <td>-</td>
+    <td><%= location.address %></td>
+    <td><%= location.ip_subnets %></td>
+    <td><%= location.floors.size %></td>
+    <td><%= location.areas.size %></td>
+    <td><%= location.computers.size %></td>
     <td><%= link_to 'Update', edit_location_path(location), data: { remote: true} %></td>
   </tr>
 <% else %>

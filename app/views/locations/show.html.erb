@@ -24,7 +24,9 @@
       </div>
       <div class="col-md-9">
         <div id="floors">
-            <%= render @location.floors.first, locals: { show: "div" } %>
+            <% if @location.floors.size > 0 %>
+              <%= render @location.floors.first, locals: { show: "div" } %>
+            <% end %>
         </div>
       </div>
     </div>
