@@ -10,7 +10,10 @@ Rails.application.routes.draw do
 
   resources :locations do
     resources :floors
-    resources :areas
+    resources :areas do
+      get :attach_computers_form, on: :member
+      post :attach_computers, on: :member
+    end
   end
 
   resources :images

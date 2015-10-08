@@ -5,6 +5,7 @@ class Floor < ActiveRecord::Base
   ## RELATIONS
   belongs_to :location
   has_many :areas
+  has_many :computers
 
   ## VALIDATIONS
   validates :name, presence: true

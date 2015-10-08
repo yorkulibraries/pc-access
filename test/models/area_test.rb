@@ -22,4 +22,23 @@ class AreaTest < ActiveSupport::TestCase
     assert_equal 2, Area.all.size, "Should be two"
     assert_equal 3, Area.deleted.size, "Should be 3"
   end
+
+  should "attach computers based on ip list" do
+    area51 = create(:area)
+    area52 = create(:area)
+    attach_to_51 = create_list(:computer, 4)
+    attach_to_52 = create_list(:computer, 5)
+
+    area51.attach_computers(attach_to_51.collect { |c| c.ip }.join("\n"))
+    area52.attach_computers(attach_to_52.collect { |c| c.ip }.join("\n"))
+
+    assert_equal 4, area51.computers.size, "Should be 4 computers"
+    assert_equal 4, area51.location.computers.size, "Should be 4 computers"
+    assert_equal 4, area51.floor.computers.size, "Should be 4 computers"
+
+    assert_equal 5, area52.computers.size, "Should be 5 computers"
+    assert_equal 5, area52.location.computers.size, "Should be 5 computers"
+    assert_equal 5, area52.floor.computers.size, "Should be 5 computers"
+
+  end
 end

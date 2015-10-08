@@ -15,7 +15,12 @@
           data-remote="true" class="green important pull-right small"><i class="fa fa-pencil"></i></a>
         </h4>
         <p><i class="fa fa-building"></i> <%= area.location.name %> | <%= area.floor.name %></p>
-        <p><i class="fa fa-desktop"></i> <%= area.computers.count %> Computers</p>
+        <p>
+          <i class="fa fa-desktop"></i> <%= area.computers.count %> Computers
+          <a href="#" class="pull-right small">
+            <i class="fa fa-plus-square green important"></i>
+          </a>
+        </p>
         <p><i class="fa fa-university"></i> <%= format area.department %></p>
         <p class="note" title="Full Note" data-content="<%= area.notes %>" data-placement="top" >
           <i class="fa fa-sticky-note"></i> <%= format(truncate(area.notes, length: 60)) %>

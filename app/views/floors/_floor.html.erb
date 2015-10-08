@@ -16,14 +16,14 @@
         <h3>
           <%= floor.name %>
           <a href="<%= edit_location_floor_path(@location, floor) %>" data-remote="true" class="btn btn-link pull-right">
-            Update
+            <i class="fa fa-edit"></i> Update
           </a>
         </h3>
         <hr/>
         <div id="areas" class="row">
 
           <% floor.areas.each do |area| %>
-            <%= render area, locals: { show: "div" } %>            
+            <%= render area, locals: { show: "div" } %>
           <% end %>
         </div>
         <hr/>

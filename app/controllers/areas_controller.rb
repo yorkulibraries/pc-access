@@ -1,7 +1,7 @@
 class AreasController < ApplicationController
 
   before_action :set_location
-  before_action :set_area, only: [:show, :edit, :update, :destroy]
+  before_action :set_area, except: [:index]
 
   def index
       @areas = @location.areas
@@ -57,6 +57,19 @@ class AreasController < ApplicationController
       end
     end
 
+
+    ### ADDITIONAL ACTIONS ###
+    def attach_computers_form
+      respond_to do |format|
+        format.js
+      end
+    end
+
+    def attach_compunters
+
+    end
+
+    ### PRIVATE METHODS ###
 
     private
       # Use callbacks to share common setup or constraints between actions.
