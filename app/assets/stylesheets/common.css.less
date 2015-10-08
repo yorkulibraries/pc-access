@@ -1,0 +1,60 @@
+@import "twitter/bootstrap/variables";
+@import "twitter/bootstrap/mixins";
+
+/** COLORS **/
+
+.clear { clear: both; }
+.hide { display: none;}
+
+
+/** COLORS */
+.red { color: #CC0000; &.important { color: #cc0000 !important; } }
+.orange { color: #ffa500; &.importnatn { color: #FF8000 !important; } }
+.black, .distinct { color: #000000; &.important { color: #000000 !important; } }
+.royalblue { color: #2B60DE; &.important { color: #2B60DE !important; } }
+.green { color: #008a00; &.important { color: #008a00 !important; } }
+.blend { color: #737779; &.important { color: #737779 !important; } }
+.trivial { color: #82745c;  &.important { color: #82745c !important; } }
+.upcase { text-transform: uppercase; }
+
+/** TYPOGRAPHY */
+.weak { color: #797D7F !important; font-size: 10px !important;}
+.soft { font-weight: normal !important; }
+.bigger { font-size: 120%; }
+.small { font-size: 11px; }
+.xsmall { font-size: 10px; }
+.xsmall-i { font-size: 10px !important; }
+.strong { font-weight: bold;}
+.italic { font-style: italic;}
+.odd { background-color: #f6f6f6;}
+.gray-bg { background-color: #ececec; color: #666; }
+.dark-background {background-color: #666; color: #fff;}
+
+
+/** BUTTON COLOURS **/
+.btn-york { background-color: #CC2030; border-color: #9A0100; color: #FFFFFF; &:hover { color: #eee; }}
+
+/** borders */
+.left-border { border-left: 1px solid #ccc; }
+
+.field {
+  color: #d2452a; font-family: Arial,sans-serif;
+	font-size: 12px; font-weight: 600; text-transform: capitalize;
+}
+.empty-field { color: #767676; font-family: "Lucida Grande",helvetica,sans-serif; font-size: 11px; padding: 12px 0; line-height: 24px; }
+
+.click_redirect { cursor: pointer; }
+
+
+/** BLANK SLATE **/
+.blank-slate {
+  color: #777777; font-size: 13px; height: 500px; line-height: 18px; padding: 150px 150px 0px; text-align: center;
+
+	span.glyphicon { color: #A40000; font-size: 165px;}
+	h1 { color: #222222;  font-size: 28px !important; font-weight: bold !important; margin-bottom: 10px !important; }
+	p { color: #999999; font-size: 18px !important; line-height: 24px !important; }
+
+	&.arrow {
+		background: image-url("blank-slate-arrow.png") no-repeat 90px 80px;
+	}
+}

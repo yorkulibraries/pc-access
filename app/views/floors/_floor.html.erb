@@ -20,9 +20,10 @@
           </a>
         </h3>
         <hr/>
-        <div id="areas">
+        <div id="areas" class="row">
+
           <% floor.areas.each do |area| %>
-              <%= render area, locals: { show: "div" } %>
+            <%= render area, locals: { show: "div" } %>            
           <% end %>
         </div>
         <hr/>

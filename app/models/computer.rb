@@ -10,6 +10,8 @@ class Computer < ActiveRecord::Base
 
   ## RELATIONS
   belongs_to :location
+  belongs_to :floor
+  belongs_to :area
   belongs_to :image
 
   has_many :activity_entries, class_name: "ComputerActivityLog"

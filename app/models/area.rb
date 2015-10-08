@@ -4,6 +4,7 @@ class Area < ActiveRecord::Base
   ## RELATIONS
   belongs_to :location
   belongs_to :floor
+  has_many :computers
 
   ## VALIDATIONS
   validates :name, :location, :floor, presence: true
@@ -13,5 +14,8 @@ class Area < ActiveRecord::Base
   scope :deleted, -> { unscoped.where(deleted: true) }
 
   ## METHODS
+  def attach_computers
+
+  end
 
 end
