@@ -1,7 +1,7 @@
 class AreasController < ApplicationController
 
   before_action :set_location
-  before_action :set_area, except: [:index]
+  before_action :set_area, except: [:index, :new, :create]
 
   def index
       @areas = @location.areas
