@@ -2,7 +2,11 @@
   <tr id="location_<%= location.id %>">
     <td><%= link_to location.name, location %></td>
     <td><%= location.address %></td>
-    <td><%= location.ip_subnets %></td>
+    <td>
+      <% parse_subnets(location.ip_subnets).each do |s| %>
+        <%= s %></br>
+      <% end %>
+    </td>
     <td><%= location.floors.size %></td>
     <td><%= location.areas.size %></td>
     <td><%= location.computers.size %></td>

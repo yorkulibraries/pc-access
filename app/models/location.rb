@@ -1,5 +1,5 @@
 class Location < ActiveRecord::Base
-  # FIELDS: name, ip_subnets, address, floors deleted
+  # FIELDS: name, ip_subnets, address, floors deleted  
 
   ## RELATIONS
   has_many :computers
