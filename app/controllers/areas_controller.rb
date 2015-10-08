@@ -12,7 +12,7 @@ class AreasController < ApplicationController
 
     def new
       @area = @location.areas.build
-      @area.floor = @location.floors.find(params[:floor_id])
+      @area.floor = @location.floors.find(params[:floor_id]) if params[:floor_id]
     end
 
     def edit
