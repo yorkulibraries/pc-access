@@ -9,11 +9,28 @@
         </div>
         <div class="modal-body">
           <div class="row">
-            <div class="col-sm-12">
-              <% @computers.each do |c| %>
-                <%= c.ip %>
+
+              <% if @original_list && @original_list.size > 0 %>
+                <div class="col-sm-6">
+                  <p><strong>Previously Attached Computers</strong></p>
+                  <% @original_list.each do |c| %>
+                    <%= c %><br/>
+                  <% end %>
+                </div>
+                <div class="col-sm-6">
+                  <p><strong>Newly Attached Computers</strong></p>
+                  <% @computers.each do |c| %>
+                    <%= c.ip %></br>
+                  <% end %>
+                </div>
+              <% else %>
+                <div class="col-sm-12">
+                  <% @computers.each do |c| %>
+                    <%= c.ip %></br>
+                  <% end %>
+                </div>
               <% end %>
-            </div>
+            
           </div>
 
         </div>
@@ -26,6 +43,6 @@
   </div>
 <% else %>
   <% @computers.each do |c| %>
-    <%= c.ip %>
+    <%= c.ip %></br>
   <% end %>
 <% end %>

@@ -41,4 +41,5 @@ class AreaTest < ActiveSupport::TestCase
     assert_equal 5, area52.floor.computers.size, "Should be 5 computers"
 
   end
+  
 end
