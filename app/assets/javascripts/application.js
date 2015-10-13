@@ -15,6 +15,7 @@
 //= require twitter/bootstrap
 //= require jquery.ui.datepicker
 //= require jquery.ui.autocomplete
+//= require jquery.ui.sortable
 //= require jquery.ui.effect-highlight
 //= require raphael
 //= require morris

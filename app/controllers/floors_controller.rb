@@ -55,6 +55,13 @@ class FloorsController < ApplicationController
       end
     end
 
+    ## ADDITIONAL METHODS ##
+    def sort
+      params[:floor].each_with_index do |id, index|
+         @location.floors.update_all({position: index + 1}, {id: id})
+      end
+      render nothing: true
+    end
 
     private
       # Use callbacks to share common setup or constraints between actions.

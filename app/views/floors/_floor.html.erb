@@ -7,7 +7,11 @@
   </tr>
 <% elsif locals[:show] == "ul" %>
     <li id="floor_<%= floor.id %>" data-id="<%= floor.id %>" class="<%= 'active' if locals[:first_item] %>">
-      <a href="<%= location_floor_path(@location, floor) %>" data-remote="true"><%= floor.name %></a>
+      <a href="<%= location_floor_path(@location, floor) %>" data-remote="true">
+        <%= floor.name %>
+        <span class="fa fa-bars pull-right handle"></span>
+      </a>
+
     </li>
 <% else %>
   <div id="floor_<%= floor.id %>" data-id="<%= floor.id %>">

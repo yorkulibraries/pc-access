@@ -9,7 +9,11 @@ Rails.application.routes.draw do
   match 'trackers/ping' => 'trackers#ping', as: :trackers_ping, via: [:get, :post]
 
   resources :locations do
-    resources :floors
+
+    resources :floors do
+      post :sort, on: :collection
+    end
+
     resources :areas do
       get :attach_computers_form, on: :member
       get :computer_list, on: :member
