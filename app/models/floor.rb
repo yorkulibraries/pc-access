@@ -12,7 +12,7 @@ class Floor < ActiveRecord::Base
   validates :position, :location, presence: true
 
   ## SCOPES
-  default_scope { where(deleted: false) } # only active floors
+  default_scope { where(deleted: false).order(:position) } # only active floors
   scope :deleted, -> { unscoped.where(deleted: true) }
 
   ## METHODS

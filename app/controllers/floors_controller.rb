@@ -58,7 +58,7 @@ class FloorsController < ApplicationController
     ## ADDITIONAL METHODS ##
     def sort
       params[:floor].each_with_index do |id, index|
-         @location.floors.update_all({position: index + 1}, {id: id})
+         @location.floors.where(id: id).update_all({position: index + 1} )
       end
       render nothing: true
     end
