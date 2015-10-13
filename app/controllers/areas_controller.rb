@@ -84,7 +84,7 @@ class AreasController < ApplicationController
       @computers = @area.computers
 
       respond_to do |format|
-        format.js
+        format.js { render action: 'computer_list' }
       end
     end
 

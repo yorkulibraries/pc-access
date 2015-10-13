@@ -1,2 +1,4 @@
+$( '.modal-backdrop' ).remove();
+$("body #area_computer_list, .modal").remove();
 $("body").append("<%= j render template: "areas/computer_list", formats: [:html] %>");
 $("body #area_computer_list").modal('show');

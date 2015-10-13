@@ -1,6 +1,0 @@
-$( '.modal-backdrop' ).remove();
-$("#attach_computers #attach_computers_form").modal('hide');
-$("#attach_computers ").remove();
-$("body").append("<%= j render template: "areas/computer_list", formats: [:html] %>");
-$("body #area_computer_list").modal('show');
-$("#area_<%= @area.id %>").replaceWith("<%= j render @area, formats: [:html], locals: { show: 'div' } %>");
