@@ -25,9 +25,19 @@
         </h3>
         <hr/>
         <div id="areas" class="row">
-
-          <% floor.areas.each do |area| %>
-            <%= render area, locals: { show: "div" } %>
+          <% if floor.areas.size == 0 %>
+            <div class="blank-slate">
+              <span class="fa fa-info"></span>
+              <h1>This Floor Has No Areas</h1>
+              <p>Click on <%= link_to new_location_area_path(@location, floor_id: floor.id), class: "red", data: { remote: true }  do%>
+                this link
+                <% end %> to add a new area.
+              </p>
+            </div>
+          <% else %>
+            <% floor.areas.each do |area| %>
+              <%= render area, locals: { show: "div" } %>
+            <% end %>
           <% end %>
         </div>
         <hr/>
