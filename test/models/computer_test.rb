@@ -137,4 +137,12 @@ class ComputerTest < ActiveSupport::TestCase
   end
 
 
+  should "detach computers from area" do
+    a = create(:area)
+    c = create(:computer, area_id: a.id, location_id: a.location.id, floor_id: a.floor.id)
+    assert_equal 1, a.computers.count, "one computer attached"
+    Computer.detach_from_area(a.id)
+    assert_equal 0, a.computers.count, "should be zero"
+  end
+
 end

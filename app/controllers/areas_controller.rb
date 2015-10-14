@@ -70,21 +70,12 @@ class AreasController < ApplicationController
       list = params[:computer_list]
       @original_list = @area.computers.select(:ip).collect { |c| c.ip }
 
-      # clear the first list
-      Area.transaction do
-        @area.computers.each do |c|
-          c.location = nil
-          c.area = nil
-          c.floor =nil
-          c.save(validate: false)
-        end
-      end
-
       @area.attach_computers(list)
       @computers = @area.computers
 
       respond_to do |format|
         format.js { render action: 'computer_list' }
+        format.html {render nothing: true}
       end
     end
 

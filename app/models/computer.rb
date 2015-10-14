@@ -48,6 +48,7 @@ class Computer < ActiveRecord::Base
     end
   end
 
+
   def logon(username)
     if self.current_username != username
       self.current_username = username
@@ -80,6 +81,17 @@ class Computer < ActiveRecord::Base
     e.computer = self
     e.username = self[:current_username]
     e.save
+  end
+
+  def self.detach_from_area(area_id)
+    Computer.transaction do
+      Computer.where(area_id: area_id).each do |c|
+        c.location = nil
+        c.area = nil
+        c.floor = nil
+        c.save(validate: false)
+      end
+    end
   end
 
   ## PRIVATE

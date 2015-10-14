@@ -30,16 +30,32 @@ class AreaTest < ActiveSupport::TestCase
     attach_to_52 = create_list(:computer, 5)
 
     area51.attach_computers(attach_to_51.collect { |c| c.ip }.join("\n"))
+
+    assert_equal 4, area51.computers.count, "Should be 4 computers in this area"
+    assert_equal 4, area51.location.computers.count, "Should be 4 computers in this location"
+    assert_equal 4, area51.floor.computers.count, "Should be 4 computers on this floor"
+
     area52.attach_computers(attach_to_52.collect { |c| c.ip }.join("\n"))
 
-    assert_equal 4, area51.computers.size, "Should be 4 computers"
-    assert_equal 4, area51.location.computers.size, "Should be 4 computers"
-    assert_equal 4, area51.floor.computers.size, "Should be 4 computers"
-
-    assert_equal 5, area52.computers.size, "Should be 5 computers"
-    assert_equal 5, area52.location.computers.size, "Should be 5 computers"
-    assert_equal 5, area52.floor.computers.size, "Should be 5 computers"
+    assert_equal 5, area52.computers.count, "Should be 5 computers in this area"
+    assert_equal 5, area52.location.computers.count, "Should be 5 computers in this location"
+    assert_equal 5, area52.floor.computers.count, "Should be 5 computers on this floor"
 
   end
-  
+
+  should "remove existing attached computers and add new ones" do
+    area = create(:area)
+    old_list = create_list(:computer, 2)
+    new_list = create_list(:computer, 3)
+
+    area.attach_computers(old_list.collect { |c| c.ip }.join("\n"))
+    assert_equal 2, area.computers.count, "Two computers"
+    #assert_equal old_list.first.id, area.computers.first.id, "Old List Computer should match"
+
+    area.attach_computers(new_list.collect { |c| c.ip }.join("\n"))
+    assert_equal 3, area.computers.count, "Three computers"
+    assert_equal new_list.first.id, area.computers.first.id, "New List Computer should match"
+
+  end
+
 end

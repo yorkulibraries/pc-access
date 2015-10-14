@@ -82,5 +82,29 @@ class AreasControllerTest < ActionController::TestCase
 
      end
 
+     should "show computer lists" do
+       area = create(:area, location: @location)
+       get :computer_list, location_id: @location.id, id: area.id
+       assert_response :success
+     end
+
+     should "show attach_computers form" do
+       area = create(:area, location: @location)
+       xhr :get, :attach_computers_form, location_id: @location.id, id: area.id, format: :js
+       assert_response :success
+     end
+
+     should "attach_computers to area" do
+       area = create(:area, location: @location)
+       list = create_list(:computer, 4)
+       ips = list.collect { |c| c.ip }.join("\n")
+
+       assert_equal 0, area.computers.count, "Zero to start with"
+
+       xhr :post, :attach_computers, location_id: @location.id, id: area.id, computer_list: ips
+       assert_response :success
+       assert_equal 4, area.computers.count, "Should be 4"
+     end
+
   end
 end
