@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.remotipart
 //= require twitter/bootstrap
 //= require jquery.ui.datepicker
 //= require jquery.ui.autocomplete

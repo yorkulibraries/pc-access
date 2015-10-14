@@ -1,7 +1,7 @@
 <div class="modal fade" id="area_form">
   <div class="modal-dialog">
     <div class="modal-content">
-    <%= simple_form_for [@location, @area], remote: true  do |f| %>
+    <%= simple_form_for [@location, @area], remote: true, html: { multipart: true } do |f| %>
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
         <h4 class="modal-title"><%= @area.new_record? ? "New Area" : "Updating" %> <%= @area.name %></h4>
