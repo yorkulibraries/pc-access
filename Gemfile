@@ -27,6 +27,7 @@ gem "font-awesome-rails", '4.4.0'
 gem 'rufus-scheduler', "3.0.9"
 gem 'ipaddress', "0.8.0"
 gem 'carrierwave', "0.10.0"
+gem "mini_magick", "4.3.6"
 
 
 # DEPLOYMENT
