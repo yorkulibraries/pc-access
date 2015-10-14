@@ -1,7 +1,7 @@
 class Area < ActiveRecord::Base
   # FIELDS: name, department, specia_access, map, notes, floor_id, location_id
 
-  ## Uploader
+  ## UPLOADER
   mount_uploader :map, MapUploader
 
   ## RELATIONS

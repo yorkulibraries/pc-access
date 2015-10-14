@@ -8,7 +8,7 @@
 <% else %>
   <div id="area_<%= area.id %>" data-id="<%= area.id %>" class="area col-md-4 col-sm-6">
     <div class="thumbnail">
-      <img src="<%= area.map.thumb.url %>"/>
+      <img src="<%= area.map.thumb.url %>" class="image_preview" data-full-size-path="<%= area.map.url %>"/>
       <div class="caption">
         <h4><%= area.name %>
           <a href="<%= edit_location_area_path(@location, area) %>"

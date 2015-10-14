@@ -2,6 +2,9 @@ class Floor < ActiveRecord::Base
 
   # FIELDS: name, position, map, location_id, deleted
 
+  ## UPLOADER
+  mount_uploader :map, MapUploader
+
   ## RELATIONS
   belongs_to :location
   has_many :areas

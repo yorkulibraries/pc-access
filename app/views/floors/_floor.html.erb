@@ -19,6 +19,7 @@
       <div class="caption">
         <h3>
           <%= floor.name %>
+          <img src="<%= floor.map.thumb_small.url %>" class="image_preview" data-full-size-path="<%= floor.map.url %>"/>
           <a href="<%= edit_location_floor_path(@location, floor) %>" data-remote="true" class="btn btn-link pull-right">
             <i class="fa fa-edit"></i> Update
           </a>
