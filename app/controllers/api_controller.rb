@@ -15,4 +15,13 @@ class ApiController < ApplicationController
       end
     end
 
+    def by_location
+      @location = Location.find(params[:id])
+    end
+
+    def by_floor
+      @location = Location.find(params[:id])
+      @floor = @location.floors.find(params[:floor_id])
+    end
+
 end

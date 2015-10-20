@@ -1,0 +1,34 @@
+<div id="floor_<%= floor.id %>" data-id="<%= floor.id %>">
+  <div class="thumbnail">
+    <div class="caption">
+      <h3>
+        <%= floor.name %>
+        <img src="<%= floor.map.thumb_small.url %>" class="image_preview" data-full-size-path="<%= floor.map.url %>"/>
+        <a href="<%= edit_location_floor_path(@location, floor) %>" data-remote="true" class="btn btn-link pull-right">
+          <i class="fa fa-edit"></i> Update
+        </a>
+      </h3>
+      <hr/>
+      <div id="areas" class="row">
+        <% if floor.areas.size == 0 %>
+          <div class="blank-slate">
+            <span class="fa fa-info"></span>
+            <h1>This Floor Has No Areas</h1>
+            <p>Click on <%= link_to new_location_area_path(@location, floor_id: floor.id), class: "red", data: { remote: true }  do%>
+              this link
+              <% end %> to add a new area.
+            </p>
+          </div>
+        <% else %>
+          <% floor.areas.each do |area| %>
+            <%= render area, locals: { show: "div" } %>
+          <% end %>
+        <% end %>
+      </div>
+      <hr/>
+      <%= link_to new_location_area_path(@location, floor_id: floor.id), class: "btn btn-link green", data: { remote: true }  do%>
+        <i class="fa fa-plus"></i> Add a new area
+      <% end %>
+    </div>
+  </div>
+</div>

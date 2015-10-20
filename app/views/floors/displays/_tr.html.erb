@@ -1,0 +1,6 @@
+<tr id="floor_<%= floor.id %>" data-id="<%= floor.id %>">
+  <td><%= link_to floor.name, [@location, floor] %></td>
+  <td><%= floor.map %></td>
+  <td>-</td>
+  <td><%= link_to 'Update', edit_location_floor_path(@location, floor), data: { remote: true} %></td>
+</tr>

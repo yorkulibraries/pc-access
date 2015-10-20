@@ -1,27 +1,7 @@
-<% if locals[:table] == true %>
-  <tr id="location_<%= location.id %>">
-    <td><%= link_to location.name, location %></td>
-    <td><%= location.address %></td>
-    <td>
-      <% parse_subnets(location.ip_subnets).each do |s| %>
-        <%= s %></br>
-      <% end %>
-    </td>
-    <td><%= location.floors.size %></td>
-    <td><%= location.areas.size %></td>
-    <td><%= location.computers.size %></td>
-    <td><%= link_to 'Update', edit_location_path(location), data: { remote: true} %></td>
-  </tr>
+<% if locals[:show] == "tr" %>
+  <%= render partial: "locations/displays/tr", locals: { location: location } %>
+<% elsif locals[:show] == "public" %>
+  <%= render partial: "locations/displays/public", locals: { location: location } %>
 <% else %>
-  <div class="col-sm-6 col-md-4"  id="location_<%= location.id %>">
-    <div class="thumbnail">
-      <div class="caption">
-        <h3><%= location.name %></h3>
-        <p><%= location.address %></p>
-        <p>
-          <a href="<%= edit_location_path(location) %>" data-remote="true" class="btn btn-default" role="button">Update</a>
-        </p>
-      </div>
-    </div>
-  </div>
+  <%= render partial: "locations/displays/div", locals: { location: location } %>
 <% end %>

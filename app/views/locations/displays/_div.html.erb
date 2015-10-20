@@ -1,0 +1,11 @@
+<div class="col-sm-6 col-md-4"  id="location_<%= location.id %>">
+  <div class="thumbnail">
+    <div class="caption">
+      <h3><%= location.name %></h3>
+      <p><%= location.address %></p>
+      <p>
+        <a href="<%= edit_location_path(location) %>" data-remote="true" class="btn btn-default" role="button">Update</a>
+      </p>
+    </div>
+  </div>
+</div>

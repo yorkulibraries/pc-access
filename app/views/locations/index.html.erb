@@ -19,7 +19,7 @@
 
   <tbody>
     <% @locations.each do |location| %>
-      <%= render location, locals: { table: true } %>
+      <%= render location, locals: { show: "tr" } %>
     <% end %>
   </tbody>
 </table>

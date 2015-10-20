@@ -4,9 +4,9 @@
 
   // update via  partial and insert it into proper place
   if ($("#locations").is("table")) {
-    $("#location_<%= @location.id %>").replaceWith("<%= j render @location, formats: [:html], locals: { table: true } %>");
+    $("#location_<%= @location.id %>").replaceWith("<%= j render @location, formats: [:html], locals: { show: "tr" } %>");
   } else {
-    $("#location_<%= @location.id %>").replaceWith("<%= j render @location, formats: [:html], locals: { table: false } %>");
+    $("#location_<%= @location.id %>").replaceWith("<%= j render @location, formats: [:html], locals: { show: "div" } %>");
   }
 
   $("#location_<%= @location.id %>").effect("highlight", {}, 3000);

@@ -4,9 +4,9 @@
 
   // add location to a locations list, figure out if locations is a table or not
   if ($("#locations").is("table")) {
-    $("#locations tbody").prepend("<%= j render @location, formats: [:html], locals: { table: true } %>");
+    $("#locations tbody").prepend("<%= j render @location, formats: [:html], locals: { show: "tr" } %>");
   } else {
-    $("#locations").prepend("<%= j render @location, formats: [:html], locals: { table: false } %>");
+    $("#locations").prepend("<%= j render @location, formats: [:html], locals: { show: "div" } %>");
   }
 
   $("#location_<%= @location.id %>").effect("highlight", {}, 3000);

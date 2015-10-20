@@ -1,0 +1,21 @@
+<div id="pc_access_location_<%= @location.id %>" class="pc_access_public_view" data-id="<%= floor.id %>">
+  <div class="thumbnail">
+    <img src="<%= floor.map.thumb.url %>" class="image_preview" data-full-size-path="<%= floor.map.url %>"/>
+    <div class="caption">
+      <h3>
+         <span class="badge badge-success pull-right"><%= floor.computers.pinging.not_in_use.count %></span>
+        <%= @location.name %> - <%= floor.name %>
+      </h3>
+      <hr/>
+      <div id="pc_access_areas">
+        <% if floor.areas.size == 0 %>
+          <h1>This Floor Has No Areas</h1>
+        <% else %>
+          <% floor.areas.each do |area| %>
+            <%= render area, locals: { show: "public" } %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
