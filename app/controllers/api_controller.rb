@@ -33,7 +33,7 @@ class ApiController < ApplicationController
         format.html
         format.js
       end
-      
+
     end
 
     def by_area
@@ -42,7 +42,10 @@ class ApiController < ApplicationController
     end
 
     def preview
+
       @locations = Location.all
+
+      render layout: "public"
     end
 
 end
