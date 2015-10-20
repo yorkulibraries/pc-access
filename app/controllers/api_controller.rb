@@ -1,4 +1,5 @@
 class ApiController < ApplicationController
+    protect_from_forgery unless: -> { request.format.js? }
 
     def index
       locations_list = Location.mock_locations
@@ -17,6 +18,11 @@ class ApiController < ApplicationController
 
     def by_location
       @location = Location.find(params[:id])
+
+      respond_to do |format|
+        format.html
+        format.js
+      end
     end
 
     def by_floor
@@ -29,6 +35,8 @@ class ApiController < ApplicationController
       @area = @location.areas.find(params[:area_id])
     end
 
-
+    def preview
+      @locations = Location.all
+    end
 
 end

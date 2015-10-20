@@ -1,0 +1,3 @@
+var pca_location_holder_id = "pc_access_holder_location-<%= @location.id %>";
+var pca_location_div = "<%= j render @location, formats: [:html], locals: { show: "public" } %>";
+document.write("<div id='" + pca_location_holder_id + "'>" + pca_location_div + "</div>");
