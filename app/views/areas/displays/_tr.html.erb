@@ -1,0 +1,6 @@
+<tr id="area_<%= area.id %>" data-id="<%= area.id %>">
+  <td><%= link_to area.name, [@location, area] %></td>
+  <td><%= area.map %></td>
+  <td>-</td>
+  <td><%= link_to 'Update', edit_location_area_path(@location, area), data: { remote: true} %></td>
+</tr>
