@@ -6,7 +6,7 @@
   if ($("#floors").is("table")) {
     $("#floors tbody").prepend("<%= j render @floor, formats: [:html], locals: { show: 'tr' } %>");
   } else if ($("#floors").is("ul")) {
-    $("ul#floors").append("<%= j render @floor, formats: [:html], locals: { show: 'ul' } %>");
+    $("ul#floors").append("<%= j render @floor, formats: [:html], locals: { show: 'li' } %>");
   } else {
     $("#floors").prepend("<%= j render @floor, formats: [:html], locals: { show: 'div'} %>");
   }

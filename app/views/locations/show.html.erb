@@ -10,9 +10,11 @@
         <ul class="nav nav-pills nav-stacked" id="floors" data-sort-url="<%= sort_location_floors_url(@location) %>">
           <% @location.floors.each_with_index do |floor, index| %>
               <% if index == 0 %>
-                <%= render floor, locals: { show: "ul", first_item: true } %>
+                <% @first_item = true %>
+                <%= render floor, locals: { show: "li"} %>
               <% else %>
-                <%= render floor, locals: { show: "ul" } %>
+                <% @first_item = false %>
+                <%= render floor, locals: { show: "li" } %>
               <% end %>
 
           <% end %>

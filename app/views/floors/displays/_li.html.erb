@@ -1,4 +1,4 @@
-<li id="floor_<%= floor.id %>" data-id="<%= floor.id %>" class="<%= 'active' if locals[:first_item] %>">
+<li id="floor_<%= floor.id %>" data-id="<%= floor.id %>" class="<%= 'active' if @first_item %>">
   <a href="<%= location_floor_path(@location, floor) %>" data-remote="true">
     <%= floor.name %>
     <span class="fa fa-bars pull-right handle"></span>
