@@ -2,8 +2,8 @@
   <%= render partial: "floors/displays/tr", locals: { floor: floor } %>
 <% elsif locals[:show] == "ul" %>
     <%= render partial: "floors/displays/li", locals: { floor: floor } %>
-<% elsif locals[:show] == "public" %>
-  <%= render partial: "floors/displays/public", locals: { floor: floor } %>
+<% elsif locals[:show] == "div" %>
+  <%= render partial: "floors/displays/div", locals: { floor: floor } %>  
 <% else %>
-  <%= render partial: "floors/displays/div", locals: { floor: floor } %>
+  <%= render partial: "floors/displays/public", locals: { floor: floor } %>
 <% end %>

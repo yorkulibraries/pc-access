@@ -1,7 +1,7 @@
 <% if locals[:show] == "tr" %>
   <%= render partial: "locations/displays/tr", locals: { location: location } %>
-<% elsif locals[:show] == "public" %>
-  <%= render partial: "locations/displays/public", locals: { location: location } %>
-<% else %>
+<% elsif locals[:show] == "div" %>
   <%= render partial: "locations/displays/div", locals: { location: location } %>
+<% else %>
+  <%= render partial: "locations/displays/public", locals: { location: location } %>
 <% end %>
