@@ -1,4 +1,4 @@
-<% if locals[:show] == "table" %>
+<% if locals[:show] == "tr" %>
   <%= render partial: "floors/displays/tr", locals: { floor: floor } %>
 <% elsif locals[:show] == "ul" %>
     <%= render partial: "floors/displays/li", locals: { floor: floor } %>

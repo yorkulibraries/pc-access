@@ -4,7 +4,7 @@
 
   // update via  partial and insert it into proper place
   if ($("#floors").is("table")) {
-    $("tr#floor_<%= @floor.id %>").replaceWith("<%= j render @floor, formats: [:html], locals: { show: 'table' } %>");
+    $("tr#floor_<%= @floor.id %>").replaceWith("<%= j render @floor, formats: [:html], locals: { show: 'tr' } %>");
   } else {
     $("div#floor_<%= @floor.id %>").replaceWith("<%= j render @floor, formats: [:html], locals: { show: 'div' } %>");
   }

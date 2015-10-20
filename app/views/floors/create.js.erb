@@ -4,7 +4,7 @@
 
   // add location to a locations list, figure out if locations is a table or not
   if ($("#floors").is("table")) {
-    $("#floors tbody").prepend("<%= j render @floor, formats: [:html], locals: { show: 'table' } %>");
+    $("#floors tbody").prepend("<%= j render @floor, formats: [:html], locals: { show: 'tr' } %>");
   } else if ($("#floors").is("ul")) {
     $("ul#floors").append("<%= j render @floor, formats: [:html], locals: { show: 'ul' } %>");
   } else {
