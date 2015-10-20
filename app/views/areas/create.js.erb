@@ -4,7 +4,7 @@
 
   // add location to a locations list, figure out if locations is a table or not
   if ($("#areas").is("table")) {
-    $("#areas tbody").prepend("<%= j render @area, formats: [:html], locals: { show: 'table' } %>");
+    $("#areas tbody").prepend("<%= j render @area, formats: [:html], locals: { show: 'tr' } %>");
   } else {
     $("#areas").prepend("<%= j render @area, formats: [:html], locals: { show: 'div' } %>");
   }

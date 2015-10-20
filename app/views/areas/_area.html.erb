@@ -1,6 +1,6 @@
 <% if locals[:show] == "tr" %>
   <%= render partial: "areas/displays/tr", locals: { area: area } %>
-<% if locals[:show] == "div" %>
+<% elsif locals[:show] == "div" %>
   <%= render partial: "areas/displays/div", locals: { area: area } %>
 <% else %>
   <%= render partial: "areas/displays/public", locals: { area: area } %>

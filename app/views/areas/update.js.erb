@@ -4,7 +4,7 @@
 
   // update via  partial and insert it into proper place
   if ($("#areas").is("table")) {
-    $("#area_<%= @area.id %>").replaceWith("<%= j render @area, formats: [:html], locals: { show: 'table' } %>");
+    $("#area_<%= @area.id %>").replaceWith("<%= j render @area, formats: [:html], locals: { show: 'tr' } %>");
   } else {
     $("#area_<%= @area.id %>").replaceWith("<%= j render @area, formats: [:html], locals: { show: 'div' } %>");
   }
