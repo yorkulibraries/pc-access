@@ -1,0 +1,9 @@
+var pca_location_holder_id = "pc_access_holder_location-<%= @location.id %>";
+var pca_floor_div = "<%= j render @floor, formats: [:html], locals: { show: "public" } %>";
+
+if ( $("#" + pca_location_holder_id).length == 1 ) {
+   $("#" + pca_location_holder_id).empty();
+    $("#" + pca_location_holder_id).append(pca_floor_div);
+} else {
+  document.write("<div id='" + pca_location_holder_id + "'>" + pca_floor_div + "</div>");
+}

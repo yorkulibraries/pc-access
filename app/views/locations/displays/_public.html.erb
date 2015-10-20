@@ -6,7 +6,9 @@
     <% location.floors.each do |floor| %>
       <li class="list-group-item">
          <span class="badge badge-success"><%= floor.computers.pinging.not_in_use.count %></span>
-         <a href="<%= api_by_floor_path(location, floor) %>"><%= floor.name %></a>
+         <a href="<%= api_by_floor_path(location, floor) %>" data-remote="<%= remote_request? %>">
+          <%= floor.name %>
+         </a>
        </li>
     <% end %>
   </ul>
