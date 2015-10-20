@@ -24,4 +24,11 @@ class ApiController < ApplicationController
       @floor = @location.floors.find(params[:floor_id])
     end
 
+    def by_area
+      @location = Location.find(params[:id])
+      @area = @location.areas.find(params[:area_id])
+    end
+
+
+
 end

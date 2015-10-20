@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get "api" => "api#index"
   get "api/l/:id" => "api#by_location", as: :api_by_location
   get "api/l/:id/f/:floor_id" => "api#by_floor", as: :api_by_floor
+  get "api/l/:id/a/:area_id" => "api#by_area", as: :api_by_area
 
 
   match 'trackers/logon' => 'trackers#logon', as: :trackers_logon, via: [:get, :post]

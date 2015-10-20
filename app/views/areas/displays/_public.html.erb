@@ -1,0 +1,12 @@
+<div id="pc_access_area_<%= area.id %>" class="pc_access_public_view" data-id="<%= area.id %>">
+  <div class="thumbnail">
+    <div class="caption">
+      <h3><%= @location.name %> - <%= area.name %> on <%= area.floor.name %></h3>
+      <p>This floor is broken up into the following areas, available computers shown.</p>
+      <div class="alert alert-success" role="alert">
+        There are <strong><%= area.computers.pinging.not_in_use.count %></strong> computers available for use.
+      </div>
+    </div>
+    <img class="media-object" src="<%= area.map.url %>" data-full-size-path="<%= area.map.url %>">
+  </div>
+</div>
