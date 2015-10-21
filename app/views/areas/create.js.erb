@@ -8,7 +8,7 @@
   } else {
     $("#areas").prepend("<%= j render @area, formats: [:html], locals: { show: 'div' } %>");
   }
-
+  $(".blank-slate").remove();
   $("#area_<%= @area.id %>").effect("highlight", {}, 3000);
 <% else %>
   $( '.modal-backdrop' ).remove();
