@@ -13,6 +13,18 @@
 
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Computers <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <% %w(in_use not_in_use pinging not_pinging staying_active not_statying active never_used never_ping).each do |status| %>
+            <li role="presentation">
+              <a role="menuitem" tabindex="-1" data-mylang="en" href="<%= by_status_path(status) %>">
+                <%= status.humanize %>
+              </a>
+            </li>
+            <% end %>
+          </ul>
+        </li>
         <li role="presentation">
           <a role="menuitem" tabindex="-1" href="<%= locations_path %>">Locations</a>
         </li>

@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   match 'trackers/logoff' => 'trackers#logoff', as: :trackers_logoff, via: [:get, :post]
   match 'trackers/ping' => 'trackers#ping', as: :trackers_ping, via: [:get, :post]
 
+  get "status/:status" => "status#by_status", as: :by_status
+
   resources :locations do
 
     resources :floors do
