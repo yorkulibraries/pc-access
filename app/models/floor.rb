@@ -12,7 +12,7 @@ class Floor < ActiveRecord::Base
 
   ## VALIDATIONS
   validates :name, presence: true
-  validates :position, :location, presence: true
+  validates :location, presence: true
 
   ## SCOPES
   default_scope { where(deleted: false).order(:position) } # only active floors
