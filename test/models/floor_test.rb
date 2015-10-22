@@ -11,16 +11,14 @@ class FloorTest < ActiveSupport::TestCase
   end
 
   should "not create an invalid floor" do
-    assert ! build(:floor, name: nil).valid?, "Name should not be blank"
-
-    assert ! build(:floor, position: nil).valid?, "Position is required"
+    assert ! build(:floor, name: nil).valid?, "Name should not be blank"    
     assert ! build(:floor, location: nil).valid?, "Location is required"
   end
 
   should "show active floors only by default, and deleted via a scope" do
     location = create(:location)
     location.floors.first.destroy # remove default floor
-    
+
     create_list(:floor, 3, deleted: true, location: location)
     create_list(:floor, 2, deleted: false, location: location)
 
