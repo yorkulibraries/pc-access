@@ -2,4 +2,16 @@
 var pca_location_holder_id = "pc_access_holder_location-<%= @location.id %>";
 var pca_location_div = "<%= j render @location, formats: [:html], locals: { show: "public" } %>";
 
-document.write("<div id='" + pca_location_holder_id + "'>" + pca_location_div + "</div>");
+document.write("<div id='" + pca_location_holder_id + "'>" + pca_location_div +  "</div>");
+
+
+//// iFRAME version ////
+
+// var ifrm = document.createElement("IFRAME");
+// ifrm.setAttribute("src", "<%= api_by_location_url(@location) %>");
+// ifrm.style.width = 640+"px";
+// ifrm.style.height = 480+"px";
+
+//document.write("<div id='" + pca_location_holder_id + "'></div>");
+//var div = document.getElementById(pca_location_holder_id);
+//div.appendChild(ifrm);

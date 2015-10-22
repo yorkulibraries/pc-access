@@ -1,6 +1,11 @@
 class ApiController < ApplicationController
     protect_from_forgery unless: -> { request.format.js? }
 
+    after_action do
+      response.headers['X-Frame-Options'] = 'GOFORIT'
+      response.headers['Access-Control-Allow-Origin'] = '*'
+    end
+
     def index
       locations_list = Location.mock_locations
 
@@ -20,7 +25,7 @@ class ApiController < ApplicationController
       @location = Location.find(params[:id])
 
       respond_to do |format|
-        format.html
+        format.html { render layout: "public" }
         format.js
       end
     end
@@ -30,7 +35,7 @@ class ApiController < ApplicationController
       @floor = @location.floors.find(params[:floor_id])
 
       respond_to do |format|
-        format.html
+        format.html { render layout: "public" }
         format.js
       end
 
@@ -39,6 +44,11 @@ class ApiController < ApplicationController
     def by_area
       @location = Location.find(params[:id])
       @area = @location.areas.find(params[:area_id])
+
+      respond_to do |format|
+        format.html { render layout: "public" }
+        format.js
+      end
     end
 
     def preview

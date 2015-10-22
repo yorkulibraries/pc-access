@@ -13,7 +13,7 @@
         <% floor.areas.each do |area| %>
           <li class="list-group-item">
              <span class="badge badge-success"><%= area.computers.pinging.not_in_use.count %></span>
-             <a href="<%= api_by_area_path(@location, area) %>" data-remote="<%= remote_request? %>"><%= area.name %></a>
+             <a href="<%= api_by_area_url(@location, area) %>" data-remote="<%= remote_request? %>"><%= area.name %></a>
            </li>
         <% end %>
       </ul>
