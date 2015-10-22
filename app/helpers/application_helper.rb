@@ -21,9 +21,13 @@ module ApplicationHelper
     end
   end
 
-  def path_to_url(path)
-    separator = path.start_with?("/") ? "" : "/"
-    "http://#{request.host_with_port}#{separator}#{path}"
+  def path_to_url(path = nil)
+    if path == nil
+      "http://#{request.host_with_port}"
+    else
+      separator = path.start_with?("/") ? "" : "/"
+      "http://#{request.host_with_port}#{separator}#{path}"
+    end
   end
 
 end

@@ -11,11 +11,7 @@ function pc_access_load_script(path) {
 }
 
 
-var pca_css_file = document.createElement('link');
-pca_css_file.rel = "stylesheet";
-pca_css_file.media = "all"
-pca_css_file.href = "<%= asset_url('controllers/api') %>";
-document.getElementsByTagName('head')[0].appendChild(pca_css_file);
+
 
 // Check if jquery exists and load it if it doesn't
 if (!window.jQuery) {
@@ -28,3 +24,11 @@ if (!window.$.rails) {
   jq_ujs_path = 'https://raw.githubusercontent.com/rails/jquery-ujs/master/src/rails.js';
   pc_access_load_script(jq_ujs_path);
 }
+
+// CSS FILE
+var css_path = $("<%= j stylesheet_link_tag "controllers/api" %>").attr("href");
+var pca_css_file = document.createElement('link');
+pca_css_file.rel = "stylesheet";
+pca_css_file.media = "all"
+pca_css_file.href = "<%= path_to_url %>" + css_path;
+document.getElementsByTagName('head')[0].appendChild(pca_css_file);
