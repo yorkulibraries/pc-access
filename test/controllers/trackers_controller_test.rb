@@ -26,7 +26,7 @@ class TrackersControllerTest < ActionController::TestCase
   end
 
   should "record activiy log entry on each action" do
-    assert_difference "ComputerActivityLog.count", 4 do
+    assert_difference "ComputerActivityLog.count", 3 do
       get :ping # After initial one, it should have a register and a PING
       get :logon, username: "tester"
       get :logoff
