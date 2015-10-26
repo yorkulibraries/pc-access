@@ -5,7 +5,7 @@ class TrackersController < ApplicationController
     @computer = Computer.where(ip: request.remote_ip).first_or_create
     @computer.logon(params[:username])
     @computer.save
-    @computer.record_activity_log(ComputerActivityLog::ACTION_PING)
+    @computer.record_activity_log(ComputerActivityLog::ACTION_LOGON)
 
     respond_to do |format|
       format.all { render :nothing => true }
@@ -29,8 +29,7 @@ class TrackersController < ApplicationController
   def ping
     @computer = Computer.where(ip: request.remote_ip).first_or_create
     @computer.ping
-    @computer.save
-    @computer.record_activity_log(ComputerActivityLog::ACTION_PING)
+    @computer.save  
 
     respond_to do |format|
       format.all { render :nothing => true }
