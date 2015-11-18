@@ -4,24 +4,26 @@
   <%= link_to '<i class="fa fa-plus"></i> Add a new location'.html_safe, new_location_path, class: "btn btn-primary", data: { remote: true } %>
 <% end %>
 
-<table id="locations" class="table table-bordered">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Address</th>
-      <th>IP Subnets</th>
-      <th>Floors</th>
-			<th>Areas</th>
-      <th>Computers</th>
-      <th></th>
-    </tr>
-  </thead>
+<div class="ibox">
+  <div class="ibox-content">
+    <table id="locations" class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Address</th>
+          <th>IP Subnets</th>
+          <th>Floors</th>
+    			<th>Areas</th>
+          <th>Computers</th>
+          <th></th>
+        </tr>
+      </thead>
 
-  <tbody>
-    <% @locations.each do |location| %>
-      <%= render location, locals: { show: "tr" } %>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
+      <tbody>
+        <% @locations.each do |location| %>
+          <%= render location, locals: { show: "tr" } %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

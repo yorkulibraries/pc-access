@@ -3,8 +3,13 @@
 <% sidebar do  %>
   <%= link_to '<i class="fa fa-plus"></i> Add a new image'.html_safe, new_image_path, class: "btn btn-primary", remote: true %>
 <% end %>
-<div id="images">
-  <% @images.each do |image| %>
-    <%= render image, locals: { table: false } %>
-  <% end %>
+
+<div class="ibox">
+  <div class="ibox-content">
+    <div id="images">
+      <% @images.each do |image| %>
+        <%= render image, locals: { table: false } %>
+      <% end %>
+    </div>
+  </div>
 </div>

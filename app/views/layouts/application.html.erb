@@ -60,7 +60,7 @@
         <%= yield (:page_header) if content_for?(:page_header)%>
       </div>
 
-      <div class="row">
+      <div class="row ">
         <div class="<%=  content_for?(:sidebar) ? "col-lg-9" : "col-lg-12" %>"  id="content">
           <%= yield %>
         </div>

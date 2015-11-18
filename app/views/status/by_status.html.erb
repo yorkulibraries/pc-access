@@ -1,34 +1,34 @@
 <% title "Computers - #{@status_name}" %>
 
-<% sidebar do  %>
 
-<% end %>
+<div class="ibox">
+  <div class="ibox-content">
+    <table id="computers" class="table table-bordered">
+      <thead>
+        <tr>
+          <th>IP Address</th>
+          <th>Current User</th>
+          <th>Previous User</th>
+          <th>Location</th>
+    			<th>Floor</th>
+          <th>Area</th>
+          <th>Last Ping</th>
+        </tr>
+      </thead>
 
-
-<table id="computers" class="table table-bordered">
-  <thead>
-    <tr>
-      <th>IP Address</th>
-      <th>Current User</th>
-      <th>Previous User</th>
-      <th>Location</th>
-			<th>Floor</th>
-      <th>Area</th>
-      <th>Last Ping</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @computers.each do |c| %>
-      <tr>
-        <td><%= c.ip %></td>
-        <td><%= c.current_username %></td>
-        <td><%= c.previous_username %></td>
-        <td><%= c.location.name rescue nil %></td>
-        <td><%= c.floor.name rescue nil %></td>
-        <td><%= c.area.name rescue nil %></td>
-        <td><%= c.last_ping %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      <tbody>
+        <% @computers.each do |c| %>
+          <tr>
+            <td><%= c.ip %></td>
+            <td><%= c.current_username %></td>
+            <td><%= c.previous_username %></td>
+            <td><%= c.location.name rescue nil %></td>
+            <td><%= c.floor.name rescue nil %></td>
+            <td><%= c.area.name rescue nil %></td>
+            <td><%= c.last_ping %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
