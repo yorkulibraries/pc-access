@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Software Packages</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Version</th>
+      <th>Note</th>
+      <th>Image</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @software_packages.each do |software_package| %>
+      <tr>
+        <td><%= software_package.name %></td>
+        <td><%= software_package.version %></td>
+        <td><%= software_package.note %></td>
+        <td><%= software_package.image_id %></td>
+        <td><%= link_to 'Show', software_package %></td>
+        <td><%= link_to 'Edit', edit_software_package_path(software_package) %></td>
+        <td><%= link_to 'Destroy', software_package, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Software package', new_software_package_path %>

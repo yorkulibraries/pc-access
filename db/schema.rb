@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151006181245) do
+ActiveRecord::Schema.define(version: 20151118200759) do
 
   create_table "areas", force: :cascade do |t|
     t.string   "name"
@@ -84,6 +84,15 @@ ActiveRecord::Schema.define(version: 20151006181245) do
     t.boolean  "deleted",    default: false, null: false
     t.integer  "floors"
     t.string   "address"
+  end
+
+  create_table "software_packages", force: :cascade do |t|
+    t.string   "name"
+    t.string   "version"
+    t.string   "note"
+    t.integer  "image_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

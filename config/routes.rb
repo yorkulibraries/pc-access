@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
 
+
+
   get "api" => "api#index"
   get "api/l/:id" => "api#by_location", as: :api_by_location
   get "api/l/:id/f/:floor_id" => "api#by_floor", as: :api_by_floor
@@ -27,7 +29,9 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :images
+  resources :images do
+    resources :software_packages, path: "software", as: :software
+  end
 
   ## DASHBOARD
   root 'status#index'

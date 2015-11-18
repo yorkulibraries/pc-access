@@ -3,42 +3,48 @@
 <div class="ibox">
   <div class="ibox-content">
     <%= render @image, show: "div" %>
-    <hr/>
+    <br/>
 
     <div class="row">
       <div class="col-md-9">
         <div class="table-responsive">
           <table class="table table-hover">
+            <tr id="new_image_form">
+              <td>
+                <span class="label label-success">+</span>
+              </td>
+              <td>
+                <input type="text" class="form-control input-sm" placeholder="Software Name"/>
+              </td>
+              <td>
+                <input type="text" class="form-control input-sm" placeholder="Version"/>
+              </td>
+              <td>
+                <input type="text" class="form-control input-sm" placeholder="Note"/>
+              </td>
+              <td class="text-right">
+                <button class="btn btn-success btn-sm"> + Add </button>
+              </td>
+            </tr>
             <% 5.times do %>
-            <tr>
-                                  <td>
-                                      <span class="label label-primary">Added</span>
-                                  </td>
-                                  <td class="issue-info">
-                                      <a href="#">
-                                          ISSUE-23
-                                      </a>
-
-                                      <small>
-                                          This is issue with the coresponding note
-                                      </small>
-                                  </td>
-                                  <td>
-                                      Adrian Novak
-                                  </td>
-                                  <td>
-                                      12.02.2015 10:00 am
-                                  </td>
-                                  <td>
-                                      <span class="pie" style="display: none;">0.52,1.041</span><svg class="peity" height="16" width="16"><path d="M 8 8 L 8 0 A 8 8 0 0 1 14.933563796318165 11.990700825968545 Z" fill="#1ab394"/><path d="M 8 8 L 14.933563796318165 11.990700825968545 A 8 8 0 1 1 7.999999999999998 0 Z" fill="#d7d7d7"/></svg>
-                                      2d
-                                  </td>
-                                  <td class="text-right">
-                                      <button class="btn btn-white btn-xs"> Tag</button>
-                                      <button class="btn btn-white btn-xs"> Mag</button>
-                                      <button class="btn btn-white btn-xs"> Rag</button>
-                                  </td>
-                              </tr>
+              <tr>
+                <td>
+                  <span class="label label-primary">s</span>
+                </td>
+                <td>
+                  Microsoft Word 2007
+                </td>
+                <td>
+                  2007
+                </td>
+                <td>
+                  <small>Unlimited Use</small>
+                </td>
+                <td class="text-right">
+                  <button class="btn btn-white btn-xs"> Edit</button>
+                  <button class="btn btn-white btn-xs"> &times; </button>
+                </td>
+              </tr>
             <% end %>
           </table>
         </div>
