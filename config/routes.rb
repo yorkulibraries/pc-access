@@ -30,7 +30,7 @@ Rails.application.routes.draw do
   end
 
   resources :images do
-    resources :software_packages, path: "software", as: :software
+    resources :software_packages, path: "software"
   end
 
   ## DASHBOARD

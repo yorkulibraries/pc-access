@@ -1,4 +1,4 @@
-<% if request.xhr? && local_assings[:show] == "tr_form" %>
+<% if local_assigns[:show] == "tr_form" %>
   <%= render partial: "images/forms/popup_form" %>
 <% elsif request.xhr? %>
   <%= render partial: "images/forms/popup_form" %>

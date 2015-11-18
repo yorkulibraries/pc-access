@@ -7,6 +7,8 @@ class Image < ActiveRecord::Base
 
   ## RELATIONS
   has_many :computers
+  has_many :software, class_name: "SoftwarePackage"
+
 
   ## VALIDATIONS
   validates :name, presence: true, uniqueness: true

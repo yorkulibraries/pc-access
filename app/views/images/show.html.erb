@@ -8,44 +8,14 @@
     <div class="row">
       <div class="col-md-9">
         <div class="table-responsive">
-          <table class="table table-hover">
-            <tr id="new_image_form">
-              <td>
-                <span class="label label-success">+</span>
-              </td>
-              <td>
-                <input type="text" class="form-control input-sm" placeholder="Software Name"/>
-              </td>
-              <td>
-                <input type="text" class="form-control input-sm" placeholder="Version"/>
-              </td>
-              <td>
-                <input type="text" class="form-control input-sm" placeholder="Note"/>
-              </td>
-              <td class="text-right">
-                <button class="btn btn-success btn-sm"> + Add </button>
-              </td>
-            </tr>
-            <% 5.times do %>
-              <tr>
-                <td>
-                  <span class="label label-primary">s</span>
-                </td>
-                <td>
-                  Microsoft Word 2007
-                </td>
-                <td>
-                  2007
-                </td>
-                <td>
-                  <small>Unlimited Use</small>
-                </td>
-                <td class="text-right">
-                  <button class="btn btn-white btn-xs"> Edit</button>
-                  <button class="btn btn-white btn-xs"> &times; </button>
-                </td>
-              </tr>
-            <% end %>
+          <%= render partial: "software_packages/form", locals: { show: "tr_form", software_package: @image.software.build } %>
+
+          <table class="table table-hover" id="software_packages">
+            <tbody>
+              <% @image.software.each do | software_package | %>
+                <%= render software_package, show: "tr" %>
+              <% end %>
+            </tbody>            
           </table>
         </div>
       </div>

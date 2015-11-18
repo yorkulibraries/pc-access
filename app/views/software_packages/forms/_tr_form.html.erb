@@ -1,0 +1,23 @@
+<%= simple_form_for([@image, software_package], remote: true) do |f| %>
+<table class="table">
+  <tr>
+    <td>
+      <span class="label label-success">+</span>
+    </td>
+    <td>
+      <%= f.input :name, label: false, input_html: { class: "input-sm", placeholder: "Software Name" } %>
+    </td>
+    <td>
+        <%= f.input :version, label: false,  input_html: { class: "input-sm", placeholder: "Version" } %>
+
+    </td>
+    <td>
+        <%= f.input :note, label: false,  input_html: { class: "input-sm", placeholder: "Note" } %>
+
+    </td>
+    <td class="text-right">
+      <button type="submit" class="btn btn-success btn-sm">+ Add </button>
+    </td>
+  </tr>
+</table>
+<% end %>
