@@ -1,0 +1,17 @@
+<div class="media" id="image_<%= image.id %>" data-id="<%= image.id %>">
+  <div class="media-left">
+    <a href="#">
+      <img class="media-object" src="<%= asset_path("os_icons/#{os_icon(image.os_name)}".html_safe) %>">
+    </a>
+  </div>
+  <div class="media-body">
+    <h4 class="media-heading"><%= image.name %></h4>
+    <p><%= image.os_name %> - <%= image.os_version %></p>
+
+  </div>
+  <div class="media-right">
+
+    <a href="<%= edit_image_path(image) %>" data-remote="true" class="btn btn-default" role="button">Update</a>
+
+  </div>
+</div>

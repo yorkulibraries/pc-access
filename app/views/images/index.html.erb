@@ -8,7 +8,7 @@
   <div class="ibox-content">
     <div id="images">
       <% @images.each do |image| %>
-        <%= render image, locals: { table: false } %>
+        <%= render image, show: "div" %>
       <% end %>
     </div>
   </div>

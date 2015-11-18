@@ -1,0 +1,7 @@
+<tr id="image_<%= image.id %>">
+  <td><%= link_to image.name, image %></td>
+  <td><%= image.os_name %></td>
+  <td><%= image.os_version %></td>
+  <td>-</td>
+  <td><%= link_to 'Update', edit_image_path(image), remote: true %></td>
+</tr>

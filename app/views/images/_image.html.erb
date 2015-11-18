@@ -1,29 +1,9 @@
-<% if locals[:table] == true %>
-<tr id="image_<%= image.id %>">
-  <td><%= link_to image.name, image %></td>
-  <td><%= image.os_name %></td>
-  <td><%= image.os_version %></td>
-  <td>-</td>
-  <td><%= link_to 'Update', edit_image_path(image), remote: true %></td>
-</tr>
+<% if local_assigns[:show] == "tr" %>
+  <%= render partial: "images/displays/tr", locals: { image: image } %>
+<% elsif local_assigns[:show] == "li" %>
+    <%= render partial: "images/displays/li", locals: { image: image } %>
+<% elsif local_assigns[:show] == "div" %>
+  <%= render partial: "images/displays/div", locals: { image: image } %>
 <% else %>
-
-  <div class="media" id="image_<%= image.id %>">
-    <div class="media-left">
-      <a href="#">
-        <img class="media-object" src="<%= asset_path("os_icons/#{os_icon(image.os_name)}".html_safe) %>">
-      </a>
-    </div>
-    <div class="media-body">
-      <h4 class="media-heading"><%= image.name %></h4>
-      <p><%= image.os_name %></p>
-      <p><%= image.os_version %></p>
-
-    </div>
-    <div class="media-right">
-
-      <a href="<%= edit_image_path(image) %>" data-remote="true" class="btn btn-default" role="button">Update</a>
-
-    </div>
-  </div>
+  <%= render partial: "images/displays/public", locals: { image: image } %>
 <% end %>
