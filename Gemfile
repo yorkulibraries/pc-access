@@ -11,15 +11,16 @@ gem "mysql2", "~> 0.3.14"
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
-gem 'therubyracer', "0.12.1", platforms: :ruby
+gem 'therubyracer', platforms: :ruby
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 ## TWITTER BOOTSTRAP, SIMPLE_FORM & FONTAWESOME
+gem "tilt"
 gem 'jquery-rails', "4.0.3"
 gem 'jquery-ui-rails', "4.2.0"
-gem 'less-rails', "2.6.0"
-gem 'twitter-bootstrap-rails', "3.2.0"
+gem 'less-rails'
+gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 gem 'simple_form', "3.1.0"
 gem "font-awesome-rails", '4.4.0'
 
