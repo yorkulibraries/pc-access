@@ -27,4 +27,34 @@ class ImageTest < ActiveSupport::TestCase
     assert_equal 2, Image.all.size, "Should be two"
     assert_equal 3, Image.deleted.size, "Should be 3"
   end
+
+  should "attach computers based on ip list" do
+    image1 = create(:image)
+    image2 = create(:image)
+    attach_to_1 = create_list(:computer, 4)
+    attach_to_2 = create_list(:computer, 5)
+
+    image1.attach_computers(attach_to_1.collect { |c| c.ip }.join("\n"))
+
+    assert_equal 4, image1.computers.count, "Should be 4 computers in this image"
+
+    image2.attach_computers(attach_to_2.collect { |c| c.ip }.join("\n"))
+
+    assert_equal 5, image2.computers.count, "Should be 5 computers in this image"
+  end
+
+  should "remove existing attached computers and add new ones" do
+    image = create(:image)
+    old_list = create_list(:computer, 2)
+    new_list = create_list(:computer, 3)
+
+    image.attach_computers(old_list.collect { |c| c.ip }.join("\n"))
+    assert_equal 2, image.computers.count, "Two computers"
+
+
+    image.attach_computers(new_list.collect { |c| c.ip }.join("\n"))
+    assert_equal 3, image.computers.count, "Three computers"
+    assert_equal new_list.first.id, image.computers.first.id, "New List Computer should match"
+
+  end
 end

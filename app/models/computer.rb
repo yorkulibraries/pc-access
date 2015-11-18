@@ -94,6 +94,15 @@ class Computer < ActiveRecord::Base
     end
   end
 
+  def self.detach_from_image(image_id)
+    Computer.transaction do
+      Computer.where(image_id: image_id).each do |c|
+        c.image = nil
+        c.save(validate: false)
+      end
+    end
+  end
+
   ## PRIVATE
   private
 

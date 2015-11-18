@@ -1,6 +1,6 @@
 <div class="media" id="image_<%= image.id %>" data-id="<%= image.id %>">
   <div class="media-left">
-    <a href="#">
+    <a href="<%= image_path(image) %>">
       <img class="media-object" src="<%= asset_path("os_icons/#{os_icon(image.os_name)}".html_safe) %>">
     </a>
   </div>

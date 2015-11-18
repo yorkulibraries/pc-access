@@ -145,4 +145,12 @@ class ComputerTest < ActiveSupport::TestCase
     assert_equal 0, a.computers.count, "should be zero"
   end
 
+  should "detach computers from image" do
+    i = create(:image)
+    c = create(:computer, image_id: i.id)
+    assert_equal 1, i.computers.count, "one computer attached"
+    Computer.detach_from_image(i.id)
+    assert_equal 0, i.computers.count, "should be zero"
+  end
+
 end
