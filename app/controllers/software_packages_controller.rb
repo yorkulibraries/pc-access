@@ -26,7 +26,7 @@ class SoftwarePackagesController < ApplicationController
 
     respond_to do |format|
       if @software_package.save
-        format.html { redirect_to @software_package, notice: 'Software package was successfully updated.' }
+        format.html { redirect_to @image, notice: 'Software package was successfully created.' }
         format.js
       else
         format.html  { render :edit }
@@ -42,11 +42,11 @@ class SoftwarePackagesController < ApplicationController
   def update
     respond_to do |format|
       if @software_package.update(software_package_params)
-        format.html { redirect_to @software_package, notice: 'Software package was successfully updated.' }
-        format.json { render :show, status: :ok, location: @software_package }
+        format.html { redirect_to @image, notice: 'Software package was successfully updated.' }
+        format.js
       else
         format.html { render :edit }
-        format.json { render json: @software_package.errors, status: :unprocessable_entity }
+        format.js
       end
     end
   end
@@ -56,8 +56,8 @@ class SoftwarePackagesController < ApplicationController
   def destroy
     @software_package.destroy
     respond_to do |format|
-      format.html { redirect_to software_packages_url, notice: 'Software package was successfully destroyed.' }
-      format.json { head :no_content }
+      format.html { redirect_to @image, notice: 'Software package was successfully destroyed.' }
+      format.js
     end
   end
 
@@ -72,6 +72,6 @@ class SoftwarePackagesController < ApplicationController
     end
     # Never trust parameters from the scary internet, only allow the white list through.
     def software_package_params
-      params.require(:software_package).permit(:name, :version, :note, :image_id)
+      params.require(:software_package).permit(:name, :version, :note)
     end
 end

@@ -1,9 +1,12 @@
 <% if @software_package.errors.size == 0 %>
 
-  $("#new_software_package").replaceWith("<%= j render "form", formats: [:html], show: "tr_form", software_package: SoftwarePackage.new  %>")
-  $("#software_packages tbody").prepend("<%= j render partial: "software_package", locals: { software_package: @software_package, show: "tr" } %>");
+  $("#new_software_package").replaceWith("<%= j render "form", formats: [:html], show: "div_form", software_package: SoftwarePackage.new  %>")
+  $("#software_packages #new_software_package").after("<%= j render partial: "software_package", locals: { software_package: @software_package, show: "div" } %>");
 
   $("#software_package_<%= @software_package.id %>").effect("highlight", {}, 3000);
+
+  $("#new_software_package #software_package_name").focus();
+  
 <% else %>
   $("#new_software_package").replaceWith("<%= j render "form", formats: [:html],  show: "tr_form", software_package: @software_package %>")
 <% end %>

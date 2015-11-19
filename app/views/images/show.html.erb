@@ -7,19 +7,20 @@
 
     <div class="row">
       <div class="col-md-9">
-        <div class="table-responsive">
-          <%= render partial: "software_packages/form", locals: { show: "tr_form", software_package: @image.software.build } %>
+        <h5>Software Packages</h5>
+        <div id="software_packages">
+          <%= render partial: "software_packages/form", locals: { show: "div_form", software_package: SoftwarePackage.new } %>
 
-          <table class="table table-hover" id="software_packages">
-            <tbody>
-              <% @image.software.each do | software_package | %>
-                <%= render software_package, show: "tr" %>
-              <% end %>
-            </tbody>            
-          </table>
+          <% @image.software.each do | software_package | %>
+            <%= render software_package, show: "div" %>
+          <% end %>
+
+          <hr/>
+
         </div>
       </div>
       <div class="col-md-3">
+        <h5>Computers</h5>
         <% @image.computers.each do |c| %>
           <%= c.ip %>
         <% end %>

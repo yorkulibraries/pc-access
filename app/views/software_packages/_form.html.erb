@@ -1,7 +1,7 @@
 <% if local_assigns[:show] == "tr_form" %>
   <%= render partial: "software_packages/forms/tr_form", locals: { software_package: software_package } %>
-<% elsif  local_assigns[:show] == "modal_form" %>
-  <%= render partial: "software_packages/forms/modal_form", locals: { software_package: software_package } %>
+<% elsif  local_assigns[:show] == "div_form" %>
+  <%= render partial: "software_packages/forms/div_form", locals: { software_package: software_package } %>
 <% else %>
   <%= render partial: "software_packages/forms/tr_form", locals: { software_package: software_package } %>
 <% end %>

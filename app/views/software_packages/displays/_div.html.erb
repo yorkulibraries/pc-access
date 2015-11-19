@@ -1,0 +1,21 @@
+<div class="row software_package" id="software_package_<%= software_package.id %>" data-id="<%= software_package.id %>">
+  <div class="col-md-5">
+    <span class="label label-primary">s</span>
+    <%= software_package.name %>
+  </div>
+  <div class="col-md-2">
+    <%= software_package.version %>
+  </div>
+  <div class="col-md-3">
+    <small><%= software_package.note %></small>
+  </div>
+  <div class="col-md-2 text-right actions">
+    <a href="<%= edit_image_software_package_path(@image, software_package)%>" data-remote="true" class="btn btn-white btn-xs">
+      Edit</a>
+
+    <%= link_to [@image, software_package], method: :delete, data: { confirm: 'Are you sure?', remote: true }, class: "btn btn-white btn-xs red" do %>
+      &times;
+    <% end %>
+
+  </div>
+</div>

@@ -1,0 +1,4 @@
+$("#software_package_<%= @software_package.id %> .actions").empty();
+$("#software_package_<%= @software_package.id %>").fadeOut( 2000, function() {
+    $(this).remove();
+});

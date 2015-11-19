@@ -1,0 +1,8 @@
+$("#software_package_<%= @software_package.id %>").replaceWith("<%= j render "form", formats: [:html],  show: "div_form", software_package: @software_package %>");
+
+$("#software_package_<%= @software_package.id %> .cancel").click(function() {
+
+  $("#software_package_<%= @software_package.id %>").replaceWith("<%= j render partial: "software_package", locals: { software_package: @software_package, show: "div" } %>");
+
+  $("#software_package_<%= @software_package.id %>").effect("highlight", {}, 3000);
+});

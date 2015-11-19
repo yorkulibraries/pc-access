@@ -12,7 +12,8 @@
     <small><%= software_package.note %></small>
   </td>
   <td class="text-right">
-    <button class="btn btn-white btn-xs"> Edit</button>
-    <button class="btn btn-white btn-xs"> &times; </button>
+    <a href="<%= edit_image_software_package_path(@image, software_package)%>" data-remote="true" class="btn btn-white btn-xs">
+      Edit</a>
+    <a class="btn btn-white btn-xs"> &times; </a>
   </td>
 </tr>
