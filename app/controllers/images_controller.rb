@@ -1,5 +1,5 @@
 class ImagesController < ApplicationController
-  before_action :set_image, only: [:show, :edit, :update, :destroy]
+  before_action :set_image, only: [:show, :edit, :update, :destroy, :attach_computers_to]
 
   def index
     if params[:q]
@@ -15,6 +15,7 @@ class ImagesController < ApplicationController
   end
 
   def show
+    @computer_list = @image.computers.select(:ip).collect { |c| c.ip }.join("\n")
   end
 
   def new
@@ -64,6 +65,21 @@ class ImagesController < ApplicationController
         format.html { render action: 'edit' }
         format.js
       end
+    end
+  end
+
+  def attach_computers_to
+    list = params[:computer_list]
+    @original_list = @image.computers.select(:ip).collect { |c| c.ip }
+
+    @image.attach_computers(list)
+    @computers = @image.computers
+
+    @computer_list = @image.computers.select(:ip).collect { |c| c.ip }.join("\n")
+
+    respond_to do |format|
+      format.js
+      format.html { render nothing: true}
     end
   end
 

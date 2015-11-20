@@ -19,11 +19,17 @@
 
         </div>
       </div>
-      <div class="col-md-3">
-        <h5>Computers</h5>
-        <% @image.computers.each do |c| %>
-          <%= c.ip %>
-        <% end %>
+      <div class="col-md-3 image">
+        <h5 class="computers">Computers</h5>
+        <div id="computer_list" title="Click To Edit">
+          <% @image.computers.each do |c| %>
+            <span class="ip" data-ip="<%= c.ip %>"><%= c.ip %></span>
+          <% end %>
+          <% if @image.computers.size == 0 %>
+            <div class="text-center small"><br/><br/>No computers attached</div>
+          <% end %>
+        </div>
+        <%= render partial: "images/forms/computer_list_form" %>
       </div>
     </div>
   </div>

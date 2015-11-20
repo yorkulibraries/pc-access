@@ -1,0 +1,9 @@
+$("#computer_list").empty();
+$("#attach_computer_list_form").replaceWith("<%= j render "images/forms/computer_list_form", formats: [:html] %> ");
+
+<% @computers.each do |c| %>
+  $("#computer_list").append("<span class='ip' data-ip='<%= c.ip %>'><%= c.ip %></span>");
+
+<% end %>
+
+$("#computer_list").show();

@@ -1,0 +1,10 @@
+<div id="attach_computer_list_form" class="hide">
+  <%= form_for @image, url: attach_computers_to_image_path(@image), remote: true do |f| %>
+    <div class="form-group">
+      <button type="submit" class="btn btn-success btn-xs">Save List</button>
+      <button type="button" class="btn btn-default cancel btn-xs">&times;</button>
+    </div>
+    <%= text_area_tag 'computer_list', @computer_list, rows: "20", style: "width: 100%;", id: "list_box" %>
+
+  <% end %>
+</div>

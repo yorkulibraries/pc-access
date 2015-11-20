@@ -31,6 +31,7 @@ Rails.application.routes.draw do
 
   resources :images do
     resources :software_packages, path: "software"
+    patch :attach_computers_to, on: :member
   end
 
   ## DASHBOARD

@@ -1,0 +1,25 @@
+.image {
+
+  h5.computers {
+    border-bottom: 1px solid #dddddd; padding-bottom: 10px;
+  }
+  #computer_list {
+
+
+    min-height: 76px; max-height: 400px;
+    border: 1px solid #d1d1d1;
+    padding: 4px 5px;
+    overflow-y: scroll;
+    &::before {
+      color: #999;
+      content: "Click to edit";
+      display: block;
+      font-size: 11px;
+      padding-bottom: 5px;
+      text-align: left;
+    }
+
+    span.ip { display: block; padding-bottom: 5px; }
+    .small { color: #999;}
+  }
+}
