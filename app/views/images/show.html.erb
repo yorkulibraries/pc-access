@@ -2,6 +2,8 @@
 
 <div class="ibox">
   <div class="ibox-content">
+    <%= link_to '<i class="fa fa-backward"></i> Back To Images List'.html_safe, images_path, class: "xbtn btn-link" %>
+    <hr/>
     <%= render @image, show: "div" %>
     <br/>
 
@@ -26,7 +28,7 @@
             <span class="ip" data-ip="<%= c.ip %>"><%= c.ip %></span>
           <% end %>
           <% if @image.computers.size == 0 %>
-            <div class="text-center small"><br/><br/>No computers attached</div>
+            <div class="text-center small"><br/>No computers attached</div>
           <% end %>
         </div>
         <%= render partial: "images/forms/computer_list_form" %>
@@ -34,7 +36,3 @@
     </div>
   </div>
 </div>
-
-
-<%= link_to '<i class="fa fa-backward"></i> Back To List'.html_safe, images_path, class: "btn btn-default" %>
-<%= link_to '<i class="fa fa-pencil"></i> Edit'.html_safe, edit_image_path(@image), class: "btn btn-default" %>

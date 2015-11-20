@@ -5,13 +5,22 @@
     </a>
   </div>
   <div class="media-body">
+    <div class="pull-right">
+      <a href="<%= image_path(image) %>" class="btn btn-white btn-xs" role="button">
+        <i class="fa fa-bars"></i> Details
+      </a>
+      <a href="<%= edit_image_path(image) %>" data-remote="true" class="btn btn-default btn-xs" role="button">
+        Update
+      </a>
+    </div>
+
     <h4 class="media-heading"><%= image.name %></h4>
-    <p><%= image.os_name %> - <%= image.os_version %></p>
+    <p>
+      <%= image.os_name %> - <%= image.os_version %><br/>
+      <span title="Computers"><i class="fa fa-desktop"></i> <%= image.computers.size %></span>
+      <span title="Software Packages"><i class="fa fa-cubes"></i> <%= image.software.size %></span>
+    </p>
 
   </div>
-  <div class="media-right">
 
-    <a href="<%= edit_image_path(image) %>" data-remote="true" class="btn btn-default" role="button">Update</a>
-
-  </div>
 </div>
