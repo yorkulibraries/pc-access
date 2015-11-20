@@ -1,6 +1,3 @@
 <h1>Editing Software Package</h1>
 
-<%= render 'form' %>
-
-<%= link_to 'Show', @software_package %> |
-<%= link_to 'Back', software_packages_path %>
+<%= render partial: "software_packages/form", locals: { show: "div_form", software_package: @software_package } %>

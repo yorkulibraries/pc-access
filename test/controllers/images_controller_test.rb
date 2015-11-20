@@ -88,6 +88,19 @@ class ImagesControllerTest < ActionController::TestCase
 
     end
 
+    ## ADDITIONAL METHODS
+    should "attach_computers to image" do
+      image = create(:image)
+      list = create_list(:computer, 4)
+      ips = list.collect { |c| c.ip }.join("\n")
+
+      assert_equal 0, image.computers.count, "Zero to start with"
+
+      xhr :post, :attach_computers_to, id: image.id, computer_list: ips
+      assert_response :success
+      assert_equal 4, image.computers.count, "Should be 4"
+    end
+
   end
 
 end

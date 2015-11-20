@@ -2,48 +2,66 @@ require 'test_helper'
 
 class SoftwarePackagesControllerTest < ActionController::TestCase
   setup do
-    @software_package = software_packages(:one)
+    @image = create(:image)
+
+    #@user = create(:user, admin: true, role: User::MANAGER_ROLE, location: @mylocation)
+    #log_user_in(@user)
+
   end
 
-  test "should get index" do
-    get :index
-    assert_response :success
-    assert_not_nil assigns(:software_packages)
-  end
 
-  test "should get new" do
-    get :new
-    assert_response :success
-  end
+   should "create a new software_package" do
+     assert_difference('SoftwarePackage.count') do
+       post :create, software_package: attributes_for(:software_package), image_id: @image.id
+       software_package = assigns(:software_package)
+       assert_equal 0, software_package.errors.size, "Should be no errors #{software_package.errors.messages}"
+       assert_redirected_to @image
+     end
 
-  test "should create software_package" do
-    assert_difference('SoftwarePackage.count') do
-      post :create, software_package: { image_id: @software_package.image_id, name: @software_package.name, note: @software_package.note, version: @software_package.version }
-    end
+   end
 
-    assert_redirected_to software_package_path(assigns(:software_package))
-  end
+   should "show software_package details" do
+     software_package = create(:software_package, image: @image)
 
-  test "should show software_package" do
-    get :show, id: @software_package
-    assert_response :success
-  end
+     get :show, id: software_package, image_id: @image.id
+     assert_response :success
+     assert_template :show
+   end
 
-  test "should get edit" do
-    get :edit, id: @software_package
-    assert_response :success
-  end
+   should "show get edit form" do
+     software_package = create(:software_package, image: @image)
 
-  test "should update software_package" do
-    patch :update, id: @software_package, software_package: { image_id: @software_package.image_id, name: @software_package.name, note: @software_package.note, version: @software_package.version }
-    assert_redirected_to software_package_path(assigns(:software_package))
-  end
+     get :edit, id: software_package, image_id: @image.id
+     assert_response :success
+   end
 
-  test "should destroy software_package" do
-    assert_difference('SoftwarePackage.count', -1) do
-      delete :destroy, id: @software_package
-    end
+   should "update an existing software_package" do
+     software_package = create(:software_package, image: @image)
 
-    assert_redirected_to software_packages_path
-  end
+     old_software_package_name = software_package.name
+
+     patch :update, id: software_package.id, software_package: { name: "word2" }, image_id: @image.id
+     software_package = assigns(:software_package)
+     assert_equal 0, software_package.errors.size, "Area name should update"
+     assert_response :redirect
+     assert_redirected_to @image
+
+     assert_not_equal old_software_package_name, software_package.name, "Old software_package name is not there"
+     assert_equal "word2", software_package.name, "software_package Name was updated"
+
+   end
+
+   should  "delete software_package" do
+     software_package = create(:software_package, image: @image)
+
+     assert_difference('SoftwarePackage.unscoped.count', -1) do
+       post :destroy, id: software_package.id, image_id: @image.id
+
+       assert_response :redirect
+       assert_redirected_to @image
+     end
+
+   end
+
+
 end

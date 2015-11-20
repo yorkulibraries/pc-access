@@ -4,15 +4,6 @@ class SoftwarePackagesController < ApplicationController
 
 
 
-
-  def index
-    @software_packages = @image.software.all
-  end
-
-  def show
-  end
-
-
   def new
     @software_package = @image.software.new
   end
