@@ -1,4 +1,4 @@
 <p>Requirements: jQuery 1.8+ and jQuery UJS library</p>
 <% @locations.each do |location| %>
-  <script type="text/javascript" src="<%= api_by_location_path(location) %>.js"></script>
+  <script type="text/javascript" src="<%= api_by_location_url(location) %>.js"></script>
 <% end %>
