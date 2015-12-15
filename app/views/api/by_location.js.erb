@@ -5,13 +5,11 @@ var pca_location_div = "<%= j render @location, formats: [:html], locals: { show
 document.write("<div id='" + pca_location_holder_id + "'>" + pca_location_div +  "</div>");
 
 
-//// iFRAME version ////
+$("#pc_access_location_<%= @location.id %> .list-group-item a").click(function() {
 
-// var ifrm = document.createElement("IFRAME");
-// ifrm.setAttribute("src", "<%= api_by_location_url(@location) %>");
-// ifrm.style.width = 640+"px";
-// ifrm.style.height = 480+"px";
-
-//document.write("<div id='" + pca_location_holder_id + "'></div>");
-//var div = document.getElementById(pca_location_holder_id);
-//div.appendChild(ifrm);
+  $("#pc_access_location_<%= @location.id %>").hide();
+  url = $(this).data("url");
+  
+  document.write("<script type='text/javascript' src='" + url + "'></script>");
+  return false;
+});

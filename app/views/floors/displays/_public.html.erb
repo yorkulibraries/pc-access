@@ -7,13 +7,14 @@
       </a>
     </div>
     <div class="media-body">
-      <h4 class="media-heading"><%= @location.name %> - <%= floor.name %></h4>
-      <p>This floor is broken up into the following areas, available computers shown.</p>
       <ul class="list-group" id="pc_access_areas">
+        <li class="list-group-item list-group-item-info">
+          <h4 class="list-group-item-heading"><%= @location.name %> - <%= floor.name %></h4>
+        </li>
         <% floor.areas.each do |area| %>
           <li class="list-group-item">
              <span class="badge badge-success"><%= area.computers.pinging.not_in_use.count %></span>
-             <a href="<%= api_by_area_url(@location, area) %>" data-remote="<%= remote_request? %>"><%= area.name %></a>
+             <%= area.name %>             
            </li>
         <% end %>
       </ul>
