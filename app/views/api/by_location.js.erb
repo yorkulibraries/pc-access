@@ -5,11 +5,12 @@ var pca_location_div = "<%= j render @location, formats: [:html], locals: { show
 document.write("<div id='" + pca_location_holder_id + "'>" + pca_location_div +  "</div>");
 
 
-$("#pc_access_location_<%= @location.id %> .list-group-item a").click(function() {
+$("#pc_access_location_<%= @location.id %> .list-group-item a.pc_access_floor").click(function() {
 
-  $("#pc_access_location_<%= @location.id %>").hide();
-  url = $(this).data("url");
-  
-  document.write("<script type='text/javascript' src='" + url + "'></script>");
+  //$("#pc_access_location_<%= @location.id %>").hide();
+  //url = $(this).data("url");
+
+  //document.write("<script type='text/javascript' src='" + url + "'></script>");
+  $(this).siblings(".pc_access_floor_areas").toggle();
   return false;
 });

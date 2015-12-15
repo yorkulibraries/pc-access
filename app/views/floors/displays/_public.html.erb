@@ -1,24 +1,15 @@
 <div id="pc_access_floor_<%= floor.id %>" class="pc_access_public_view" data-id="<%= floor.id %>">
 
-  <div class="media">
-    <div class=" media-left" style="display: none; ">
-      <a href="#">
-        <img class="media-object" src="<%= path_to_url(floor.map.url) %>" data-full-size-path="<%= path_to_url floor.map.url %>">
-      </a>
-    </div>
-    <div class="media-body">
-      <ul class="list-group" id="pc_access_areas">
-        <li class="list-group-item list-group-item-info">
-          <h4 class="list-group-item-heading"><%= @location.name %> - <%= floor.name %></h4>
-        </li>
-        <% floor.areas.each do |area| %>
-          <li class="list-group-item">
-             <span class="badge badge-success"><%= area.computers.pinging.not_in_use.count %></span>
-             <%= area.name %>             
-           </li>
-        <% end %>
-      </ul>
-    </div>
-  </div>
+    <ul class="list-group" id="pc_access_areas">
+      <li class="list-group-item list-group-item-info">
+        <h4 class="list-group-item-heading"><%= @location.name %> - <%= floor.name %></h4>
+      </li>
+      <% floor.areas.each do |area| %>
+        <li class="list-group-item">
+           <span class="badge badge-success"><%= area.computers.pinging.not_in_use.count %></span>
+           <%= area.name %>
+         </li>
+      <% end %>
+    </ul>
 
 </div>
