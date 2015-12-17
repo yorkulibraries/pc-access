@@ -1,8 +1,5 @@
 <div id="pc_access_location_<%= location.id %>" class="pc_access_public_view" data-id="<%= location.id %>">
   <ul class="list-group">
-    <li class="list-group-item list-group-item-info">
-      <h4 class="list-group-item-heading"><%= location.name %></h4>
-    </li>
     <% location.floors.each do |floor| %>
       <li class="list-group-item">
          <span class="badge badge-success"><%= floor.computers.pinging.not_in_use.count %></span>
