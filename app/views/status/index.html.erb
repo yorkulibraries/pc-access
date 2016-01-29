@@ -1,35 +1,30 @@
 <% title "Nerve Centre" %>
 
-
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h3 class="panel-title">Current Activity By Location</h3>
+    <h3 class="panel-title">Current Activity By Location and Area</h3>
   </div>
   <div class="panel-body">
-    <%= content_tag :div, "", id: "by_location_activity", data: { computers: location_activity_chart_data }  %>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-md-6">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">Current Activity By Status</h3>
-      </div>
-      <div class="panel-body">
-        <%= content_tag :div, "", id: "by_status_of_activity", data: { computers: by_status_of_activity_chart_data }  %>
-      </div>
-    </div>
-  </div>
-
-  <div class="col-md-6">
-    <div class="panel panel-warning">
-      <div class="panel-heading">
-        <h3 class="panel-title">Not Being Used</h3>
-      </div>
-      <div class="panel-body">
-        <%= content_tag :div, "", id: "troubled_computers", data: { computers: troubled_computers_chart_data }  %>
-      </div>
-    </div>
+    <% @locations.each do |location| %>
+      <h3><%= location.name %></h3>
+      <table class="table">
+        <tr>
+          <th width="35%">Floor</th>
+          <th width="35%">Area</th>
+          <th width="10%">Total</th>
+          <th width="10%">Free</th>
+          <th width="10%">In Use</th>
+        </tr>
+        <% location.areas.order(:floor_id).each do |area| %>
+          <tr>
+            <td><%= area.floor.name %></td>
+            <td><%= area.name %></td>
+            <td><%= area.computers.count %></td>
+            <td><%= area.computers.pinging.not_in_use.count %></td>
+            <td><%= area.computers.pinging.in_use.count %></td>
+          </tr>
+        <% end %>
+      </table>
+    <% end %>
   </div>
 </div>
