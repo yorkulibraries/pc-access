@@ -9,19 +9,21 @@
       <h3><%= location.name %></h3>
       <table class="table">
         <tr>
-          <th width="35%">Floor</th>
-          <th width="35%">Area</th>
+          <th width="30%">Floor</th>
+          <th width="30%">Area</th>
           <th width="10%">Total</th>
           <th width="10%">Free</th>
           <th width="10%">In Use</th>
+          <th width="10%">Not Setup</th>
         </tr>
         <% location.areas.order(:floor_id).each do |area| %>
           <tr>
             <td><%= area.floor.name %></td>
             <td><%= area.name %></td>
             <td><%= area.computers.count %></td>
-            <td><%= area.computers.pinging.not_in_use.count %></td>
+            <td><%= area.computers.not_in_use.count %></td>
             <td><%= area.computers.pinging.in_use.count %></td>
+            <td><%= area.computers.never_ping.count %></td>
           </tr>
         <% end %>
       </table>

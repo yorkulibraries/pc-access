@@ -7,7 +7,7 @@
          <ul class="pc_access_floor_areas" style="<%= params[:expand] == "true" ?  "" : "display: none;" %>">
            <% floor.areas.each do |area| %>
              <li class="">
-                <span class="badge badge-info"><%= area.computers.pinging.not_in_use.count %></span>
+                <span class="badge badge-info"><%= area.computers.not_in_use.count %></span>
                 <%= area.name %>
               </li>
            <% end %>
