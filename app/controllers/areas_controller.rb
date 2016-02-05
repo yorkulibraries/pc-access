@@ -60,7 +60,7 @@ class AreasController < ApplicationController
 
     ### ADDITIONAL ACTIONS ###
     def attach_computers_form
-      @computer_list = @area.computers.select(:ip).collect { |c| c.ip }.join("\n")
+      @computer_list = @area.computers.select(:ip).collect { |c| c.ip }.sort_by { |x| -x[/\d+/].to_i }.join("\n")
       respond_to do |format|
         format.js
       end
@@ -80,7 +80,7 @@ class AreasController < ApplicationController
     end
 
     def computer_list
-      @computers = @area.computers
+      @computers = @area.computers.order("ip ASC")
     end
 
     ### PRIVATE METHODS ###

@@ -9,7 +9,8 @@
       <p><i class="fa fa-building"></i> <%= area.location.name %> | <%= area.floor.name %></p>
       <p>
         <a href="<%= computer_list_location_area_path(@location, area) %>" data-remote="true">
-          <i class="fa fa-desktop"></i> <%= area.computers.count %> Computers
+          <i class="fa fa-desktop"></i> <%= area.computers.count %> 
+            (<%= area.computers.in_use.count %> In Use / <%= area.computers.not_in_use.count %> Free)
         </a>
         <a href="<%= attach_computers_form_location_area_path(@location, area) %>" data-remote="true" class="pull-right small">
           <i class="fa fa-plus-square green important"></i>
