@@ -22,7 +22,7 @@
             <td><%= area.name %></td>
             <td><%= area.computers.count %></td>
             <td><%= area.computers.not_in_use.count %></td>
-            <td><%= area.computers.pinging.in_use.count %></td>
+            <td><%= area.computers.in_use.count %></td>
             <td><%= area.computers.never_ping.count %></td>
           </tr>
         <% end %>
