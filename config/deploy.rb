@@ -1,5 +1,5 @@
-# config valid only for Capistrano 3.1
-lock '3.1.0'
+# config valid only for Capistrano 3.4
+lock '3.4.0'
 
 set :application, 'pc-access'
 # set :repo_url, 'git@github.com:yorkulibraries/#{fetch(:application)}.git'
@@ -47,7 +47,7 @@ namespace :deploy do
 
   after :publishing, :restart
   after :restart, 'deploy:cleanup'
-  
+
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
       # Here we can do anything such as:

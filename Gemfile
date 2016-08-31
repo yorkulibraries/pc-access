@@ -33,7 +33,7 @@ gem 'remotipart', '~> 1.2'
 
 
 # DEPLOYMENT
-gem 'capistrano', '~> 3.1.0'
+gem 'capistrano', '3.4.0'
 gem 'capistrano-rails', '~> 1.1.0'
 gem 'capistrano-bundler', "1.1.4"
 gem 'capistrano-rbenv', "~> 2.0"
