@@ -16,6 +16,8 @@ Rails.application.routes.draw do
 
   get "status/:status" => "status#by_status", as: :by_status
 
+  resources :computers
+
   resources :locations do
 
     resources :floors do

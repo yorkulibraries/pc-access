@@ -1,0 +1,37 @@
+<% title "#{@computer.ip}" %>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    Activity For This Computer
+  </div>
+  <div class="panel-body">
+    <p><%= link_to  :back do %> &laquo; Back <% end %></p>
+
+    <p><i class="fa fa-building"></i> <%= @computer.location.name  rescue nil%>
+      | <%= @computer.floor.name rescue nil%> | <%= @computer.area.name rescue nil %></p>
+    <p><i class="fa fa-user"></i> <%= @computer.current_username %> | <%= @computer.previous_username %> </p>
+    <p><i class="fa fa-calendar"></i> Last Ping: <%= @computer.last_ping %></p>
+
+    <table class="table">
+      <tr>
+        <th>
+          Activity Date
+        </th>
+        <th>
+          Action
+        </th>
+        <th>
+          Username
+        </th>
+      </tr>
+      <% @logs.each do |log| %>
+        <tr>
+          <td><%= log.activity_date %></td>
+          <td><%= log.action %></td>
+          <td><%= log.username %></td>
+        </tr>
+      <% end %>
+    </table>
+
+  </div>
+</div>

@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.0'
+gem 'rails', '4.2.7'
 
 
 ## DATABASES
@@ -16,13 +16,13 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 ## TWITTER BOOTSTRAP, SIMPLE_FORM & FONTAWESOME
-gem "tilt"
+gem "tilt", "1.4.1"
 gem 'jquery-rails', "4.0.3"
 gem 'jquery-ui-rails', "4.2.0"
-gem 'less-rails'
+gem 'less-rails', "2.7.1"
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 gem 'simple_form', "3.1.0"
-gem "font-awesome-rails", '4.4.0'
+gem "font-awesome-rails", '4.6.3.1'
 
 ## TOOLS AND PLUGINS
 gem 'rufus-scheduler', "3.0.9"
@@ -37,7 +37,6 @@ gem 'capistrano', '~> 3.1.0'
 gem 'capistrano-rails', '~> 1.1.0'
 gem 'capistrano-bundler', "1.1.4"
 gem 'capistrano-rbenv', "~> 2.0"
-
 
 group :development, :test do
 
