@@ -4,7 +4,14 @@ class ServersController < ApplicationController
   before_action :set_server, only: [:show, :edit, :update, :destroy]
 
   def index
-    @servers = Server.order(sort_column + " " + sort_direction)
+    sort_sql = sort_column
+
+    if ActiveRecord::Base.connection.adapter_name == 'MySQL' && (sort_sql == "public_ip" || sort_sql == "local_ip") 
+      sort_sql = "INET_ATON(#{sort_column})"
+    end
+
+
+    @servers = Server.order(sort_sql + " " + sort_direction)
   end
 
   def show
