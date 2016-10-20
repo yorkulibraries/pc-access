@@ -33,7 +33,7 @@ class ServersController < ApplicationController
   def index
     sort_sql = sort_column
 
-    if ActiveRecord::Base.connection.adapter_name == 'MySQL' && (sort_sql == "public_ip" || sort_sql == "local_ip")
+    if ActiveRecord::Base.connection.adapter_name.downcase.starts_with?("mysql") && (sort_sql == "public_ip" || sort_sql == "local_ip")
       sort_sql = "INET_ATON(#{sort_column})"
     end
 
