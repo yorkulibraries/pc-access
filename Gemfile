@@ -19,7 +19,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem "tilt", "1.4.1"
 gem 'jquery-rails', "4.0.3"
 gem 'jquery-ui-rails', "4.2.0"
-gem 'less-rails', "2.7.1"
+gem 'less-rails', "2.8.0"
 gem 'twitter-bootstrap-rails', git: 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 gem 'simple_form', "3.1.0"
 gem "font-awesome-rails", '4.6.3.1'

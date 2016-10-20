@@ -91,11 +91,14 @@ ActiveRecord::Schema.define(version: 20161020125401) do
     t.string   "public_ip"
     t.string   "local_ip"
     t.string   "os_name"
+    t.string   "os_version"
+    t.boolean  "public_ip_used"
+    t.boolean  "local_ip_used"
     t.datetime "last_ping"
     t.string   "note"
     t.string   "administrator"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   create_table "software_packages", force: :cascade do |t|

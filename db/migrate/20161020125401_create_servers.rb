@@ -5,6 +5,9 @@ class CreateServers < ActiveRecord::Migration
       t.string :public_ip
       t.string :local_ip
       t.string :os_name
+      t.string :os_version
+      t.boolean :public_ip_used
+      t.boolean :local_ip_used
       t.datetime :last_ping
       t.string :note
       t.string :administrator
