@@ -30,6 +30,7 @@ gem 'ipaddress', "0.8.0"
 gem 'carrierwave', "0.10.0"
 gem "mini_magick", "4.3.6"
 gem 'remotipart', '~> 1.2'
+gem 'best_in_place', '~> 3.0.1'
 
 
 # DEPLOYMENT

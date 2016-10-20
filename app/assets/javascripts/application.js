@@ -20,4 +20,5 @@
 //= require jquery.ui.effect-highlight
 //= require raphael
 //= require morris
+//= require best_in_place
 //= require_tree .

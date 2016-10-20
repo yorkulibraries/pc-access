@@ -1,17 +1,5 @@
-<%= simple_form_for(@server) do |f| %>
-  <%= f.error_notification %>
-
-  <div class="form-inputs">
-    <%= f.input :hostname %>
-    <%= f.input :public_ip %>
-    <%= f.input :local_ip %>
-    <%= f.input :os_name %>
-    <%= f.input :last_ping %>
-    <%= f.input :note %>
-    <%= f.input :administrator %>
-  </div>
-
-  <div class="form-actions">
-    <%= f.button :submit %>
-  </div>
+<% if request.xhr? %>
+  <%= render partial: "servers/forms/popup_form" %>
+<% else %>
+  <%= render partial: "servers/forms/inline_form" %>
 <% end %>

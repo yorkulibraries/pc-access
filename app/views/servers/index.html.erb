@@ -1,39 +1,40 @@
-<p id="notice"><%= notice %></p>
+<% title "Server Room", false %>
 
-<h1>Listing Servers</h1>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Server Room</h3>
+  </div>
+  <div class="panel-body">
+    <%= link_to 'New Server', new_server_path %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Hostname</th>
-      <th>Public ip</th>
-      <th>Local ip</th>
-      <th>Os name</th>
-      <th>Last ping</th>
-      <th>Note</th>
-      <th>Administrator</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Hostname</th>
+          <th>Public ip</th>
+          <th>Local ip</th>
+          <th>Administrator</th>
+          <th>Note</th>
+          <th>Os name</th>
+          <th>Last ping</th>                  
+          <th colspan="3"></th>
+        </tr>
+      </thead>
 
-  <tbody>
-    <% @servers.each do |server| %>
-      <tr>
-        <td><%= server.hostname %></td>
-        <td><%= server.public_ip %></td>
-        <td><%= server.local_ip %></td>
-        <td><%= server.os_name %></td>
-        <td><%= server.last_ping %></td>
-        <td><%= server.note %></td>
-        <td><%= server.administrator %></td>
-        <td><%= link_to 'Show', server %></td>
-        <td><%= link_to 'Edit', edit_server_path(server) %></td>
-        <td><%= link_to 'Destroy', server, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Server', new_server_path %>
+      <tbody>
+        <% @servers.each do |server| %>
+          <tr>
+            <td><%= best_in_place server, :name, tabindex: "1" %> %></td>
+            <td><%= best_in_place server, :public_ip %></td>
+            <td><%= best_in_place server, :local_ip %></td>
+            <td><%= best_in_place server, :administrator %></td>
+            <td><%= best_in_place server, :note %></td>
+            <td><%= best_in_place server, :os_name %></td>
+            <td><%= server.last_ping %></td>
+            <td><%= link_to 'Show', server %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
