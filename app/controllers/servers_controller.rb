@@ -9,13 +9,20 @@ class ServersController < ApplicationController
 
 
     if @server == nil
-      
+      @server = Server.new
+      @server.hostname = ""
+      @server.local_ip = "10.0.0.#{request.remote_ip.split(".").last}"
+      @server.public_ip_used = false
+      @server.public_ip = request.remote_ip
+      @server.public_ip_used = true
+
+      @serer.save(validate: false)
     end
 
     @server.os_name = params[:os_name]
     @server.os_version = params[:os_version]
     @server.last_ping = Date.today
-    @server.save
+    @server.save(validate: false)
 
 
     respond_to do |format|

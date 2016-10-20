@@ -43,7 +43,7 @@ group :development, :test do
 
   ## defaults
   gem 'byebug', "3.5.1" # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'web-console', '~> 2.0'
+  gem 'web-console', '~> 2.0', group: :development
   gem 'spring', "1.3.6"
 
   ## testing specific
