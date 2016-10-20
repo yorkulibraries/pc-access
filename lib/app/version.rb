@@ -2,7 +2,7 @@ module App
 
   class Version
     def version
-      "1.1"
+      "1.2"
     end
   end
 

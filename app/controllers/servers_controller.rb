@@ -3,10 +3,30 @@ class ServersController < ApplicationController
 
   before_action :set_server, only: [:show, :edit, :update, :destroy]
 
+
+  def inform
+    @server = Server.where(public_ip: request.remote_ip).first
+
+
+    if @server == nil
+      
+    end
+
+    @server.os_name = params[:os_name]
+    @server.os_version = params[:os_version]
+    @server.last_ping = Date.today
+    @server.save
+
+
+    respond_to do |format|
+      format.all { render :nothing => true }
+    end
+  end
+
   def index
     sort_sql = sort_column
 
-    if ActiveRecord::Base.connection.adapter_name == 'MySQL' && (sort_sql == "public_ip" || sort_sql == "local_ip") 
+    if ActiveRecord::Base.connection.adapter_name == 'MySQL' && (sort_sql == "public_ip" || sort_sql == "local_ip")
       sort_sql = "INET_ATON(#{sort_column})"
     end
 
