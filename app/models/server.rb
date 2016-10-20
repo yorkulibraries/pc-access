@@ -1,7 +1,7 @@
 class Server < ActiveRecord::Base
 
   ## Constants
-  OS_NAMES = ["Ubuntu", "CentOS", "Fedora", "Debian", "Red Hat", "Slackware", "openSUSE", "Linux Mint", "Gentoo", "Other Linux", "Windows", "OS X"]
+  OS_NAMES = ["", "Ubuntu", "CentOS", "Fedora", "Debian", "Red Hat", "Slackware", "openSUSE", "Linux Mint", "Gentoo", "Other Linux", "Windows", "OS X"]
 
 
   ## VALIDATIONS
