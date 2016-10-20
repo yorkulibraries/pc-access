@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
 
 
+
   get "api" => "api#index"
   get "api/l/:id" => "api#by_location", as: :api_by_location
   get "api/l/:id/f/:floor_id" => "api#by_floor", as: :api_by_floor
@@ -15,6 +16,8 @@ Rails.application.routes.draw do
   match 'trackers/ping' => 'trackers#ping', as: :trackers_ping, via: [:get, :post]
 
   get "status/:status" => "status#by_status", as: :by_status
+
+  resources :servers
 
   resources :computers
 

@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Hostname:</strong>
+  <%= @server.hostname %>
+</p>
+
+<p>
+  <strong>Public ip:</strong>
+  <%= @server.public_ip %>
+</p>
+
+<p>
+  <strong>Local ip:</strong>
+  <%= @server.local_ip %>
+</p>
+
+<p>
+  <strong>Os name:</strong>
+  <%= @server.os_name %>
+</p>
+
+<p>
+  <strong>Last ping:</strong>
+  <%= @server.last_ping %>
+</p>
+
+<p>
+  <strong>Note:</strong>
+  <%= @server.note %>
+</p>
+
+<p>
+  <strong>Administrator:</strong>
+  <%= @server.administrator %>
+</p>
+
+<%= link_to 'Edit', edit_server_path(@server) %> |
+<%= link_to 'Back', servers_path %>
