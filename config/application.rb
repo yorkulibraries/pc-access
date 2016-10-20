@@ -27,6 +27,5 @@ module PcAccess
 
     config.time_zone = 'Eastern Time (US & Canada)'
 
-    config.web_console.development_only = false
   end
 end

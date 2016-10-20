@@ -43,7 +43,7 @@ group :development, :test do
 
   ## defaults
   gem 'byebug', "3.5.1" # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'web-console', '~> 2.0', group: :development
+
   gem 'spring', "1.3.6"
 
   ## testing specific
@@ -67,3 +67,5 @@ group :development, :test do
   gem "rack-livereload", "0.3.16"
 
 end
+
+gem 'web-console', '~> 2.0', group: :development

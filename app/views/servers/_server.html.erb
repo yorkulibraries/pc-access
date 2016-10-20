@@ -1,7 +1,9 @@
 <tr id="server_<%= server.id %>">
   <td><%= in_place_edit server, :hostname %></td>
   <td>
-    <%= in_place_edit server, :public_ip %>
+    <span style="min-width: 110px; display:inline-block;">
+      <%= in_place_edit server, :public_ip %>
+    </span>
 
     <%= simple_form_for server, remote: true, html: { style: "display: inline;" } do |f| %>
       <% if server.public_ip_used? %>
@@ -16,7 +18,9 @@
 
   </td>
   <td>
-    <%= in_place_edit server, :local_ip %>
+    <span style="min-width: 110px; display:inline-block;">
+      <%= in_place_edit server, :local_ip %>
+    </span>
 
     <%= simple_form_for server, remote: true, html: { style: "display: inline;" } do |f| %>
       <% if server.local_ip_used? %>
