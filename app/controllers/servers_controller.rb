@@ -1,8 +1,10 @@
 class ServersController < ApplicationController
+  include SortableHelper
+
   before_action :set_server, only: [:show, :edit, :update, :destroy]
 
   def index
-    @servers = Server.all
+    @servers = Server.order(sort_column + " " + sort_direction)
   end
 
   def show
@@ -36,9 +38,11 @@ class ServersController < ApplicationController
       if @server.update(server_params)
         format.html { redirect_to @server, notice: 'Server was successfully updated.' }
         format.js
+        format.json { respond_with_bip(@server) }
       else
         format.html { render :edit }
         format.js
+        format.json { respond_with_bip(@server) }
       end
     end
   end
@@ -59,6 +63,7 @@ class ServersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def server_params
-      params.require(:server).permit(:hostname, :public_ip, :local_ip, :os_name, :note, :administrator)
+      params.require(:server).permit(:hostname, :public_ip, :local_ip, :os_name, :note, :administrator, :public_ip_used, :local_ip_used)
     end
+
 end

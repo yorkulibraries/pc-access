@@ -21,4 +21,5 @@
 //= require raphael
 //= require morris
 //= require best_in_place
+//= require plugin_loader
 //= require_tree .

@@ -5,34 +5,28 @@
     <h3 class="panel-title">Server Room</h3>
   </div>
   <div class="panel-body">
-    <%= link_to 'New Server', new_server_path %>
+    <%= link_to new_server_path, data: { remote: true }, class: "btn btn-success" do %>
+      <i class="fa fa-plus"></i> New Server
+    <% end %>
+    <hr/>
+    <p class="weak">To edit server details, click on the server field you wish update...</p>
 
-    <table class="table">
+    <table class="table" id="servers">
       <thead>
         <tr>
-          <th>Hostname</th>
-          <th>Public ip</th>
-          <th>Local ip</th>
-          <th>Administrator</th>
-          <th>Note</th>
-          <th>Os name</th>
-          <th>Last ping</th>                  
-          <th colspan="3"></th>
+          <th><%= sortable :hostname, "Hostname" %></th>
+          <th><%= sortable :public_ip, "Public IP (Used?)" %></th>
+          <th><%= sortable :local_ip, "Local IP (Used?)" %></th>
+          <th><%= sortable :administrator, "Administrator" %></th>
+          <th><%= sortable :os_name, "OS Name" %></th>
+          <th><%= sortable :os_version, "OS Version" %></th>
+          <th class="weak soft">CNAMEs and Notes</th>
         </tr>
       </thead>
 
-      <tbody>
+      <tbody id="server_list">
         <% @servers.each do |server| %>
-          <tr>
-            <td><%= best_in_place server, :name, tabindex: "1" %> %></td>
-            <td><%= best_in_place server, :public_ip %></td>
-            <td><%= best_in_place server, :local_ip %></td>
-            <td><%= best_in_place server, :administrator %></td>
-            <td><%= best_in_place server, :note %></td>
-            <td><%= best_in_place server, :os_name %></td>
-            <td><%= server.last_ping %></td>
-            <td><%= link_to 'Show', server %></td>
-          </tr>
+          <%= render server %>
         <% end %>
       </tbody>
     </table>

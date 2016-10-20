@@ -1,4 +1,4 @@
-<div class="modal fade" id="image_form">
+<div class="modal fade" id="server_form">
   <div class="modal-dialog">
     <div class="modal-content">
     <%= simple_form_for @server, remote: true  do |f| %>
@@ -9,26 +9,49 @@
       <div class="modal-body">
 
         <div class="row">
-          <div class="col-sm-12">
-              <%= f.input :name, as: :string %>
+          <div class="col-sm-6">
+              <%= f.input :hostname, as: :string %>
+          </div>
+          <div class="col-sm-6">
+              <%= f.input :administrator %>
           </div>
         </div>
         <div class="row">
           <div class="col-sm-6">
-              <%= f.input :os_name, collection: Image::OS_NAMES, required: true %>
+              <%= f.input :public_ip %>
+              <%= f.input :public_ip_used, label: "In Use?" %>
+          </div>
+          <div class="col-sm-6">
+              <%= f.input :local_ip %>
+              <%= f.input :local_ip_used, label: "In Use?" %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-6">
+              <%= f.input :os_name, collection: Server::OS_NAMES %>
           </div>
           <div class="col-sm-6">
               <%= f.input :os_version, as: :string %>
           </div>
         </div>
 
+        <div class="row">
+          <div class="col-sm-6">
+              <%= f.input :cnames %>
+          </div>
+          <div class="col-sm-6">
+              <%= f.input :note, as: :text %>
+          </div>
+        </div>
 
-      <% if @image.errors.any? %>
+
+      <% if @server.errors.any? %>
         <div class="error_messages">
           <hr/>
           <p class="red">
             Oops! There seems to be a small issue with this item. Please make sure you've filled out the form correctly.<br/>
-            If <span title="<%=raw  @image.errors.full_messages.join("<br/>") %>">the problem</span>
+            If <span title="<%=raw  @server.errors.full_messages.join("<br/>") %>">the problem</span>
             persists, please contact the administrator of this application.
           </p>
         </div>
@@ -36,8 +59,8 @@
     </div>
 
     <div class="modal-footer">
-      <% unless @image.new_record? %>
-        <%= link_to @image, method: :delete, data: { confirm: 'Are you sure?', remote: true }, class: "pull-left btn btn-danger" do %>
+      <% unless @server.new_record? %>
+        <%= link_to @server, method: :delete, data: { confirm: 'Are you sure?', remote: true }, class: "pull-left btn btn-danger" do %>
           <span class="fa fa-trash"></span><span class="sr-only">Delete?</span>
         <% end %>
       <% end %>

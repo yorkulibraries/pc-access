@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151118200759) do
+ActiveRecord::Schema.define(version: 20161020125401) do
 
   create_table "areas", force: :cascade do |t|
     t.string   "name"
@@ -84,6 +84,22 @@ ActiveRecord::Schema.define(version: 20151118200759) do
     t.boolean  "deleted",    default: false, null: false
     t.integer  "floors"
     t.string   "address"
+  end
+
+  create_table "servers", force: :cascade do |t|
+    t.string   "hostname"
+    t.string   "public_ip"
+    t.string   "local_ip"
+    t.string   "os_name"
+    t.string   "os_version"
+    t.boolean  "public_ip_used"
+    t.boolean  "local_ip_used"
+    t.datetime "last_ping"
+    t.text     "cnames"
+    t.string   "note"
+    t.string   "administrator"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   create_table "software_packages", force: :cascade do |t|

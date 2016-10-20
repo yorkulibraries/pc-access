@@ -1,0 +1,6 @@
+$("#show_server_<%= @server.id %>").remove();
+$("body").append("<%= j render template: "servers/show", formats: [:html] %>");
+$("#show_server_<%= @server.id %>").modal('show');
+
+// load best in place
+$(".best_in_place").best_in_place();

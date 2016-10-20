@@ -1,0 +1,15 @@
+<% if @server.errors.size == 0 %>
+  $("#server_form").modal( 'hide' ).data( 'bs.modal', null );
+  $( '.modal-backdrop' ).remove();
+
+
+  $("#servers tbody").prepend("<%= j render @server, formats: [:html] %>");
+  $("#server_<%= @server.id %>").effect("highlight", {}, 3000);
+
+  $(".best_in_place").best_in_place();
+<% else %>
+  $( '.modal-backdrop' ).remove();
+  $("#server_form").modal('hide');
+  $("#server_form").replaceWith("<%= j render "form", formats: [:html] %>");
+  $("#server_form").modal("show");
+<% end %>

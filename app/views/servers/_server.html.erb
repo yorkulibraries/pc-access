@@ -1,0 +1,42 @@
+<tr id="server_<%= server.id %>">
+  <td><%= in_place_edit server, :hostname %></td>
+  <td>
+    <%= in_place_edit server, :public_ip %>
+
+    <%= simple_form_for server, remote: true, html: { style: "display: inline;" } do |f| %>
+      <% if server.public_ip_used? %>
+        <%= f.input :public_ip_used, as: :hidden, input_html: { value: "false" } %>
+        <i class="fa fa-toggle-on pointer" onclick="$(this).closest('form').submit();"></i>
+      <% else %>
+        <%= f.input :public_ip_used, as: :hidden, input_html: { value: "true" } %>
+        <i class="fa fa-toggle-off pointer" onclick="$(this).closest('form').submit();"></i>
+      <% end %>
+
+    <% end %>
+
+  </td>
+  <td>
+    <%= in_place_edit server, :local_ip %>
+
+    <%= simple_form_for server, remote: true, html: { style: "display: inline;" } do |f| %>
+      <% if server.local_ip_used? %>
+        <%= f.input :local_ip_used, as: :hidden, input_html: { value: "false" } %>
+        <i class="fa fa-toggle-on pointer" onclick="$(this).closest('form').submit();"></i>
+      <% else %>
+        <%= f.input :local_ip_used, as: :hidden, input_html: { value: "true" } %>
+        <i class="fa fa-toggle-off pointer" onclick="$(this).closest('form').submit();"></i>
+      <% end %>
+
+    <% end %>
+
+  </td>
+  <td><%= in_place_edit server, :administrator %></td>
+
+  <td><%= in_place_edit server, :os_name, as: :select, collection: Server::OS_NAMES %></td>
+  <td><%= in_place_edit server, :os_version %></td>
+
+  <td><%= link_to server, data: { remote: true } do %>
+      More <i class="fa fa-angle-double-right"></i>
+    <% end %>
+  </td>
+</tr>

@@ -1,39 +1,49 @@
-<p id="notice"><%= notice %></p>
+<div class="modal fade" id="show_server_<%= @server.id %>">
+  <div class="modal-dialog">
+    <div class="modal-content">
 
-<p>
-  <strong>Hostname:</strong>
-  <%= @server.hostname %>
-</p>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title"><%= @server.hostname %></h4>
+      </div>
+      <div class="modal-body">
 
-<p>
-  <strong>Public ip:</strong>
-  <%= @server.public_ip %>
-</p>
+        <div class="row">
+          <div class="col-sm-2">
+            <strong> CNAMES: </strong>
+          </div>
+          <div class="col-sm-10">
+            <%= in_place_edit @server, :cnames, as: :textarea %>
+          </div>
+        </div>
 
-<p>
-  <strong>Local ip:</strong>
-  <%= @server.local_ip %>
-</p>
+        <hr/>
 
-<p>
-  <strong>Os name:</strong>
-  <%= @server.os_name %>
-</p>
+        <div class="row">
+          <div class="col-sm-2">
+            <strong> NOTES:</strong>
+          </div>
+          <div class="col-sm-10">
+            <%= in_place_edit @server, :note, as: :textarea %>
+          </div>
+        </div>
 
-<p>
-  <strong>Last ping:</strong>
-  <%= @server.last_ping %>
-</p>
+        <hr/>
 
-<p>
-  <strong>Note:</strong>
-  <%= @server.note %>
-</p>
+        <div class="row">
+          <div class="col-sm-2">
+            <strong>Last Ping:</strong>
+          </div>
+          <div class="col-sm-10">
+            <%= simple_format @server.last_ping %>
+          </div>
+        </div>
 
-<p>
-  <strong>Administrator:</strong>
-  <%= @server.administrator %>
-</p>
 
-<%= link_to 'Edit', edit_server_path(@server) %> |
-<%= link_to 'Back', servers_path %>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    </div>
+  </div>
+</div>
