@@ -6,10 +6,10 @@
     <%= simple_form_for server, remote: true, html: { style: "display: inline;" } do |f| %>
       <% if server.public_ip_used? %>
         <%= f.input :public_ip_used, as: :hidden, input_html: { value: "false" } %>
-        <i class="fa fa-toggle-on pointer" onclick="$(this).closest('form').submit();"></i>
+        <i class="fa fa-toggle-on pointer red" onclick="$(this).closest('form').submit();"></i>
       <% else %>
         <%= f.input :public_ip_used, as: :hidden, input_html: { value: "true" } %>
-        <i class="fa fa-toggle-off pointer" onclick="$(this).closest('form').submit();"></i>
+        <i class="fa fa-toggle-off pointer green" onclick="$(this).closest('form').submit();"></i>
       <% end %>
 
     <% end %>
@@ -21,10 +21,10 @@
     <%= simple_form_for server, remote: true, html: { style: "display: inline;" } do |f| %>
       <% if server.local_ip_used? %>
         <%= f.input :local_ip_used, as: :hidden, input_html: { value: "false" } %>
-        <i class="fa fa-toggle-on pointer" onclick="$(this).closest('form').submit();"></i>
+        <i class="fa fa-toggle-on pointer red" onclick="$(this).closest('form').submit();"></i>
       <% else %>
         <%= f.input :local_ip_used, as: :hidden, input_html: { value: "true" } %>
-        <i class="fa fa-toggle-off pointer" onclick="$(this).closest('form').submit();"></i>
+        <i class="fa fa-toggle-off pointer green" onclick="$(this).closest('form').submit();"></i>
       <% end %>
 
     <% end %>
