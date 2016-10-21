@@ -16,11 +16,10 @@
         <tr>
           <th><%= sortable :hostname, "Hostname" %></th>
           <th><%= sortable :public_ip, "Public IP (Used?)" %></th>
+          <th><%= sortable :public_used_by, "Used By" %></th>
+          <th><%= sortable :local_hostanme, "Local Hostname" %></th>
           <th><%= sortable :local_ip, "Local IP (Used?)" %></th>
-          <th><%= sortable :administrator, "Administrator" %></th>
-          <th><%= sortable :os_name, "OS Name" %></th>
-          <th><%= sortable :os_version, "OS Version" %></th>
-          <th class="weak soft">CNAMEs and Notes</th>
+          <th><%= sortable :local_used_by, "Used By" %></th>
         </tr>
       </thead>
 

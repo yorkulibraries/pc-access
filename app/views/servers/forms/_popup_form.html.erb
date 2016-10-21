@@ -13,37 +13,38 @@
               <%= f.input :hostname, as: :string %>
           </div>
           <div class="col-sm-6">
-              <%= f.input :administrator %>
+              <%= f.input :public_used_by, label: "Used By" %>
           </div>
         </div>
         <div class="row">
           <div class="col-sm-6">
               <%= f.input :public_ip %>
-              <%= f.input :public_ip_used, label: "In Use?" %>
+
           </div>
           <div class="col-sm-6">
-              <%= f.input :local_ip %>
-              <%= f.input :local_ip_used, label: "In Use?" %>
+            <%= f.input :public_ip_used, label: "In Use?" %>
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col-sm-6">
+              <%= f.input :local_hostname, as: :string %>
+          </div>
+          <div class="col-sm-6">
+              <%= f.input :local_used_by, label: "Used By" %>
           </div>
         </div>
 
         <div class="row">
           <div class="col-sm-6">
-              <%= f.input :os_name, collection: Server::OS_NAMES %>
+            <%= f.input :local_ip %>
           </div>
           <div class="col-sm-6">
-              <%= f.input :os_version, as: :string %>
+            <%= f.input :local_ip_used, label: "In Use?" %>
           </div>
         </div>
 
-        <div class="row">
-          <div class="col-sm-6">
-              <%= f.input :cnames %>
-          </div>
-          <div class="col-sm-6">
-              <%= f.input :note, as: :text %>
-          </div>
-        </div>
 
 
       <% if @server.errors.any? %>

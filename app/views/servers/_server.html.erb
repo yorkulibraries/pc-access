@@ -17,6 +17,8 @@
     <% end %>
 
   </td>
+  <td><%= in_place_edit server, :public_used_by %></td>
+  <td><%= in_place_edit server, :local_hostname %></td>
   <td>
     <span style="min-width: 110px; display:inline-block;">
       <%= in_place_edit server, :local_ip %>
@@ -34,13 +36,6 @@
     <% end %>
 
   </td>
-  <td><%= in_place_edit server, :administrator %></td>
+  <td><%= in_place_edit server, :local_used_by %></td>
 
-  <td><%= in_place_edit server, :os_name, as: :select, collection: Server::OS_NAMES %></td>
-  <td><%= in_place_edit server, :os_version %></td>
-
-  <td><%= link_to server, data: { remote: true } do %>
-      More <i class="fa fa-angle-double-right"></i>
-    <% end %>
-  </td>
 </tr>

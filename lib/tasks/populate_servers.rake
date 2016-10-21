@@ -28,8 +28,11 @@ namespace :server do
         server.hostname = hostname
         server.public_ip = public_ip
         server.public_ip_used = true
-        server.local_ip = local_ip
+
+        server.local_hostname = ""
+        server.local_ip = local_ip        
         server.local_ip_used = false
+
         server.last_ping = Date.today
         server.save(validate: false)
       end

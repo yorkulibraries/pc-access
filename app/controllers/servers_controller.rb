@@ -4,32 +4,6 @@ class ServersController < ApplicationController
   before_action :set_server, only: [:show, :edit, :update, :destroy]
 
 
-  def inform
-    @server = Server.where(public_ip: request.remote_ip).first
-
-
-    if @server == nil
-      @server = Server.new
-      @server.hostname = ""
-      @server.local_ip = "10.0.0.#{request.remote_ip.split(".").last}"
-      @server.public_ip_used = false
-      @server.public_ip = request.remote_ip
-      @server.public_ip_used = true
-
-      @serer.save(validate: false)
-    end
-
-    @server.os_name = params[:os_name]
-    @server.os_version = params[:os_version]
-    @server.last_ping = Date.today
-    @server.save(validate: false)
-
-
-    respond_to do |format|
-      format.all { render :nothing => true }
-    end
-  end
-
   def index
     sort_sql = sort_column
 
@@ -97,7 +71,7 @@ class ServersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def server_params
-      params.require(:server).permit(:hostname, :public_ip, :local_ip, :os_name, :note, :administrator, :public_ip_used, :local_ip_used)
+      params.require(:server).permit(:hostname, :public_ip, :local_ip, :local_hostname, :local_used_by, :public_used_by, :public_ip_used, :local_ip_used)
     end
 
 end
