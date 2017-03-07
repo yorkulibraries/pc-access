@@ -10,6 +10,17 @@
       <% @images.each do |image| %>
         <%= render image, show: "div" %>
       <% end %>
+
+      <% if @images.size == 0 %>
+        <div class="blank-slate">
+          <span class="fa fa-info"></span>
+          <h1>There are no Images</h1>
+          <p>Click on <%= link_to new_image_path(), class: "red", data: { remote: true }  do%>
+            this link
+            <% end %> to add a new image.
+          </p>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
