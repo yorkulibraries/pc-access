@@ -2,7 +2,7 @@
   height: 100%; font-family: Arial, sans-serif;
 
   h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
-    color: white;
+    color: inherit;
     font-family: inherit;
     font-weight: 500;
     line-height: 1.1;
@@ -39,9 +39,6 @@
     white-space: nowrap;
   }
 
-  .pc_access_floor_computers { font-size: 5em; }
-  .pc_access_area_computers { font-size: 18px; }
-
   .list-group {
     xborder-radius: 4px;
     xbox-shadow: 0 1px 2px rgba(0, 0, 0, 0.075);
@@ -51,9 +48,15 @@
     .list-group-item {
       &::before { content: none; }
       .badge { float: right; }
+      a.pc_access_floor { text-decoration: none; color: #31708f; }
+
       &.list-group-item-info {
         background-color: #d9edf7;
         color: #31708f;
+      }
+
+      &.highlight_floor {
+        background-color: #d9edf7;
       }
 
       &:first-child {
@@ -63,20 +66,13 @@
 
       background-color: #ffffff;
       border: 1px solid #dddddd;
-      display: block;
-      margin-bottom: -1px;
+      display: block;    
       padding: 10px 15px;
       position: relative;
-
-      float: left;
-      margin-right: 30px;
-      margin-bottom: 10px;
-      min-width: 500px;
-      min-height: 400px;
     }
   }
 
-  a.pc_access_floor { text-decoration: none; color: black; }
+
 
   ul.pc_access_floor_areas {
     padding-left: 0; margin-left: 0px;

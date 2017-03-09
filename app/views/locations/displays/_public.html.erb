@@ -1,14 +1,16 @@
+<%= render partial: "api/custom_location_css" %>
+
 <div id="pc_access_location_<%= location.id %>" class="pc_access_public_view" data-id="<%= location.id %>">
-  <h1><%= location.name %> </h1>
+  <h1><%= location.name %> - Available Computers</h1>
   <ul class="list-group">
     <% location.floors.each do |floor| %>
-      <li class="list-group-item">
-         <span class="badge badge-success pc_access_floor_computers"><%= floor.computers.pinging.not_in_use.count %></span>
-         <a class="pc_access_floor pc_access_floor_computers" href="#"><%= t floor.name %></a>
+      <li class="list-group-item <% "highlight_floor" if params[:hl_floor] == floor.id %>">
+         <span class="badge badge-success"><%= floor.computers.pinging.not_in_use.count %></span>
+         <a class="pc_access_floor" href="#"><%= t floor.name %></a>
          <ul class="pc_access_floor_areas" style="<%= params[:expand] == "true" ?  "" : "display: none;" %>">
            <% floor.areas.each do |area| %>
-             <li class="pc_access_area_computers">
-                <span class="badge badge-info pc_access_area_computers"><%= area.computers.not_in_use.count %></span>
+             <li class="pc_access_area">
+                <span class="badge badge-info"><%= area.computers.not_in_use.count %></span>
                 <%= area.name %>
               </li>
            <% end %>

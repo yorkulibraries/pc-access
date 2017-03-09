@@ -1,0 +1,42 @@
+<style type="text/css">
+  <% defaults = {
+      h1_size: "18px",
+      h1_color: "111",
+      use_cards: false,
+      card_width: "500px",
+      card_height: "400px",
+      card_right_margin: "30px",
+      card_bottom_margin: "30px",
+
+      floor_font_size: "4em",
+      area_font_size: "18px",
+
+    }
+
+    params.replace(defaults.merge(params))
+  %>
+  .pc_access_public_view h1 { color: #<%= params[:h1_color] %>; font-size: <%= params[:h1_size] %>; }
+
+  <% if params[:use_cards] == "true" %>
+    .pc_access_public_view .list-group-item {
+      float: left !important;
+      width: <%= params[:card_width] %> !important;
+      height: <%= params[:card_height] %> !important;
+      overflow: hidden;
+
+    }
+  <% end %>
+  .pc_access_public_view .list-group-item {
+      margin-right: <%= params[:card_right_margin] %> !important;
+      margin-bottom: <%= params[:card_bottom_margin] %> !important;
+    }
+
+  .pc_access_public_view .list-group-item a.pc_access_floor,
+  .pc_access_public_view .list-group-item .badge
+    { font-size:<%= params[:floor_font_size] %>; }
+
+  .pc_access_public_view .list-group-item .pc_access_floor_areas .pc_access_area,
+  .pc_access_public_view .list-group-item .pc_access_floor_areas .pc_access_area .badge
+    { font-size:<%= params[:area_font_size] %>; }
+
+</style>
