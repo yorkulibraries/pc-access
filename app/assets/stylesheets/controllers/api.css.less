@@ -1,6 +1,8 @@
 .pc_access_public_view {
+  height: 100%; font-family: Arial, sans-serif;
+
   h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
-    color: inherit;
+    color: white;
     font-family: inherit;
     font-weight: 500;
     line-height: 1.1;
@@ -37,10 +39,12 @@
     white-space: nowrap;
   }
 
+  .pc_access_floor_computers { font-size: 4em; }
+  .pc_access_area_computers { font-size: 18px; }
 
   .list-group {
-    border-radius: 4px;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.075);
+    xborder-radius: 4px;
+    xbox-shadow: 0 1px 2px rgba(0, 0, 0, 0.075);
     margin-bottom: 20px;
     padding-left: 0;
 
@@ -53,8 +57,8 @@
       }
 
       &:first-child {
-        border-top-left-radius: 4px;
-        border-top-right-radius: 4px;
+        xborder-top-left-radius: 4px;
+        xborder-top-right-radius: 4px;
       }
 
       background-color: #ffffff;
@@ -66,8 +70,10 @@
     }
   }
 
+  a.pc_access_floor { text-decoration: none; font-size: 4em; color: black; }
+
   ul.pc_access_floor_areas {
-    padding-left: 0; margin-left: 0px; 
+    padding-left: 0; margin-left: 0px;
     li { padding: 5px 0px 5px 10px; list-style: none; &::before { content: none; } }
   }
 
