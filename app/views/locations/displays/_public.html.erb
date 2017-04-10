@@ -4,9 +4,9 @@
   <h1><%= location.name %> - Available Computers</h1>
   <ul class="list-group">
     <% location.floors.each do |floor| %>
-      <li class="list-group-item <% "highlight_floor" if params[:hl_floor] == floor.id %>">
+      <li class="list-group-item <%= "highlight_floor" if params[:hl_floor] == floor.id.to_s %>">      
          <span class="badge badge-success"><%= floor.computers.pinging.not_in_use.count %></span>
-         <a class="pc_access_floor" href="#"><%= t floor.name %></a>
+         <a class="pc_access_floor" href="#" data-id="<%= floor.id %>"><%= t floor.name %></a>
          <ul class="pc_access_floor_areas" style="<%= params[:expand] == "true" ?  "" : "display: none;" %>">
            <% floor.areas.each do |area| %>
              <li class="pc_access_area">

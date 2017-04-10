@@ -4,11 +4,11 @@
 
   // add location to a locations list, figure out if locations is a table or not
   if ($("#floors").is("table")) {
-    $("#floors tbody").prepend("<%= j render @floor, formats: [:html], locals: { show: 'tr' } %>");
+    $("#floors tbody").prepend("<%= j render partial: "floors/floor", formats: [:html], locals: { floor: @floor, show: 'tr' } %>");
   } else if ($("#floors").is("ul")) {
-    $("ul#floors").append("<%= j render @floor, formats: [:html], locals: { show: 'li' } %>");
+    $("ul#floors").append("<%= j render partial: "floors/floor", formats: [:html], locals: { floor: @floor, show: 'li' } %>");
   } else {
-    $("#floors").prepend("<%= j render @floor, formats: [:html], locals: { show: 'div'} %>");
+    $("#floors").prepend("<%= j render partial: "floors/floor", formats: [:html], locals: { floor: @floor, show: 'div'} %>");
   }
 
   $("#floor_<%= @floor.id %>").effect("highlight", {}, 3000);

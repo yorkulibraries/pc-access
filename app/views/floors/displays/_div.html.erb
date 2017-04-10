@@ -21,7 +21,7 @@
           </div>
         <% else %>
           <% floor.areas.each do |area| %>
-            <%= render area, locals: { show: "div" } %>
+            <%= render partial: "areas/area", locals: { area: area, show: "div" } %>
           <% end %>
         <% end %>
       </div>

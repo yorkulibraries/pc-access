@@ -11,10 +11,10 @@
           <% @location.floors.each_with_index do |floor, index| %>
               <% if index == 0 %>
                 <% @first_item = true %>
-                <%= render floor, locals: { show: "li"} %>
+                <%= render partial: 'floors/floor', locals: { floor: floor, show: "li" } %>
               <% else %>
                 <% @first_item = false %>
-                <%= render floor, locals: { show: "li" } %>
+                <%= render partial: 'floors/floor', locals: { floor: floor, show: "li" } %>
               <% end %>
 
           <% end %>
@@ -27,7 +27,7 @@
       <div class="col-md-9">
         <div id="floors">
             <% if @location.floors.size > 0 %>
-              <%= render @location.floors.first, locals: { show: "div" } %>
+              <%= render partial: 'floors/floor', locals: { floor:  @location.floors.first,  show: "div" } %>
             <% end %>
         </div>
       </div>

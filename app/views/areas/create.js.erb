@@ -4,9 +4,9 @@
 
   // add location to a locations list, figure out if locations is a table or not
   if ($("#areas").is("table")) {
-    $("#areas tbody").prepend("<%= j render @area, formats: [:html], locals: { show: 'tr' } %>");
+    $("#areas tbody").prepend("<%= j render partial: "areas/area", formats: [:html], locals: { area: @area, show: 'tr' } %>");
   } else {
-    $("#areas").prepend("<%= j render @area, formats: [:html], locals: { show: 'div' } %>");
+    $("#areas").prepend("<%= j render partial: "areas/area", formats: [:html], locals: { area: @area, show: 'div' } %>");
   }
   $(".blank-slate").remove();
   $("#area_<%= @area.id %>").effect("highlight", {}, 3000);

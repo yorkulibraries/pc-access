@@ -20,8 +20,8 @@
       </thead>
 
       <tbody>
-        <% @locations.each do |location| %>
-          <%= render location, locals: { show: "tr" } %>
+        <% @locations.each do |location| %>      
+          <%= render 'location', location: location, show: "tr" %>
         <% end %>
       </tbody>
     </table>

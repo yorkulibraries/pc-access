@@ -4,9 +4,9 @@
 
   // add location to a locations list, figure out if locations is a table or not
   if ($("#images").is("table")) {
-    $("#images tbody").prepend("<%= j render @image, formats: [:html], locals: { table: true } %>");
+    $("#images tbody").prepend("<%= j render partial: "images/image", formats: [:html], locals: { image: @image, show: "tr" } %>");
   } else {
-    $("#images").prepend("<%= j render @image, formats: [:html], locals: { table: false } %>");
+    $("#images").prepend("<%= j render partial: "images/image", formats: [:html], locals: { image: @image, show: "div"  } %>");
   }
 
     $("#image_<%= @image.id %>").effect("highlight", {}, 3000);

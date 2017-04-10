@@ -1,4 +1,4 @@
 $("div#floors").empty();
 $("ul#floors li.active").removeClass("active");
-$("div#floors").prepend("<%= j render @floor, formats: [:html], locals: { show: 'div'} %>");
+$("div#floors").prepend("<%= j render partial: "floors/floor", formats: [:html], locals: { floor: @floor,  show: 'div'} %>");
 $("li#floor_<%= @floor.id %>").addClass("active");

@@ -4,9 +4,9 @@
 
   // update via  partial and insert it into proper place
   if ($("#images").is("table")) {
-    $("#image_<%= @image.id %>").replaceWith("<%= j render @image, formats: [:html], locals: { table: true } %>");
+    $("#image_<%= @image.id %>").replaceWith("<%= j render partial: "images/image", formats: [:html], locals: { image: @image, show: "tr" } %>");
   } else {
-    $("#image_<%= @image.id %>").replaceWith("<%= j render @image, formats: [:html], locals: { table: false } %>");
+    $("#image_<%= @image.id %>").replaceWith("<%= j render partial: "images/image", formats: [:html], locals: { image: @image, show: "div"} %>");
   }
 
   $("#image_<%= @image.id %>").effect("highlight", {}, 3000);

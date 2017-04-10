@@ -4,9 +4,9 @@
 
   // update via  partial and insert it into proper place
   if ($("#floors").is("table")) {
-    $("tr#floor_<%= @floor.id %>").replaceWith("<%= j render @floor, formats: [:html], locals: { show: 'tr' } %>");
+    $("tr#floor_<%= @floor.id %>").replaceWith("<%= j render partial: "floors/floor", formats: [:html], locals: { floor: @floor, show: 'tr' } %>");
   } else {
-    $("div#floor_<%= @floor.id %>").replaceWith("<%= j render @floor, formats: [:html], locals: { show: 'div' } %>");
+    $("div#floor_<%= @floor.id %>").replaceWith("<%= j render partial: "floors/floor", formats: [:html], locals: { floor: @floor, show: 'div' } %>");
   }
 
   $("#floor_<%= @floor.id %>").effect("highlight", {}, 3000);
