@@ -20,7 +20,7 @@ gem "tilt", "1.4.1"
 gem 'jquery-rails', "4.0.3"
 gem 'jquery-ui-rails', "4.2.0"
 gem 'less-rails', "2.8.0"
-gem 'twitter-bootstrap-rails', git: 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
+gem 'twitter-bootstrap-rails', "3.2.2"
 gem 'simple_form', "3.1.0"
 gem "font-awesome-rails", '4.6.3.1'
 
@@ -30,14 +30,14 @@ gem 'ipaddress', "0.8.0"
 gem 'carrierwave', "0.10.0"
 gem "mini_magick", "4.3.6"
 gem 'remotipart', '~> 1.2'
-gem 'best_in_place', '~> 3.0.1'
+gem 'best_in_place', '3.0.3'
 
 
 # DEPLOYMENT
-gem 'capistrano', '3.4.0'
-gem 'capistrano-rails', '~> 1.1.0'
-gem 'capistrano-bundler', "1.1.4"
-gem 'capistrano-rbenv', "~> 2.0"
+gem 'capistrano', '3.8.0'
+gem 'capistrano-rails', '1.2.3'
+gem 'capistrano-bundler', "1.2.0"
+gem 'capistrano-rbenv', "2.1.0"
 
 group :development, :test do
 

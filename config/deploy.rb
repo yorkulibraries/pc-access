@@ -1,5 +1,5 @@
 # config valid only for Capistrano 3.4
-lock '3.4.0'
+lock '3.8.0'
 
 set :application, 'pc-access'
 # set :repo_url, 'git@github.com:yorkulibraries/#{fetch(:application)}.git'
