@@ -2,6 +2,12 @@ class StatusController < ApplicationController
 
   def index
     @locations = Location.all
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @locations }
+    end
+
   end
 
   def by_status
