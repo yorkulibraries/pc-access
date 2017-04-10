@@ -40,13 +40,13 @@ namespace :deploy do
   desc 'Restart application'
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
-      # Your restart mechanism here, for example:
+      # passenger restart
+      execute "mkdir", "-p", release_path.join('tmp')
       execute :touch, release_path.join('tmp/restart.txt')
     end
   end
 
   after :publishing, :restart
-  after :restart, 'deploy:cleanup'
 
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
