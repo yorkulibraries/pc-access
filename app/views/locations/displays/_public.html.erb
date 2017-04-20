@@ -5,12 +5,12 @@
   <ul class="list-group">
     <% location.floors.each do |floor| %>
       <li class="list-group-item <%= "highlight_floor" if params[:hl_floor] == floor.id.to_s %>">
-         <span class="badge badge-success"><%= floor.computers.pinging.not_in_use.count %></span>
+         <span class="badge badge-success"><%= floor.computers.not_in_use.count %></span>
          <a class="pc_access_floor" href="#" data-id="<%= floor.id %>"><%= t floor.name %></a>
          <ul class="pc_access_floor_areas" style="<%= params[:expand] == "true" ?  "" : "display: none;" %>">
            <% floor.areas.each do |area| %>
              <li class="pc_access_area">
-                <span class="badge badge-info"><%= area.computers.pinging.not_in_use.count %></span>
+                <span class="badge badge-info"><%= area.computers.not_in_use.count %></span>
                 <%= area.name %>
               </li>
            <% end %>
