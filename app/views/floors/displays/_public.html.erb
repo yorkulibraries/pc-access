@@ -6,7 +6,7 @@
       </li>
       <% floor.areas.each do |area| %>
         <li class="list-group-item">
-           <span class="badge badge-success"><%= area.computers.not_in_use.count %></span>
+           <span class="badge badge-success"><%= area.computers.available.count %></span>
            <%= area.name %>
          </li>
       <% end %>

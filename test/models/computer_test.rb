@@ -153,4 +153,39 @@ class ComputerTest < ActiveSupport::TestCase
     assert_equal 0, i.computers.count, "should be zero"
   end
 
+  should "show not available computers" do
+     list = create_list(:computer, 3, current_username: "someone", last_ping: DateTime.now)
+
+     assert_equal list.size, Computer.all.size, "Should be matching, with all call"
+     assert_equal list.size, Computer.pinging.size, "Should match on pinging"
+     assert_equal list.size, Computer.in_use.size, "Should match on not_in_use #{Computer.not_in_use.to_sql}"
+     assert_equal list.size, Computer.pinging.in_use.size, "Should match, with pinging and not_in_use"
+
+     assert_equal list.size, Computer.unavailable.size, "Should be matching, with unavailable"
+
+     create(:computer, current_username: nil)
+
+     assert_equal list.size, Computer.unavailable.size, "Should be matching, with unavailable"
+  end
+
+
+  should "show available computers, negation of unavailable" do
+    on_no_user =  create(:computer, current_username: nil)
+
+    assert_equal 1, Computer.all.count, "One computer"
+    assert_equal 1, Computer.available.count, "One available #{ Computer.available.to_sql}"
+
+    off_no_user = create(:computer, last_ping: nil)
+
+    assert_equal 2, Computer.all.count, "One computer"
+    assert_equal 2, Computer.available.count, "Two available"
+
+    on_with_user = create(:computer, current_username: "someone", last_ping: DateTime.now)
+
+    assert_equal 3, Computer.all.count, "Two computers"
+    assert_equal 2, Computer.available.count, "Should be two, #{ Computer.unavailable.count}"
+
+  end
+
+
 end

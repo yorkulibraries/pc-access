@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :computer do
-    sequence(:ip) { |n| "10.0.0.1#{n}" }
+    sequence(:ip){ |n| IPAddr.new(n, Socket::AF_INET).to_s }  #{ |n| "10.#{rand(45..99)}.#{rand(1..40)}.1#{n}" }
     current_username "jamesmay"
     previous_username "jeremyclarkson"
     last_ping 1.minute.ago

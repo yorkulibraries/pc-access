@@ -30,6 +30,8 @@ class Computer < ActiveRecord::Base
   scope :pinging, -> { where("last_ping >= ?", Computer::STAY_ALIVE_INTERVAL.ago) }
   scope :never_ping, -> { where("last_ping IS NULL") }
   scope :never_used, -> { where("last_user_activity IS NULL") }
+  scope :unavailable, -> { pinging.in_use }
+  scope :available, -> { where("id NOT IN(?)", unavailable.select(:id))}
 
   ## CALLBACKS
   after_create :add_register_activity_entry
