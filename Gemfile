@@ -41,6 +41,9 @@ gem 'capistrano-rbenv', "2.1.0"
 
 group :development, :test do
 
+  gem "better_errors", "2.1.1"
+  gem "binding_of_caller", "0.7.2"
+
   ## defaults
   gem 'byebug', "3.5.1" # Call 'byebug' anywhere in the code to stop execution and get a debugger console
 
