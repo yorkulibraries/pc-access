@@ -3,14 +3,17 @@ class TrackersController < ApplicationController
   # /trackers/logon
   def logon
     if params[:hostname]
-      @computer = Computer.where(hostname: params[:hostname]).first_or_create(hostname: params[:hostname], ip: request.remote_ip)
-    else
-      @computer = Computer.where(ip: request.remote_ip).first_or_create
+      @computer = Computer.find_by_hostname(params[:hostname])
+    end
+
+    if @computer == nil
+      @computer = Computer.where(ip: request.remote_ip).first_or_create(ip: request.remote_ip, hostname: params[:hostname])
     end
 
     @computer.logon(params[:username])
     @computer.save
     @computer.record_activity_log(ComputerActivityLog::ACTION_LOGON)
+
 
     respond_to do |format|
       format.all { render :nothing => true }
@@ -21,9 +24,11 @@ class TrackersController < ApplicationController
   def logoff
 
     if params[:hostname]
-      @computer = Computer.where(hostname: params[:hostname]).first_or_create(hostname: params[:hostname], ip: request.remote_ip)
-    else
-      @computer = Computer.where(ip: request.remote_ip).first_or_create
+      @computer = Computer.find_by_hostname(params[:hostname])
+    end
+
+    if @computer == nil
+      @computer = Computer.where(ip: request.remote_ip).first_or_create(ip: request.remote_ip, hostname: params[:hostname])
     end
 
     @computer.logoff
@@ -38,7 +43,14 @@ class TrackersController < ApplicationController
 
   # /trackers/ping
   def ping
-    @computer = Computer.where(ip: request.remote_ip).first_or_create
+    if params[:hostname]
+      @computer = Computer.find_by_hostname(params[:hostname])
+    end
+
+    if @computer == nil
+      @computer = Computer.where(ip: request.remote_ip).first_or_create(ip: request.remote_ip, hostname: params[:hostname])
+    end
+
     @computer.ping
     @computer.save
 

@@ -25,6 +25,55 @@ class TrackersControllerTest < ActionController::TestCase
     end
   end
 
+  should "LOGON: use existing computer if found by hostname" do
+    h = "host"
+    c = create(:computer, hostname: h)
+
+    assert_no_difference "Computer.count" do
+      get :logon, username: "tester", hostname: h
+    end
+  end
+
+  should "LOGOFF: use existing computer if found by hostname" do
+    h = "host"
+    c = create(:computer, hostname: h)
+
+    assert_no_difference "Computer.count" do
+      get :logoff, username: "tester", hostname: h
+    end
+  end
+
+  should "PING: use existing computer if found by hostname" do
+    h = "host"
+    c = create(:computer, hostname: h)
+
+    assert_no_difference "Computer.count" do
+      get :ping, username: "tester", hostname: h
+    end
+  end
+
+  should "LOGON: create a new computer if hostname is present but was not found" do
+    assert_difference "Computer.count", 1 do
+      hostname = "somethi.something.ca"
+      get :logon, username: "tester", hostname: hostname
+    end
+  end
+
+  should "LOGOFF: create a new compute if hostname is present but was not found" do
+    assert_difference "Computer.count", 1 do
+      h = "different_hostname"
+      get :logoff, username: "tester", hostname: h
+    end
+  end
+
+  should "PING: create a new compute if hostname is present but was not found" do
+    assert_difference "Computer.count", 1 do
+      h = "different_hostname"
+      get :ping, username: "tester", hostname: h
+    end
+  end
+
+
 
   should "still have computer in db after logoff" do
     create(:computer, ip: request.remote_ip)
