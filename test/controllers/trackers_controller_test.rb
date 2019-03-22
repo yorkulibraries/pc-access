@@ -2,7 +2,7 @@ require 'test_helper'
 
 class TrackersControllerTest < ActionController::TestCase
 
-  should "have a computer in db after logon" do
+  should "have a computer in db after logon if useing ip as key" do
     assert_difference "Computer.count", 1 do
       get :logon, username: "tester"
       c = assigns(:computer)
@@ -11,6 +11,20 @@ class TrackersControllerTest < ActionController::TestCase
       assert_response :success
     end
   end
+
+
+  should "have a computer in db after logon if using hostname as key" do
+    assert_difference "Computer.count", 1 do
+      hostname = "somethi.something.ca"
+      get :logon, username: "tester", hostname: hostname
+      c = assigns(:computer)
+      assert c, "computer is present"
+      assert_equal c.hostname, hostname
+      assert_equal c.ip, request.remote_ip
+      assert_response :success
+    end
+  end
+
 
   should "still have computer in db after logoff" do
     create(:computer, ip: request.remote_ip)
@@ -24,6 +38,20 @@ class TrackersControllerTest < ActionController::TestCase
     end
 
   end
+
+  should "still have computer in db after logoff, using hostname" do
+    computer = create(:computer, ip: request.remote_ip, hostname: "tester")
+
+    assert_no_difference "Computer.count" do
+      get :logoff, hostname: computer.hostname
+      c = assigns(:computer)
+      assert c, "Computer is present"
+      assert Computer.exists?(:hostname => computer.hostname)
+      assert_response :success
+    end
+
+  end
+
 
   should "record activiy log entry on each action" do
     assert_difference "ComputerActivityLog.count", 3 do

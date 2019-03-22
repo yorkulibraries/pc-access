@@ -25,7 +25,7 @@ class ComputerTest < ActiveSupport::TestCase
   should "not create an invalid computer" do
 
     assert ! build(:computer, ip: nil).valid?, "IP is required"
-    assert ! build(:computer, ip: "dljaflsda").valid?, "IP Should be a valid ip"
+    assert ! build(:computer, ip: "dljaflsda", hostname: nil).valid?, "IP Should be a valid ip"
 
     create(:computer, ip: "10.0.0.1")
     assert ! build(:computer, ip: "10.0.0.1").valid?, "IP Should be unique"

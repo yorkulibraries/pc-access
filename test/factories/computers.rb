@@ -6,6 +6,8 @@ FactoryGirl.define do
     last_ping 1.minute.ago
     last_user_activity 30.seconds.ago
 
+    hostname nil
+
     association(:location)
     image nil
     floor_id nil
