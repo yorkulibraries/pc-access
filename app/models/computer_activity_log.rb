@@ -15,7 +15,7 @@ class ComputerActivityLog < ActiveRecord::Base
   validates :computer_id, presence: true
   validates :ip, :action, presence: true
 
-  ## SCOPES  
-
+  ## SCOPES
+  scope :newest_first, -> { order(created_at: :desc)}
   ## METHODS
 end
