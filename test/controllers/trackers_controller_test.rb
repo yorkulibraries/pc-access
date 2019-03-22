@@ -25,6 +25,40 @@ class TrackersControllerTest < ActionController::TestCase
     end
   end
 
+  should "LOGON: update hostname if found by ip and hostname is nil" do
+    c = create(:computer, hostname: nil, ip: request.remote_ip)
+
+    assert_no_difference "Computer.count" do
+      hostname = "something"
+      get :logon, username: "tester", hostname: hostname
+      c = assigns(:computer)
+      assert_equal c.hostname, hostname
+    end
+  end
+
+  should "LOGOFF: update hostname if found by ip and hostname is nil" do
+    c = create(:computer, hostname: nil, ip: request.remote_ip)
+
+    assert_no_difference "Computer.count" do
+      hostname = "something"
+      get :logoff, username: "tester", hostname: hostname
+      c = assigns(:computer)
+      assert_equal c.hostname, hostname
+    end
+  end
+
+  should "PING: update hostname if found by ip and hostname is nil" do
+    c = create(:computer, hostname: nil, ip: request.remote_ip)
+
+    assert_no_difference "Computer.count" do
+      hostname = "something"
+      get :ping, username: "tester", hostname: hostname
+      c = assigns(:computer)
+      assert_equal c.hostname, hostname
+    end
+  end
+
+
   should "LOGON: use existing computer if found by hostname" do
     h = "host"
     c = create(:computer, hostname: h)

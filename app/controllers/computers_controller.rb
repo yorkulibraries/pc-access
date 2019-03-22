@@ -7,7 +7,7 @@ class ComputersController < ApplicationController
   end
 
   def show
-    @logs = @computer.activity_entries
+    @logs = @computer.activity_entries.limit(300)
   end
 
   private

@@ -188,4 +188,24 @@ class ComputerTest < ActiveSupport::TestCase
   end
 
 
+  should "update hostname if nil" do
+    c = create(:computer, hostname: nil)
+    h = "host"
+    c.update_hostname_if_nil(h)
+    c.reload
+    assert_not_nil c.hostname
+    assert_equal c.hostname, h
+  end
+
+  should "not update hostname if it's set" do
+    h = "host2"
+    c = create(:computer, hostname: h)
+
+    assert_equal c.hostname, h
+    c.update_hostname_if_nil("some other hostname")
+    c.reload
+    assert_equal c.hostname, h
+  end
+
+
 end

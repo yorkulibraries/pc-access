@@ -41,6 +41,13 @@ class Computer < ActiveRecord::Base
     record_activity_log(ComputerActivityLog::ACTION_REGISTER)
   end
 
+
+  def update_hostname_if_nil(h)
+    if self[:hostname] == nil
+      update_attribute(:hostname, h)
+    end
+  end
+
   def self.free_inactive_computers
     self.in_use.not_staying_active.each do |pc|
       Rails.logger.info("#{pc.ip} not_staying_active => logging off")

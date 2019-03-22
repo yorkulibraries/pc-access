@@ -8,7 +8,9 @@ class TrackersController < ApplicationController
 
     if @computer == nil
       @computer = Computer.where(ip: request.remote_ip).first_or_create(ip: request.remote_ip, hostname: params[:hostname])
+      @computer.update_hostname_if_nil(params[:hostname])
     end
+
 
     @computer.logon(params[:username])
     @computer.save
@@ -29,6 +31,7 @@ class TrackersController < ApplicationController
 
     if @computer == nil
       @computer = Computer.where(ip: request.remote_ip).first_or_create(ip: request.remote_ip, hostname: params[:hostname])
+      @computer.update_hostname_if_nil(params[:hostname])
     end
 
     @computer.logoff
@@ -49,6 +52,7 @@ class TrackersController < ApplicationController
 
     if @computer == nil
       @computer = Computer.where(ip: request.remote_ip).first_or_create(ip: request.remote_ip, hostname: params[:hostname])
+      @computer.update_hostname_if_nil(params[:hostname])
     end
 
     @computer.ping
