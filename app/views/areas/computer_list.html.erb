@@ -20,17 +20,17 @@
                 <div class="col-sm-6">
                   <p><strong>Newly Attached Computers</strong></p>
                   <% @computers.each do |c| %>
-                    <%= c.ip %></br>
+                    <%= c.ip %> <%= c.hostname %></br>
                   <% end %>
                 </div>
               <% else %>
                 <div class="col-sm-12">
                   <% @computers.each do |c| %>
-                    <%= c.ip %></br>
+                    <%= c.ip %> <%= c.hostname %></br>
                   <% end %>
                 </div>
               <% end %>
-            
+
           </div>
 
         </div>

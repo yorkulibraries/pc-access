@@ -20,7 +20,7 @@
       <tbody>
         <% @computers.each do |c| %>
           <tr>
-            <td><%= link_to c.hostname, c %></td>
+            <td><%= link_to format(c.hostname), c %></td>
             <td><%= link_to c.ip, c %></td>
             <td><%= c.current_username %></td>
             <td><%= c.previous_username %></td>

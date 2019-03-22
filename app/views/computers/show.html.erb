@@ -1,4 +1,4 @@
-<% title "#{@computer.ip} - #{@computer.hostname}" %>
+<% title "#{@computer.ip} #{@computer.hostname}" %>
 
 <div class="panel panel-default">
   <div class="panel-heading">
@@ -11,6 +11,7 @@
       | <%= @computer.floor.name rescue nil%> | <%= @computer.area.name rescue nil %></p>
     <p><i class="fa fa-user"></i> <%= @computer.current_username %> | <%= @computer.previous_username %> </p>
     <p><i class="fa fa-calendar"></i> Last Ping: <%= @computer.last_ping %></p>
+    <p><i class="fa fa-globe"></i> Hostname: <%= format(@computer.hostname) %></p>
 
     <table class="table">
       <tr>

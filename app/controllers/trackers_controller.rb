@@ -21,7 +21,7 @@ class TrackersController < ApplicationController
   def logoff
 
     if params[:hostname]
-      @computer = Computer.where(hostname: params[:hostname]).first_or_create
+      @computer = Computer.where(hostname: params[:hostname]).first_or_create(hostname: params[:hostname], ip: request.remote_ip)
     else
       @computer = Computer.where(ip: request.remote_ip).first_or_create
     end
