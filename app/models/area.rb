@@ -25,12 +25,20 @@ class Area < ActiveRecord::Base
     # detach computers from area first
     Computer.detach_from_area(self[:id])
 
-    sanitized_ips = ip_list.lines.collect { |ip| ip.rstrip }
-    new_computers = Computer.where("ip in (?)", sanitized_ips)
+    sanitized_list = ip_list.lines.collect { |ip| ip.rstrip }
+
+    host_computers = Computer.where("hostname in (?)", sanitized_list)
+    ip_computers = Computer.where("ip in (?)", sanitized_list)
 
 
     Computer.transaction do
-      new_computers.each do |c|
+      host_computers.each do |c|
+        c.area = self
+        c.location = self.location
+        c.floor = self.floor
+        c.save(validate: false)
+      end
+      ip_computers.each do |c|
         c.area = self
         c.location = self.location
         c.floor = self.floor

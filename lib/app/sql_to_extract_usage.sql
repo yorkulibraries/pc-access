@@ -34,7 +34,7 @@ select ip, count(distinct(username))
         left outer join areas a on a.id = c.area_id
         left outer join locations l on l.id = c.location_id
         left outer join floors f on f.id = c.floor_id
-        where activity_date BETWEEN cast('2018-09-01' AS DATE) and cast('2018-12-31' as DATE)
+        where activity_date BETWEEN cast('2019-01-01' AS DATE) and cast('2019-07-12' as DATE)
         and (action = "logoff" or action = "logoff_inactive")
         group by ip;
 
@@ -42,7 +42,7 @@ select ip, count(distinct(username))
 
 ### OUTPUT INTO A FILE ####
 
-        INTO OUTFILE '/tmp/2018_stats.csv'
+        INTO OUTFILE '/var/lib/mysql-files/2019_stats.csv'
         FIELDS TERMINATED BY ','
         ENCLOSED BY '"'
         LINES TERMINATED BY '\n';
