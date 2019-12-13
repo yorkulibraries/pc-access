@@ -26,7 +26,8 @@
               <% else %>
                 <div class="col-sm-12">
                   <% @computers.each do |c| %>
-                    <%= c.ip %> <%= c.hostname %></br>
+                  <span class="empty-field">  ip:</span> <%= c.ip %>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="empty-field">  host:</span> <%= c.hostname %></br>
                   <% end %>
                 </div>
               <% end %>
