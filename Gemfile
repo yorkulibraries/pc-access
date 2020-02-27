@@ -4,7 +4,6 @@ gem 'rails', '4.2.11.1'
 
 
 ## DATABASES
-gem 'sqlite3', "1.3.10"
 gem "mysql2", "~> 0.3.14"
 
 ## RAILS DEPENDENCIES
@@ -40,7 +39,8 @@ gem 'capistrano-bundler', "1.2.0"
 gem 'capistrano-rbenv', "2.1.0"
 
 group :development, :test do
-
+  gem 'sqlite3', "1.3.10"
+  
   gem "better_errors", "2.1.1"
   gem "binding_of_caller", "0.7.2"
 
